@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Critter Country - 2D Platformer Game</title>
+    <link rel="stylesheet" href="/carolcal/about-styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="back-link">← Back to davidlewis.ai</a>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="hero">
+            <div class="hero-icon" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">🐰</div>
+            <h1>Critter Country</h1>
+            <p class="tagline">A Charming 2D Platformer Adventure</p>
+        </section>
+
+        <section class="content-section">
+            <div class="section-block">
+                <h2>About Critter Country</h2>
+                <p>
+                    Critter Country is a charming 2D platformer game built with SpriteKit where players control a bunny 
+                    character navigating through user-created levels. The game features a robust level editor, adaptive 
+                    scaling for different device sizes, and a polished user interface with beautiful parallax scrolling backgrounds.
+                </p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎮</div>
+                    <h3>Smooth Platforming</h3>
+                    <p>Double jump capability, automatic forward movement, and responsive touch controls for an engaging gameplay experience.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🏗️</div>
+                    <h3>Powerful Level Editor</h3>
+                    <p>Create custom levels with platforms, collectibles, obstacles, and enemies. Features grid-based placement and camera panning.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🌄</div>
+                    <h3>Parallax Backgrounds</h3>
+                    <p>Beautiful multi-layer parallax scrolling with clouds, hills, and trees that bring the world to life.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🍌</div>
+                    <h3>Collectibles & Powerups</h3>
+                    <p>Collect berries, carrots, watermelons, and special banana bombs to defeat enemies.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🐺</div>
+                    <h3>Enemy AI</h3>
+                    <p>Clever coyote enemies that chase the player, with combat mechanics and score penalties for getting caught.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🏠</div>
+                    <h3>Level Completion</h3>
+                    <p>Reach the house with enough fruit collected to complete levels. Success animations and automatic level progression.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎵</div>
+                    <h3>Sound Effects</h3>
+                    <p>Immersive audio with jump sounds, collection effects, enemy interactions, and victory/failure music.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Device Adaptive</h3>
+                    <p>Dynamic scaling system ensures consistent gameplay across all iOS device sizes.</p>
+                </div>
+            </div>
+
+            <div class="section-block tech-section">
+                <h2>Game Mechanics</h2>
+                <div class="tech-stack">
+                    <div class="tech-item">
+                        <strong>Controls</strong>
+                        <p>Jump button (left), banana attack button (right), double jump support</p>
+                    </div>
+                    <div class="tech-item">
+                        <strong>Physics</strong>
+                        <p>Realistic gravity, platform collisions, obstacle detection</p>
+                    </div>
+                    <div class="tech-item">
+                        <strong>Score System</strong>
+                        <p>Collect fruit to increase score, lose points when enemies attack</p>
+                    </div>
+                    <div class="tech-item">
+                        <strong>Combat</strong>
+                        <p>Throw bananas to defeat coyote enemies chasing you</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-block">
+                <h2>Level Editor Tools</h2>
+                <ol class="how-it-works-list">
+                    <li>
+                        <strong>Selection Tool</strong>
+                        <p>Move elements around, double-tap to delete, select items for editing.</p>
+                    </li>
+                    <li>
+                        <strong>Platform Tool</strong>
+                        <p>Place and resize platforms with handles. Width constraints from 100-800 units.</p>
+                    </li>
+                    <li>
+                        <strong>Collectible Tool</strong>
+                        <p>Submenu with 5 collectible types including special banana bombs for combat.</p>
+                    </li>
+                    <li>
+                        <strong>Obstacle & Enemy Tools</strong>
+                        <p>Place rocks, enemies, and the level-ending house marker.</p>
+                    </li>
+                    <li>
+                        <strong>Camera Pan Mode</strong>
+                        <p>Navigate large levels with grid snapping and auto-extending level width.</p>
+                    </li>
+                </ol>
+            </div>
+
+            <div class="section-block tech-section">
+                <h2>Technical Highlights</h2>
+                <p style="color: white; margin-bottom: 20px;">
+                    Built with Apple's SpriteKit framework, Critter Country showcases advanced game development techniques 
+                    including texture atlases for performance, physics-based interactions, and a custom level editor with 
+                    JSON-based level storage.
+                </p>
+                <div class="tech-stack">
+                    <div class="tech-item">
+                        <strong>Framework</strong>
+                        <p>SpriteKit with custom physics and collision detection</p>
+                    </div>
+                    <div class="tech-item">
+                        <strong>Graphics</strong>
+                        <p>Texture atlases for optimized sprite management</p>
+                    </div>
+                    <div class="tech-item">
+                        <strong>Audio</strong>
+                        <p>Cached sound effects for responsive gameplay</p>
+                    </div>
+                    <div class="tech-item">
+                        <strong>Platform</strong>
+                        <p>iOS, landscape orientation, iPad optimized</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 David Lewis. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+

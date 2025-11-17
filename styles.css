@@ -163,6 +163,36 @@ body {
     font-size: 3rem;
 }
 
+.paddleup-icon {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    font-size: 3rem;
+}
+
+.fitforlife-icon {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    font-size: 3rem;
+}
+
+.crittercountry-icon {
+    background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+    font-size: 3rem;
+}
+
+.cackie-icon {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    font-size: 3rem;
+}
+
+.readyplayerone-icon {
+    background: linear-gradient(135deg, #ff9a56 0%, #ff6a88 100%);
+    font-size: 3rem;
+}
+
+.dpgmanager-icon {
+    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+    font-size: 3rem;
+}
+
 .card-badge {
     background: var(--background-secondary);
     color: var(--text-secondary);
