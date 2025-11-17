@@ -87,6 +87,8 @@ const fieldLocation = $("field-location");
 const fieldDriverName = $("field-driver-name");
 const fieldNotes = $("field-notes");
 
+const ET_TIMEZONE = "America/New_York";
+
 // --- Application state ---
 let currentUser = null;
 let userProfile = null;
@@ -131,25 +133,70 @@ function showFormError(message) {
   setHidden(appointmentFormErrorEl, false);
 }
 
+const etDisplayDateFormatter = new Intl.DateTimeFormat(undefined, {
+  timeZone: ET_TIMEZONE,
+  weekday: "short",
+  month: "short",
+  day: "numeric",
+});
+
+const etDisplayTimeFormatter = new Intl.DateTimeFormat(undefined, {
+  timeZone: ET_TIMEZONE,
+  hour: "numeric",
+  minute: "2-digit",
+});
+
+const etDateOnlyFormatter = new Intl.DateTimeFormat("en-US", {
+  timeZone: ET_TIMEZONE,
+  year: "numeric",
+  month: "numeric",
+  day: "numeric",
+});
+
+const etTimeFormatter = new Intl.DateTimeFormat("en-US", {
+  timeZone: ET_TIMEZONE,
+  hour: "numeric",
+  minute: "numeric",
+  hour12: false,
+});
+
 function formatDateDisplay(date) {
   if (!date) return "";
-  return date.toLocaleDateString(undefined, {
-    weekday: "short",
-    month: "short",
-    day: "numeric",
-  });
+  return etDisplayDateFormatter.format(date);
 }
 
 function formatTimeDisplay(date) {
   if (!date) return "";
-  return date.toLocaleTimeString(undefined, {
-    hour: "numeric",
-    minute: "2-digit",
-  });
+  return etDisplayTimeFormatter.format(date);
+}
+
+function getEtDateParts(date) {
+  const parts = etDateOnlyFormatter.formatToParts(date);
+  let year = 0;
+  let month = 0;
+  let day = 0;
+  for (const p of parts) {
+    if (p.type === "year") year = parseInt(p.value, 10);
+    if (p.type === "month") month = parseInt(p.value, 10);
+    if (p.type === "day") day = parseInt(p.value, 10);
+  }
+  return { year, month, day };
+}
+
+function getEtTimeParts(date) {
+  const parts = etTimeFormatter.formatToParts(date);
+  let hour = 0;
+  let minute = 0;
+  for (const p of parts) {
+    if (p.type === "hour") hour = parseInt(p.value, 10);
+    if (p.type === "minute") minute = parseInt(p.value, 10);
+  }
+  return { hour, minute };
 }
 
 function startOfDay(date) {
-  return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  const { year, month, day } = getEtDateParts(date);
+  return new Date(year, month - 1, day, 0, 0, 0, 0);
 }
 
 function addDays(date, days) {
@@ -160,15 +207,9 @@ function addDays(date, days) {
 
 function combineDateAndTime(date, time) {
   if (!date || !time) return date || time;
-  return new Date(
-    date.getFullYear(),
-    date.getMonth(),
-    date.getDate(),
-    time.getHours(),
-    time.getMinutes(),
-    0,
-    0
-  );
+  const { year, month, day } = getEtDateParts(date);
+  const { hour, minute } = getEtTimeParts(time);
+  return new Date(year, month - 1, day, hour, minute, 0, 0);
 }
 
 function determineUserRole(email) {
@@ -687,14 +728,16 @@ function openAppointmentModal(appointmentId = null) {
     }
 
     if (appt.pickupTime instanceof Date) {
-      const h = String(appt.pickupTime.getHours()).padStart(2, "0");
-      const m = String(appt.pickupTime.getMinutes()).padStart(2, "0");
+      const { hour, minute } = getEtTimeParts(appt.pickupTime);
+      const h = String(hour).padStart(2, "0");
+      const m = String(minute).padStart(2, "0");
       fieldPickupTime.value = `${h}:${m}`;
     }
 
     if (appt.appointmentTime instanceof Date) {
-      const h = String(appt.appointmentTime.getHours()).padStart(2, "0");
-      const m = String(appt.appointmentTime.getMinutes()).padStart(2, "0");
+      const { hour, minute } = getEtTimeParts(appt.appointmentTime);
+      const h = String(hour).padStart(2, "0");
+      const m = String(minute).padStart(2, "0");
       fieldAppointmentTime.value = `${h}:${m}`;
     }
 
