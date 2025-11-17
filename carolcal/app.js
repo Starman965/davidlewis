@@ -212,6 +212,26 @@ function combineDateAndTime(date, time) {
   return new Date(year, month - 1, day, hour, minute, 0, 0);
 }
 
+// Create a Date that represents the given Eastern Time components (year, month, day, hour, minute)
+// regardless of the browser's local timezone. This mirrors how the iOS app uses ET.
+function makeEtDate(year, month, day, hour, minute) {
+  // First, create a UTC date with the raw components
+  const tmpUtc = new Date(Date.UTC(year, month - 1, day, hour, minute));
+
+  // Determine whether that instant falls under EST (UTC-5) or EDT (UTC-4)
+  const tzParts = new Intl.DateTimeFormat("en-US", {
+    timeZone: ET_TIMEZONE,
+    timeZoneName: "short",
+  }).formatToParts(tmpUtc);
+
+  const tzNamePart = tzParts.find((p) => p.type === "timeZoneName");
+  const isDst = tzNamePart && tzNamePart.value === "EDT";
+  const offsetHours = isDst ? 4 : 5; // ET is UTC-4 in DST, UTC-5 otherwise
+
+  // Shift by the offset so that ET wall-clock time matches the requested components
+  return new Date(Date.UTC(year, month - 1, day, hour + offsetHours, minute));
+}
+
 function determineUserRole(email) {
   const lower = (email || "").toLowerCase();
   if (
@@ -441,10 +461,10 @@ async function saveAppointmentFromForm(event) {
     const [hStr, mStr] = timeStr.split(":");
     const h = parseInt(hStr, 10);
     const m = parseInt(mStr, 10);
-    return new Date(year, month - 1, day, h, m, 0, 0);
+    return makeEtDate(year, month, day, h, m);
   }
 
-  const date = new Date(year, month - 1, day, 12, 0, 0, 0);
+  const date = makeEtDate(year, month, day, 12, 0);
   const pickupTime = buildTime(pickupTimeStr);
   const appointmentTime = buildTime(appointmentTimeStr);
 
