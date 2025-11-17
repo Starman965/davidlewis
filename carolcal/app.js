@@ -26,12 +26,12 @@ import {
 // from the Firebase console (Project Settings → General → Your apps → Web app).
 // This should point to the same Firebase project used by the iOS app.
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID", // likely "carolcal"
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID",
+  apiKey: "AIzaSyBCpoU5xEXkqP9OgCw4JWi8q32lLBnn6D4",
+  authDomain: "carolcal.firebaseapp.com",
+  projectId: "carolcal",
+  storageBucket: "carolcal.firebasestorage.app",
+  messagingSenderId: "736990550141",
+  appId: "1:736990550141:web:aafb9a0f72a0c28fe73914",
 };
 
 // --- Firebase setup ---
