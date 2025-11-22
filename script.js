@@ -1,6 +1,8 @@
 // Main JavaScript file for davidlewis.ai
 
 document.addEventListener('DOMContentLoaded', () => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -64,6 +66,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add parallax effect to hero (subtle)
     let ticking = false;
     window.addEventListener('scroll', () => {
+        if (prefersReducedMotion) {
+            return;
+        }
         if (!ticking) {
             window.requestAnimationFrame(() => {
                 const scrolled = window.pageYOffset;
