@@ -307,6 +307,11 @@ body {
     font-size: 3rem;
 }
 
+.music-icon {
+    background: linear-gradient(135deg, #7F5DFF 0%, #FF4DE1 100%);
+    font-size: 3rem;
+}
+
 .card-badge {
     background: rgba(255, 255, 255, 0.04);
     color: var(--text-secondary);
