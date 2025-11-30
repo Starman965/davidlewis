@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wrist Score - Pickleball Scoring on Apple Watch & iPhone</title>
+    <style>
+        :root {
+            --primary-color: #007AFF;
+            --text-color: #333;
+            --background-color: #f5f5f7;
+            --card-background: #ffffff;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        header {
+            background-color: var(--card-background);
+            padding: 60px 20px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .app-section {
+            background-color: var(--card-background);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 40px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .app-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .app-store-badge {
+            height: 40px;
+            margin-top: 20px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .feature-card {
+            background-color: var(--card-background);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        footer {
+            background-color: var(--card-background);
+            padding: 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .privacy-link {
+            margin-top: 20px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Wrist Score</h1>
+        <p class="subtitle">Pickleball Scoring for Apple Watch, iPhone, and iPad</p>
+    </header>
+
+    <div class="container">
+        <section class="app-section">
+            <img src="pickleball_tracker_splash_icon.png" alt="Wrist Score Icon" class="app-icon">
+            <h2>Wrist Score</h2>
+            <p>Wrist Score is a clean, glanceable pickleball scoring app built for Apple Watch and iPhone. Keep your hands on the paddle while your watch handles the score, server, and stats.</p>
+            
+            <!-- TODO: Replace this link with the Wrist Score App Store URL once available -->
+            <a href="#">
+                <img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg" 
+                     alt="Download on the App Store" 
+                     class="app-store-badge">
+            </a>
+        </section>
+
+        <div class="features">
+            <div class="feature-card">
+                <h3>Watch‑First Scoring</h3>
+                <p>Use your Apple Watch to keep score in real time: tap to change serving team, tap or long‑press to adjust the score, and track server 1/2 with a single glance.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Mirrored iPhone &amp; iPad View</h3>
+                <p>See a large, easy‑to‑read scoreboard on iPhone and iPad that mirrors the watch, along with your win percentage and game stats.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Simple, Privacy‑Friendly Design</h3>
+                <p>Scores and stats are stored locally on your devices. No accounts, no ads, and no external servers.</p>
+            </div>
+        </div>
+
+        <section>
+            <h2>About Wrist Score</h2>
+            <p>As a passionate pickleball player, I wanted a way to keep score that felt as natural as glancing at my wrist between points. Wrist Score focuses on fast, reliable scoring with a layout tuned for Apple Watch.</p>
+            <p>The companion iPhone and iPad views give you a clear scoreboard and win‑percentage stats without adding complexity. No logins, no clutter—just a modern, “liquid glass” style interface that gets out of the way while you play.</p>
+        </section>
+
+        <a href="./privacy.html" class="privacy-link">Privacy Policy</a>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Dave Lewis. All rights reserved.</p>
+    </footer>
+</body>
+</html> 
