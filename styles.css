@@ -312,6 +312,11 @@ body {
     font-size: 3rem;
 }
 
+.wristscore-icon {
+    background: linear-gradient(135deg, #007AFF 0%, #00C6FF 100%);
+    font-size: 3rem;
+}
+
 .card-badge {
     background: rgba(255, 255, 255, 0.04);
     color: var(--text-secondary);
