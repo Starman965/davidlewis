@@ -14,7 +14,7 @@ const CONFIG = {
   bustsPerRound: 1,
   miniEverySafe: 5,
   miniMaxPerTurn: 3,
-  bradUsesPerTurn: 5
+  bradUsesPerTurn: 3
 };
 
 const state = {
@@ -137,7 +137,9 @@ const el = {
   miniArea: document.getElementById('miniArea'),
   miniButtons: document.getElementById('miniButtons'),
 
-  newMatchBtn: document.getElementById('newMatchBtn')
+  newMatchBtn: document.getElementById('newMatchBtn'),
+  testWheelBtn: document.getElementById('testWheelBtn'),
+  testCasesBtn: document.getElementById('testCasesBtn')
 };
 
 /* =============================
@@ -168,7 +170,7 @@ function renderHeader(){
 }
 function renderAskButton(){
   const left = Math.max(0, CONFIG.bradUsesPerTurn - state.bradUsedCount);
-  el.askBtn.textContent = left>0 ? `Ask BradGPT (${left} left)` : `Ask BradGPT (0 left)`;
+  el.askBtn.textContent = left>0 ? `Time Out (${left} left)` : `Time Out (0 left)`;
   const disable = (left<=0 || !state.started || state.locked || state.revealing);
   el.askBtn.disabled = disable;
   el.askBtn.style.opacity = disable ? 0.5 : 1;
@@ -253,7 +255,7 @@ function renderBoard(){
     d.dataset.idx = i;
     d.innerHTML = `
       <div class="inner">
-        <div class="face front"><div class="label">CASE ${i+1}</div></div>
+        <div class="face front"><div class="label">CHEST ${i+1}</div></div>
         <div class="face back"><div class="value">${c.value}</div></div>
       </div>`;
     d.addEventListener('click', ()=> onCase(i), {passive:true});
@@ -509,7 +511,7 @@ function showBustThenNext(){
 }
 
 /* =============================
-   BradGPT
+   Time Out
 ============================= */
 
 function openAI(){
@@ -520,40 +522,41 @@ function openAI(){
   stopTimer(); // freeze time
 
   const couple = CONFIG.couples[state.currentTeam];
-  const remaining = state.cases.filter(c=>!c.opened);
-  const remainingBusts = remaining.filter(c=>c.value===0).length;
-  const remainingCases = remaining.length;
 
-  // safe odds: never show 100% while a bust remains
-  let safeOdds = remainingCases>0 ? (remainingCases - remainingBusts)/remainingCases : 0;
-  if (remainingBusts>0) safeOdds = Math.min(safeOdds, 0.99);
+  el.aiIntro.textContent = `${couple} Team — Time Out Called`;
+  el.aiSafe.textContent = ``;
+  el.aiRisk.textContent = ``;
+  el.aiStats.textContent = `Take a moment to strategize...`;
+  el.aiLeader.textContent = ``;
+  el.aiAdvice.textContent = `30`;
 
-  const positives = remaining.filter(c=>c.value>0).map(c=>c.value);
-  const expected = positives.length ? Math.round(sum(positives)/positives.length) : 0;
-  const highest = positives.length ? Math.max(...positives) : 0;
+  // Start 30-second countdown
+  let timeLeft = 30;
+  el.aiAdvice.textContent = timeLeft;
+  
+  const countdownInterval = setInterval(() => {
+    timeLeft--;
+    el.aiAdvice.textContent = timeLeft;
+    
+    if (timeLeft <= 0) {
+      clearInterval(countdownInterval);
+      el.aiAdvice.textContent = `Time's up!`;
+    }
+  }, 1000);
 
-  const leaderScore = Math.max(...state.thisRoundScores);
-  const leaderIdxs = state.thisRoundScores.map((v,i)=>v===leaderScore?i:-1).filter(i=>i>=0);
-  const leaderNames = leaderScore>0 ? leaderIdxs.map(i=>CONFIG.couples[i]).join(' & ') : 'No one';
-
-  el.aiIntro.textContent = `${couple} Couple — you're at ${state.subtotal} points.`;
-  el.aiSafe.textContent = `Safe: ${(safeOdds*100).toFixed(0)}%`;
-  el.aiRisk.textContent = `(Bust: ${((1-safeOdds)*100).toFixed(0)}%)`;
-  el.aiStats.textContent = `Expected next pick: +${expected} • Highest remaining: ${highest}`;
-  el.aiLeader.textContent = leaderScore>0 ? `Leaders: ${leaderNames} at ${leaderScore}.` : `No current leader.`;
-
-  let advice = '';
-  if (safeOdds >= 0.9) advice = 'Odds are excellent — take another pick.';
-  else if (safeOdds >= 0.75) advice = 'Odds are strong — going for one more is reasonable.';
-  else if (safeOdds >= 0.6) advice = 'Borderline: consider banking soon unless you feel lucky.';
-  else advice = 'Risky: banking now is sensible.';
-  el.aiAdvice.textContent = `Advice (Balanced): ${advice}`;
+  // Store interval ID so we can clear it if modal is closed early
+  el.aiOverlay.countdownInterval = countdownInterval;
 
   openOverlay(el.aiOverlay);
   state.bradUsedCount++;
   renderAskButton();
 }
 function closeAI(){
+  // Clear countdown interval if it exists
+  if (el.aiOverlay.countdownInterval) {
+    clearInterval(el.aiOverlay.countdownInterval);
+    el.aiOverlay.countdownInterval = null;
+  }
   closeOverlay(el.aiOverlay);
   renderAskButton(); // reflect remaining uses immediately
 }
@@ -579,8 +582,8 @@ function maybeTriggerMini(){
 function openMiniBonusCases(){
   stopTimer(); // ensure timer is stopped while modal is up
   const couple = CONFIG.couples[state.currentTeam];
-  el.miniTitle.textContent = 'Mini-Game: Bonus Cases';
-  el.miniIntro.textContent = `BradGPT™: ${couple} Team, pick one of 4 bonus cases!`;
+  el.miniTitle.textContent = 'Mini-Game: Bonus Chests';
+  el.miniIntro.textContent = `Game Host: ${couple} Team, pick one of 4 bonus chests!`;
   
   // Create randomized values for the 4 cases
   const possibleValues = [-20, -10, 0, 10, 20, 30, 40, 50, 60];
@@ -613,12 +616,14 @@ function openMiniWheel(){
   stopTimer(); // pause while the mini-game is up
   const couple = CONFIG.couples[state.currentTeam];
   el.miniTitle.textContent = 'Mini-Game: Risk Wheel';
-  el.miniIntro.textContent = `BradGPT™: ${couple} Couple, spin for a bonus — or pass if you're not feeling lucky.`;
+  el.miniIntro.textContent = `Spin for bonus points — or pass if you're not feeling lucky.`;
 
-  // Fresh wheel container (no pointer, no highlight)
+  // Clean wheel container without winner box
   el.miniArea.innerHTML = `
-    <div class="wheel">
-      <canvas id="wheelCanvas"></canvas>
+    <div class="slot-machine-container">
+      <div class="wheel">
+        <canvas id="wheelCanvas"></canvas>
+      </div>
     </div>`;
   el.miniButtons.innerHTML = '';
 
@@ -643,58 +648,79 @@ function openMiniWheel(){
   const totalSeg = segments.length;
   const segAngle = 2*Math.PI/totalSeg;
 
-  // Draw the wheel at rotation `angle` (NO highlight)
+  // Draw the wheel at rotation `angle` with center window highlight
   function paint(angle){
     const w = canvas.width, r = w/2, cx = r, cy = r;
     ctx.clearRect(0,0,w,w);
 
-    ctx.save();
-    ctx.translate(cx,cy);
-    ctx.rotate(angle);
-    ctx.translate(-cx,-cy);
-
-    let start = -Math.PI/2; // 12 o'clock
-    const baseColors = ['#dc143c','#c0c0c0','#ff6b6b','#a0a0a0','#e8e8e8',
-                        '#b22222','#ffffff','#808080','#d3d3d3','#696969'];
+    // Don't rotate the canvas - instead adjust the drawing angles
+    let start = -Math.PI/2 + angle; // Start at 12 o'clock + rotation
+    const baseColor = '#c0c0c0'; // Single silver color for all segments
     ctx.textAlign='center';
     ctx.textBaseline='middle';
     ctx.font = `${Math.floor(w*0.06)}px sans-serif`;
 
+    // Find which segment is in the center window
+    const centerIdx = getCenterSegment(angle);
+
     for (let i=0;i<totalSeg;i++){
       const ang = segAngle;
       const mid = start + ang/2;
+      const isInCenter = (i === centerIdx);
 
       // Wedge
       ctx.beginPath();
       ctx.moveTo(cx,cy);
       ctx.arc(cx,cy,r,start,start+ang,false);
       ctx.closePath();
-      ctx.fillStyle = baseColors[i%baseColors.length];
-      ctx.shadowColor = 'transparent';
-      ctx.shadowBlur = 0;
+      
+      // Highlight segment in center window
+      if (isInCenter) {
+        ctx.fillStyle = '#ffff00'; // Bright yellow highlight
+        ctx.shadowColor = 'rgba(255,255,0,0.8)';
+        ctx.shadowBlur = 20;
+      } else {
+        ctx.fillStyle = baseColor; // All other segments same silver color
+        ctx.shadowColor = 'transparent';
+        ctx.shadowBlur = 0;
+      }
       ctx.fill();
+
+      // Add border to segments
+      ctx.strokeStyle = '#fff';
+      ctx.lineWidth = 2;
+      ctx.stroke();
 
       // Label
       ctx.save();
       ctx.translate(cx + Math.cos(mid)*r*0.65, cy + Math.sin(mid)*r*0.65);
       ctx.rotate(mid);
-      ctx.fillStyle = '#000';
+      ctx.fillStyle = isInCenter ? '#000' : '#000';
+      ctx.font = `bold ${Math.floor(w*0.06)}px sans-serif`;
       ctx.fillText(segments[i].label, 0, 0);
       ctx.restore();
 
       start += ang;
     }
-    ctx.restore();
-
-    // IMPORTANT: do NOT draw an outer stroke; CSS border on .wheel is the ring.
   }
 
-  // Which slice is under 12 o'clock at rotation `angle`?
+  // Which segment is currently in the center window?
+  function getCenterSegment(angle){
+    // Normalize angle to positive range
+    let normalizedAngle = ((angle % (2 * Math.PI)) + (2 * Math.PI)) % (2 * Math.PI);
+    
+    // Calculate how many segments we've rotated
+    const segmentsPassed = normalizedAngle / segAngle;
+    
+    // The segment in the center is the one that has rotated to that position
+    const segmentIndex = Math.floor(segmentsPassed) % totalSeg;
+    
+    return segmentIndex;
+  }
+
+  // Legacy function for compatibility
   function indexAtTop(angle){
-    const segProgress = angle/segAngle - 0.5;
-    let idx = Math.floor(segProgress);
-    idx = ((idx % totalSeg) + totalSeg) % totalSeg; // safe modulo
-    return idx;
+    return getCenterSegment(angle);
   }
 
   // Initial paint
@@ -721,29 +747,49 @@ function openMiniWheel(){
 
   passBtn.addEventListener('click', closeMiniAndResume, {once:true});
 
-  // BLIND MODE: spin to a random final angle; result is whatever ends up at 12 o'clock.
+  // REALISTIC WHEEL SPIN: More authentic wheel of fortune experience
   spinBtn.addEventListener('click', ()=>{
     spinBtn.disabled = true; passBtn.disabled = true;
 
-    const spins = 4 + Math.floor(Math.random()*3);       // 4–6 turns
-    const dur   = 5000 + Math.floor(Math.random()*3000); // 5–8s
-    const randomOffset = Math.random() * 2*Math.PI;      // anywhere
-    const finalAngle = spins*2*Math.PI + randomOffset;
+    // More dramatic spin parameters for suspense
+    const baseSpins = 5 + Math.random() * 3;  // 5-8 full rotations
+    const randomOffset = Math.random() * 2*Math.PI;
+    const finalAngle = baseSpins * 2*Math.PI + randomOffset;
+    
+    // Much longer, more suspenseful spin
+    const dur = 7000 + Math.random() * 3000; // 7-10 seconds
 
     let t0 = null;
     let lastTickIdx = -1;
-    const easeOutCubic = x => 1 - Math.pow(1 - x, 3);
+    let tickCount = 0;
+    
+    // Roulette-style easing - starts fast, gradually slows down
+    const easeOutQuint = x => 1 - Math.pow(1 - x, 5);
 
     function animate(ts){
       if(!t0) t0 = ts;
       const p = Math.min(1,(ts - t0)/dur);
-      const angle = easeOutCubic(p) * finalAngle;
+      
+      // Roulette physics - starts at full speed, gradually decelerates
+      const easedProgress = easeOutQuint(p);
+      const angle = easedProgress * finalAngle;
+      
+      // Calculate current speed for sound (derivative of easing function)
+      const currentSpeed = 1 - easedProgress;
 
-      // Tick per new wedge passing 12 o'clock
-      const liveIdx = indexAtTop(angle);
+      // Roulette-style tick sound - frequency matches wheel speed
+      const liveIdx = getCenterSegment(angle);
       if (liveIdx !== lastTickIdx){
         lastTickIdx = liveIdx;
-        try{ ensureAudio(); beep(); }catch{}
+        tickCount++;
+        
+        // Sound frequency matches current wheel speed (high when fast, low when slow)
+        const tickFreq = Math.max(200, 200 + (currentSpeed * 800));
+        const volume = Math.max(0.1, currentSpeed * 0.25);
+        try{ 
+          ensureAudio(); 
+          tone(tickFreq, 0.06, 'square', volume);
+        }catch{}
       }
 
       paint(angle);
@@ -751,30 +797,48 @@ function openMiniWheel(){
       if (p < 1){
         rafId = requestAnimationFrame(animate);
       } else {
-        // Landed
-        const landedIdx = indexAtTop(finalAngle);
+        // Landed - add some final settling animation
+        const landedIdx = getCenterSegment(finalAngle);
+        
+        // Final "settling" wobble
+        let wobbleCount = 0;
+        const maxWobbles = 3;
+        const wobbleInterval = setInterval(() => {
+          wobbleCount++;
+          const wobbleAngle = finalAngle + (Math.sin(wobbleCount * Math.PI) * 0.05 * (maxWobbles - wobbleCount) / maxWobbles);
+          paint(wobbleAngle);
+          
+          if (wobbleCount >= maxWobbles) {
+            clearInterval(wobbleInterval);
+            paint(finalAngle); // Final position
+            
+            // Victory pulse effect
+            let up = false;
+            pulseId = setInterval(()=>{
+              up = !up;
+              canvas.style.transition = 'transform 200ms ease-in-out';
+              canvas.style.transform = up ? 'scale(1.05)' : 'scale(1.00)';
+            }, 200);
 
-        // Pulse the whole wheel (not a wedge) for 2 seconds
-        let up = false;
-        pulseId = setInterval(()=>{
-          up = !up;
-          canvas.style.transition = 'transform 140ms ease-in-out';
-          canvas.style.transform = up ? 'scale(1.03)' : 'scale(1.00)';
-        }, 160);
-
-        setTimeout(()=>{
-          cleanup();
-          const result = segments[landedIdx].value;
-          if (result === 'BUST'){
-            closeOverlay(el.miniOverlay);
-            showBustThenNext();
-          } else {
-            state.subtotal += Number(result)||0;
-            showPlus(result);
-            renderScores();
-            closeMiniAndResume();
+            // Final result
+            setTimeout(()=>{
+              cleanup();
+              const result = segments[landedIdx].value;
+              console.log(`Wheel landed on index ${landedIdx}, value: ${result}, segment: ${segments[landedIdx].label}`);
+              try{ ensureAudio(); fanfare(); }catch{}
+              
+              if (result === 'BUST'){
+                closeOverlay(el.miniOverlay);
+                showBustThenNext();
+              } else {
+                state.subtotal += Number(result)||0;
+                showPlus(result);
+                renderScores();
+                closeMiniAndResume();
+              }
+            }, 1500);
           }
-        }, 2000);
+        }, 150);
       }
     }
 
@@ -948,6 +1012,25 @@ el.newMatchBtn.addEventListener('click', ()=> {
 });
 el.askBtn.addEventListener('click', openAI);
 el.aiCloseBtn.addEventListener('click', ()=> { closeAI(); });
+
+// Temporary test buttons for mini-games
+el.testWheelBtn.addEventListener('click', ()=> {
+  if (!state.started) {
+    alert('Please start a round first to test the wheel!');
+    return;
+  }
+  ensureAudio();
+  openMiniWheel();
+});
+
+el.testCasesBtn.addEventListener('click', ()=> {
+  if (!state.started) {
+    alert('Please start a round first to test bonus chests!');
+    return;
+  }
+  ensureAudio();
+  openMiniBonusCases();
+});
 
 /* =============================
    Init

@@ -3,14 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Treasure Cases - Collect and Bank as Many Points as Possible</title>
+  <title>Treasure Chest - Collect or Bank Your Points</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <!-- Intro Screen -->
 <div class="intro-screen" id="introScreen">
     <div class="intro-container">
-    <h1 class="intro-title">Treasure Cases</h1>
+    <h1 class="intro-title">TREASURE CHEST</h1>
+    <h2 class="intro-subtitle">Collect or Bank Your Points</h2>
     
     <div class="intro-section">
       <label class="intro-label">Number of Teams:</label>
@@ -54,7 +55,7 @@
 
 <div class="wrap" id="gameWrap" style="display: none;">
   <header>
-    <div class="brand">Treasure Chest — Find or Bank Points</div>
+    <div class="brand">TREASURE CHEST — Collect or Bank Your Points</div>
     <div class="controls">
       <span class="pill">Round <span id="roundNum">1</span>/<span id="roundsPlanned">16</span></span>
       <span class="pill">Prize: $<span id="roundPrize">5</span></span>
@@ -106,7 +107,7 @@
         <div class="card round-total" id="roundTotalCard">Round Total: <span id="subtotal" class="big">0</span>
           <button class="btn ok" id="bankBtn">💰 Bank Points</button>
         </div>
-        <div class="card">Cases Left: <span id="casesLeft" class="big">0</span></div>
+        <div class="card">Chests Left: <span id="casesLeft" class="big">0</span></div>
         <div class="card">Round: <span id="roundLabel" class="big">1 of 16</span></div>
         <div class="timer" id="timer">15</div>
       </div>
@@ -120,10 +121,12 @@
 
       <div class="foot-controls">
         <div class="chips" id="counts"></div>
-        <div class="footer-right">
-          <button class="btn" id="askBtn">Ask BradGPT</button>
-          <span class="pill" id="miniHint">Mini-game in: 5</span>
-        </div>
+      <div class="footer-right">
+        <button class="btn" id="askBtn">Ask BradGPT</button>
+        <button class="btn" id="testWheelBtn" style="background: #ff6b6b; color: #000;">🎡 Test Wheel</button>
+        <button class="btn" id="testCasesBtn" style="background: #c0c0c0; color: #000;">📦 Test Chests</button>
+        <span class="pill" id="miniHint">Mini-game in: 5</span>
+      </div>
       </div>
     </div>
   </main>
@@ -170,17 +173,17 @@
 <!-- Rules splash (larger) -->
 <div class="overlay" id="rulesOverlay">
   <div class="modal">
-    <h2>Hidden Case Game</h2>
-    <p><b>Open cases, avoid the Bust, bank when you dare.</b></p>
+    <h2>Treasure Chest Game</h2>
+    <p><b>Open treasure chests, avoid the Bust, bank when you dare.</b></p>
     <ul style="text-align:left; margin:0 auto; width:min(900px, 96%); background: rgba(255,255,255,.65); color:#7a0037; border:2px solid rgba(255,255,255,.9); border-radius:14px; padding:16px; font-weight:800; font-size: clamp(14px,1.6vw,22px);">
       <li><b>Teams:</b> 2-4 teams compete (customize team names on the intro screen).</li>
-      <li><b>20 cases</b> per turn: 19 have points, <b>1 Bust (0)</b>. Values reshuffled each turn; the set is the same every time.</li>
-      <li>Tap a case → suspenseful flip + big reveal. Safe values add to your Round Total.</li>
+      <li><b>20 treasure chests</b> per turn: 19 have points, <b>1 Bust (0)</b>. Values reshuffled each turn; the set is the same every time.</li>
+      <li>Tap a chest → suspenseful flip + big reveal. Safe values add to your Round Total.</li>
       <li><b>Bank Points</b> (button next to Round Total) anytime to lock in the total for your team's turn.</li>
       <li><b>Timer:</b> 15s per decision. It <i>starts only after your first pick</i>, pauses during reveal, and resets after safe picks. Timer at 0 or revealing the Bust ends your turn with 0 for that turn.</li>
       <li><b>Rounds:</b> customizable (set on startup). Prize per round is customizable. Ties or no-score → an extra round is added automatically.</li>
-      <li><b>BradGPT:</b> limited uses per turn; freezes time and gives odds + advice.</li>
-      <li><b>Mini-games:</b> every 5 safe picks (max 3 per turn). <i>Bonus Cases</i> (-20,+20,+30,+40) or <i>Risk Wheel</i> (+0,+BUST, and additional points). Only the wheel may be passed.</li>
+      <li><b>Time Out:</b> 3 uses per turn; freezes time for 30 seconds to strategize.</li>
+      <li><b>Mini-games:</b> every 5 safe picks (max 3 per turn). <i>Bonus Chests</i> (-20,+20,+30,+40) or <i>Risk Wheel</i> (+0,+BUST, and additional points). Only the wheel may be passed.</li>
       <li>Starting team rotates each round for fairness.</li>
     </ul>
     <div class="row" style="margin-top:10px">
@@ -189,15 +192,15 @@
   </div>
 </div>
 
-<!-- BradGPT modal -->
+<!-- Time Out modal -->
 <div class="overlay" id="aiOverlay">
   <div class="modal" id="aiModal">
-    <h2>🤖 BradGPT™</h2>
+    <h2>⏰ Time Out</h2>
     <p id="aiIntro">—</p>
-    <p><span class="stat safe" id="aiSafe">Safe: 95%</span> <span class="stat risk" id="aiRisk" style="margin-left:8px">(Bust: 5%)</span></p>
-    <p id="aiStats" style="opacity:.95">Expected next pick: +— • Highest remaining: —</p>
-    <p id="aiLeader" style="opacity:.95">—</p>
-    <div class="advice" id="aiAdvice">—</div>
+    <p><span class="stat safe" id="aiSafe"></span> <span class="stat risk" id="aiRisk" style="margin-left:8px"></span></p>
+    <p id="aiStats" style="opacity:.95">Take a moment to strategize...</p>
+    <p id="aiLeader" style="opacity:.95"></p>
+    <div class="advice" id="aiAdvice">30</div>
     <div class="row"><button class="btn primary" id="aiCloseBtn">Continue</button></div>
   </div>
 </div>
