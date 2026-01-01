@@ -39,7 +39,8 @@ const state = {
   // per-turn helpers
   bradUsedCount: 0,
   safeStreak: 0,
-  minisThisTurn: 0
+  minisThisTurn: 0,
+  minisPlayedThisTurn: [] // Track which mini-games have been played this turn
 };
 
 /* =============================
@@ -48,6 +49,42 @@ const state = {
 
 let AC=null;
 function ensureAudio(){ if(!AC){ try{ AC=new (window.AudioContext||window.webkitAudioContext)(); }catch{} } }
+
+// Professional audio system for game sounds
+const gameAudio = {
+  sounds: {},
+  
+  // Load a sound file
+  load(name, filename) {
+    this.sounds[name] = new Audio(filename);
+    this.sounds[name].preload = 'auto';
+  },
+  
+  // Play a sound
+  play(name, volume = 0.7) {
+    if (this.sounds[name]) {
+      try {
+        this.sounds[name].currentTime = 0;
+        this.sounds[name].volume = volume;
+        this.sounds[name].play().catch(() => {}); // Ignore autoplay restrictions
+      } catch(e) {}
+    }
+  }
+};
+
+// Load all game sounds
+gameAudio.load('cheer', 'cheer.wav');
+gameAudio.load('sweet_bell', 'sweet_bell.wav');
+gameAudio.load('start', 'start.mp3');
+gameAudio.load('bank_points', 'bank_points.mp3');
+gameAudio.load('bust', 'bust.mp3');
+gameAudio.load('drumroll', 'drumroll.mp3');
+gameAudio.load('cardbust', 'cardbust.mp3');
+gameAudio.load('points', 'points.mp3');
+gameAudio.load('chest', 'chest.mp3');
+gameAudio.load('crowd_ah', 'crowd_ah.mp3');
+
+// Legacy tone functions for fallback
 function tone(freq=880, dur=0.2, type='sine', gain=0.25){
   if(!AC) return;
   const o=AC.createOscillator(), g=AC.createGain();
@@ -139,7 +176,8 @@ const el = {
 
   newMatchBtn: document.getElementById('newMatchBtn'),
   testWheelBtn: document.getElementById('testWheelBtn'),
-  testCasesBtn: document.getElementById('testCasesBtn')
+  testCasesBtn: document.getElementById('testCasesBtn'),
+  testCardsBtn: document.getElementById('testCardsBtn')
 };
 
 /* =============================
@@ -240,6 +278,7 @@ function renderBoard(){
     if (startBtn) {
       startBtn.addEventListener('click', ()=> { 
         ensureAudio(); 
+        gameAudio.play('start');
         if (!state.started) { 
           startRoundPlay(); 
         } 
@@ -325,6 +364,7 @@ function prepareTurnBoard(){
   state.bradUsedCount = 0;
   state.safeStreak = 0;
   state.minisThisTurn = 0;
+  state.minisPlayedThisTurn = [];
 }
 function nextTurn(){
   state.turnsTaken++;
@@ -424,7 +464,8 @@ function onCase(idx){
   state.revealing = true;
 
   stopTimer(); // pause during reveal
-  ensureAudio(); whoosh();
+  ensureAudio(); 
+  gameAudio.play('chest');
 
   const node = el.cases.querySelector(`.case[data-idx="${idx}"]`);
   if (!node){ state.locked=false; state.revealing=false; return; }
@@ -441,14 +482,21 @@ function onCase(idx){
     if (val===0){
       state.subtotal = 0;
       renderScores();
+      gameAudio.play('crowd_ah'); // Crowd disappointment for bust
       showBustThenNext();
     } else {
       c.opened = true;
       state.remaining--;
       state.subtotal += val;
       showPlus(val);
-      ensureAudio(); ding();
-      if (val >= 70) setTimeout(fanfare, 140);
+      ensureAudio();
+      
+      // Play appropriate sound based on value
+      if (val >= 50) {
+        gameAudio.play('cheer'); // Large amounts get cheer
+      } else {
+        gameAudio.play('points'); // Regular points sound
+      }
 
       state.safeStreak++;
 
@@ -472,10 +520,10 @@ function onCase(idx){
   }, 650);
 }
 
-function showPlus(n){
+function showPlus(n, duration = 800){
   el.plusTxt.textContent = n >= 0 ? `+${Number(n)}` : `${Number(n)}`;
   openOverlay(el.plusOverlay);
-  setTimeout(()=> closeOverlay(el.plusOverlay), 800);
+  setTimeout(()=> closeOverlay(el.plusOverlay), duration);
 }
 
 function doBank(manual=true){
@@ -486,14 +534,18 @@ function doBank(manual=true){
   }
   state.subtotal = 0;
   renderScores();
-  if (manual) ensureAudio(), ding();
+  if (manual) {
+    ensureAudio();
+    gameAudio.play('bank_points');
+  }
 
   state.locked = true;
   setTimeout(()=>{ state.locked=false; nextTurn(); }, 350);
 }
 
 function timeOutBust(){
-  ensureAudio(); buzzer();
+  ensureAudio(); 
+  gameAudio.play('bust');
   state.subtotal = 0;
   renderScores();
   showBustThenNext();
@@ -501,7 +553,8 @@ function timeOutBust(){
 
 function showBustThenNext(){
   openOverlay(el.bustOverlay);
-  ensureAudio(); buzzer();
+  ensureAudio(); 
+  gameAudio.play('bust');
   setTimeout(()=>{
     closeOverlay(el.bustOverlay);
     state.locked = false;
@@ -523,40 +576,18 @@ function openAI(){
 
   const couple = CONFIG.couples[state.currentTeam];
 
-  el.aiIntro.textContent = `${couple} Team — Time Out Called`;
+  el.aiIntro.textContent = ``;
   el.aiSafe.textContent = ``;
   el.aiRisk.textContent = ``;
-  el.aiStats.textContent = `Take a moment to strategize...`;
+  el.aiStats.textContent = ``;
   el.aiLeader.textContent = ``;
-  el.aiAdvice.textContent = `30`;
-
-  // Start 30-second countdown
-  let timeLeft = 30;
-  el.aiAdvice.textContent = timeLeft;
-  
-  const countdownInterval = setInterval(() => {
-    timeLeft--;
-    el.aiAdvice.textContent = timeLeft;
-    
-    if (timeLeft <= 0) {
-      clearInterval(countdownInterval);
-      el.aiAdvice.textContent = `Time's up!`;
-    }
-  }, 1000);
-
-  // Store interval ID so we can clear it if modal is closed early
-  el.aiOverlay.countdownInterval = countdownInterval;
+  el.aiAdvice.textContent = `Take your time to discuss strategy and plan your next moves.`;
 
   openOverlay(el.aiOverlay);
   state.bradUsedCount++;
   renderAskButton();
 }
 function closeAI(){
-  // Clear countdown interval if it exists
-  if (el.aiOverlay.countdownInterval) {
-    clearInterval(el.aiOverlay.countdownInterval);
-    el.aiOverlay.countdownInterval = null;
-  }
   closeOverlay(el.aiOverlay);
   renderAskButton(); // reflect remaining uses immediately
 }
@@ -569,9 +600,28 @@ function closeAI(){
 function maybeTriggerMini(){
   if (state.minisThisTurn >= CONFIG.miniMaxPerTurn) return false;
   if (state.safeStreak > 0 && state.safeStreak % CONFIG.miniEverySafe === 0){
-    // Stop timer & open one of the two minis
+    // Stop timer & open one of the three minis (randomly, no repeats)
     stopTimer();
-    Math.random() < 0.5 ? openMiniBonusCases() : openMiniWheel();
+    
+    const availableGames = ['wheel', 'chests', 'cards'].filter(game => 
+      !state.minisPlayedThisTurn.includes(game)
+    );
+    
+    if (availableGames.length === 0) {
+      // If all games played, reset and allow any
+      state.minisPlayedThisTurn = [];
+      availableGames.push('wheel', 'chests', 'cards');
+    }
+    
+    const selectedGame = availableGames[Math.floor(Math.random() * availableGames.length)];
+    state.minisPlayedThisTurn.push(selectedGame);
+    
+    switch(selectedGame) {
+      case 'wheel': openMiniWheel(); break;
+      case 'chests': openMiniBonusCases(); break;
+      case 'cards': openMiniAceyDeucey(); break;
+    }
+    
     state.safeStreak = 0; // reset counter after mini appears
     state.minisThisTurn++;
     return true;
@@ -583,7 +633,7 @@ function openMiniBonusCases(){
   stopTimer(); // ensure timer is stopped while modal is up
   const couple = CONFIG.couples[state.currentTeam];
   el.miniTitle.textContent = 'Mini-Game: Bonus Chests';
-  el.miniIntro.textContent = `Game Host: ${couple} Team, pick one of 4 bonus chests!`;
+  el.miniIntro.textContent = `${couple}, pick one of four bonus chests!`;
   
   // Create randomized values for the 4 cases
   const possibleValues = [-20, -10, 0, 10, 20, 30, 40, 50, 60];
@@ -603,6 +653,14 @@ function openMiniBonusCases(){
       state.subtotal += val;
       showPlus(val);
       renderScores();
+      
+      // Play appropriate sound
+      if (val > 0) {
+        gameAudio.play('sweet_bell');
+      } else if (val < 0) {
+        gameAudio.play('bust');
+      }
+      
       closeOverlay(el.miniOverlay);
       resetTimer(); startTimer();
       renderAskButton();
@@ -797,48 +855,43 @@ function openMiniWheel(){
       if (p < 1){
         rafId = requestAnimationFrame(animate);
       } else {
-        // Landed - add some final settling animation
+        // Landed - go straight to pulse effect
         const landedIdx = getCenterSegment(finalAngle);
+        paint(finalAngle); // Lock to final position immediately
         
-        // Final "settling" wobble
-        let wobbleCount = 0;
-        const maxWobbles = 3;
-        const wobbleInterval = setInterval(() => {
-          wobbleCount++;
-          const wobbleAngle = finalAngle + (Math.sin(wobbleCount * Math.PI) * 0.05 * (maxWobbles - wobbleCount) / maxWobbles);
-          paint(wobbleAngle);
-          
-          if (wobbleCount >= maxWobbles) {
-            clearInterval(wobbleInterval);
-            paint(finalAngle); // Final position
-            
-            // Victory pulse effect
-            let up = false;
-            pulseId = setInterval(()=>{
-              up = !up;
-              canvas.style.transition = 'transform 200ms ease-in-out';
-              canvas.style.transform = up ? 'scale(1.05)' : 'scale(1.00)';
-            }, 200);
+        // Victory pulse effect
+        let up = false;
+        pulseId = setInterval(()=>{
+          up = !up;
+          canvas.style.transition = 'transform 200ms ease-in-out';
+          canvas.style.transform = up ? 'scale(1.05)' : 'scale(1.00)';
+        }, 200);
 
-            // Final result
-            setTimeout(()=>{
-              cleanup();
-              const result = segments[landedIdx].value;
-              console.log(`Wheel landed on index ${landedIdx}, value: ${result}, segment: ${segments[landedIdx].label}`);
-              try{ ensureAudio(); fanfare(); }catch{}
-              
-              if (result === 'BUST'){
-                closeOverlay(el.miniOverlay);
-                showBustThenNext();
-              } else {
-                state.subtotal += Number(result)||0;
-                showPlus(result);
-                renderScores();
-                closeMiniAndResume();
-              }
-            }, 1500);
+        // Final result - no wobble delay needed
+        setTimeout(()=>{
+          cleanup();
+          const result = segments[landedIdx].value;
+          console.log(`Wheel landed on index ${landedIdx}, value: ${result}, segment: ${segments[landedIdx].label}`);
+          try{ ensureAudio(); fanfare(); }catch{}
+          
+          if (result === 'BUST'){
+            closeOverlay(el.miniOverlay);
+            showBustThenNext();
+          } else if (result === 0 || result === '0') {
+            // Zero points - crowd disappointment but no bust
+            state.subtotal += 0;
+            showPlus(0, 3000);
+            renderScores();
+            gameAudio.play('crowd_ah'); // Crowd disappointment for zero
+            closeMiniAndResume();
+          } else {
+            state.subtotal += Number(result)||0;
+            showPlus(result, 3000); // Show +XX for 3 seconds during cheer audio
+            renderScores();
+            gameAudio.play('cheer'); // Crowd cheer for wheel wins
+            closeMiniAndResume();
           }
-        }, 150);
+        }, 600);
       }
     }
 
@@ -852,6 +905,280 @@ function openMiniWheel(){
 
   openOverlay(el.miniOverlay);
   renderAskButton();
+}
+
+function openMiniAceyDeucey(){
+  stopTimer(); // pause while the mini-game is up
+  const couple = CONFIG.couples[state.currentTeam];
+  el.miniTitle.textContent = 'Mini-Game: Acey Deucey';
+  el.miniIntro.textContent = `${couple}, wager whether the next card is within the spread!`;
+
+  // Create shuffled deck
+  const suits = ['♠', '♥', '♦', '♣'];
+  const ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+  const deck = [];
+  
+  suits.forEach(suit => {
+    ranks.forEach((rank, index) => {
+      deck.push({
+        rank: rank,
+        suit: suit,
+        value: index + 1 // Ace = 1, King = 13
+      });
+    });
+  });
+  
+  // Shuffle deck
+  shuffle(deck);
+  
+  // Deal two cards ensuring there's at least 1 card between them
+  let leftCard, rightCard, middleCard;
+  let attempts = 0;
+  
+  do {
+    leftCard = deck[attempts];
+    rightCard = deck[attempts + 1];
+    middleCard = deck[attempts + 2];
+    attempts++;
+  } while (Math.abs(leftCard.value - rightCard.value) <= 1 && attempts < 50);
+  
+  // Ensure left card is lower than right card for display
+  const [lowCard, highCard] = leftCard.value <= rightCard.value ? 
+    [leftCard, rightCard] : [rightCard, leftCard];
+
+  el.miniArea.innerHTML = `
+    <div class="card-game">
+      <div class="cards-row">
+        <div class="card-slot">
+          <div class="playing-card">
+            <div class="card-rank">${lowCard.rank}</div>
+            <div class="card-suit">${lowCard.suit}</div>
+            ${lowCard.rank === 'A' ? '<div class="ace-indicator">LOW</div>' : ''}
+          </div>
+        </div>
+        <div class="card-slot middle">
+          <div class="playing-card face-down">?</div>
+        </div>
+        <div class="card-slot">
+          <div class="playing-card">
+            <div class="card-rank">${highCard.rank}</div>
+            <div class="card-suit">${highCard.suit}</div>
+            ${highCard.rank === 'A' ? '<div class="ace-indicator">LOW</div>' : ''}
+          </div>
+        </div>
+      </div>
+      <div class="spread-info">
+        Winning Numbers: ${lowCard.value + 1} to ${highCard.value - 1}
+        <br>Spread: ${highCard.value - lowCard.value - 1} cards
+      </div>
+      <div class="wager-section">
+        <p>Current Points: <strong>${state.subtotal}</strong></p>
+        <div class="wager-display">
+          <p>Choose your wager:</p>
+        </div>
+        <div class="wager-input-section">
+          <div class="quick-wager-buttons">
+            <button class="btn quick-wager" data-percent="0">NONE</button>
+            <button class="btn quick-wager" data-percent="10">10%</button>
+            <button class="btn quick-wager" data-percent="25">25%</button>
+            <button class="btn quick-wager" data-percent="50">50%</button>
+            <button class="btn quick-wager" data-percent="75">75%</button>
+            <button class="btn quick-wager" data-percent="100">ALL</button>
+          </div>
+        </div>
+        <div class="deal-section" style="margin-top: 16px;">
+          <button class="btn primary deal-btn" id="dealCardBtn" disabled>💳 Deal Card</button>
+        </div>
+      </div>
+    </div>`;
+
+  el.miniButtons.innerHTML = '';
+
+  // Check if player has no points to wager
+  if (state.subtotal <= 0) {
+    // Replace wager section with message and continue button
+    el.miniArea.querySelector('.wager-section').innerHTML = `
+      <div style="text-align: center; padding: 20px;">
+        <p style="font-size: 18px; color: var(--red1); margin-bottom: 20px;">
+          <strong>Sorry, you don't have anything to wager!</strong>
+        </p>
+        <button class="btn primary" id="continueNoWagerBtn">Continue</button>
+      </div>`;
+    
+    document.getElementById('continueNoWagerBtn').addEventListener('click', () => {
+      closeOverlay(el.miniOverlay);
+      resetTimer(); 
+      startTimer();
+      renderAskButton();
+    }, {once: true});
+    
+    openOverlay(el.miniOverlay);
+    renderAskButton();
+    return; // Exit early, don't set up wager logic
+  }
+
+  // Wager selection and deal button
+  const dealBtn = el.miniArea.querySelector('#dealCardBtn');
+  let selectedWagerAmount = undefined;
+  
+  // Quick wager buttons
+  el.miniArea.querySelectorAll('.quick-wager').forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Remove active class from all buttons
+      el.miniArea.querySelectorAll('.quick-wager').forEach(b => b.classList.remove('active'));
+      // Add active class to clicked button
+      btn.classList.add('active');
+      
+      const percent = parseInt(btn.dataset.percent);
+      selectedWagerAmount = Math.round(state.subtotal * percent / 100);
+      
+      // Update the wager display
+      const wagerDisplay = el.miniArea.querySelector('.wager-display');
+      if (selectedWagerAmount === 0) {
+        wagerDisplay.innerHTML = '<p>Choose your wager: <strong>NONE (0 points)</strong></p>';
+      } else {
+        wagerDisplay.innerHTML = `<p>Choose your wager: <strong>${percent}% (${selectedWagerAmount} points)</strong></p>`;
+      }
+      
+      dealBtn.disabled = false;
+    });
+  });
+
+  // Deal card button
+  dealBtn.addEventListener('click', () => {
+    const wagerAmount = selectedWagerAmount;
+    
+    if (selectedWagerAmount === undefined || wagerAmount > state.subtotal) {
+      alert('Please select a wager option first!');
+      return;
+    }
+    
+    // Disable controls
+    dealBtn.disabled = true;
+    el.miniArea.querySelectorAll('.quick-wager').forEach(b => b.disabled = true);
+    
+    // Play drumroll for suspense (except for NONE bets)
+    if (wagerAmount > 0) {
+      gameAudio.play('drumroll', 0.5);
+    }
+    
+    // Reveal the middle card with suspense (longer delay for drumroll)
+    setTimeout(() => {
+        const middleSlot = el.miniArea.querySelector('.middle .playing-card');
+        middleSlot.innerHTML = `
+          <div class="card-rank">${middleCard.rank}</div>
+          <div class="card-suit">${middleCard.suit}</div>
+          ${middleCard.rank === 'A' ? '<div class="ace-indicator">LOW</div>' : ''}
+        `;
+        middleSlot.classList.remove('face-down');
+        middleSlot.classList.add('revealed');
+      
+        // Determine outcome
+        let result = '';
+        let pointChange = 0;
+        
+        if (wagerAmount === 0) {
+          // NONE option - just show what would have happened
+          if (middleCard.value > lowCard.value && middleCard.value < highCard.value) {
+            result = `🔍 NONE bet - Card ${middleCard.value} was between ${lowCard.value} and ${highCard.value}. You would have won!`;
+          } else if (middleCard.value === lowCard.value || middleCard.value === highCard.value) {
+            result = `🔍 NONE bet - Card ${middleCard.value} matched an end card. You would have lost 50 points!`;
+          } else {
+            result = `🔍 NONE bet - Card ${middleCard.value} was outside the range. You would have lost your wager!`;
+          }
+          pointChange = 0;
+        } else if (middleCard.value > lowCard.value && middleCard.value < highCard.value) {
+          // WIN - card is in between
+          result = `🎉 WIN! Card ${middleCard.value} is between ${lowCard.value} and ${highCard.value}`;
+          pointChange = wagerAmount;
+        } else if (middleCard.value === lowCard.value || middleCard.value === highCard.value) {
+          // MATCH - lose 50 points
+          result = `💥 MATCH! Card ${middleCard.value} matches an end card. Lose 50 points!`;
+          pointChange = -50;
+        } else {
+          // LOSE - card is outside range, lose wagered amount
+          result = `💀 BUST! Card ${middleCard.value} is outside the range. Lose ${wagerAmount} points!`;
+          pointChange = -wagerAmount;
+        }
+      
+        // Show dramatic result overlay first
+        setTimeout(() => {
+          let overlayText = '';
+          let overlayClass = '';
+          
+          if (wagerAmount === 0) {
+            // NONE option - no dramatic overlay, just show result
+            showCardResult();
+          } else if (middleCard.value > lowCard.value && middleCard.value < highCard.value) {
+            // WIN
+            overlayText = 'YOU WIN!';
+            overlayClass = 'card-win';
+            gameAudio.play('sweet_bell');
+            // Play cheer after sweet bell
+            setTimeout(() => gameAudio.play('cheer'), 800);
+            showCardOverlay(overlayText, overlayClass, () => showCardResult());
+          } else {
+            // BUST (both match and outside range)
+            overlayText = 'BUST!';
+            overlayClass = 'card-bust';
+            gameAudio.play('cardbust');
+            // Play crowd disappointment after cardbust
+            setTimeout(() => gameAudio.play('crowd_ah'), 800);
+            showCardOverlay(overlayText, overlayClass, () => showCardResult());
+          }
+        }, 2500);
+        
+        function showCardResult() {
+          el.miniArea.querySelector('.spread-info').innerHTML = `
+            <div class="result-text">${result}</div>
+            <div class="point-change">Points: ${pointChange >= 0 ? '+' : ''}${pointChange}</div>
+          `;
+          
+          // Apply point change
+          state.subtotal = Math.max(0, state.subtotal + pointChange);
+          showPlus(pointChange);
+          renderScores();
+          
+          // Add continue button
+          el.miniButtons.innerHTML = '<button class="btn primary" id="continueCardBtn">Continue</button>';
+          document.getElementById('continueCardBtn').addEventListener('click', () => {
+            closeOverlay(el.miniOverlay);
+            resetTimer(); 
+            startTimer();
+            renderAskButton();
+          }, {once: true});
+        }
+    }, 2000); // 2 seconds - better sync with drumroll audio
+  }, {once: true});
+
+
+  openOverlay(el.miniOverlay);
+  renderAskButton();
+}
+
+function showCardOverlay(text, className, callback) {
+  // Create overlay element if it doesn't exist
+  let cardOverlay = document.getElementById('cardOverlay');
+  if (!cardOverlay) {
+    cardOverlay = document.createElement('div');
+    cardOverlay.id = 'cardOverlay';
+    cardOverlay.className = 'card-overlay';
+    cardOverlay.innerHTML = '<div class="card-overlay-text"></div>';
+    document.body.appendChild(cardOverlay);
+  }
+  
+  const textElement = cardOverlay.querySelector('.card-overlay-text');
+  textElement.textContent = text;
+  textElement.className = `card-overlay-text ${className}`;
+  
+  // Show overlay
+  cardOverlay.classList.add('show');
+  
+  // Hide after delay and run callback
+  setTimeout(() => {
+    cardOverlay.classList.remove('show');
+    setTimeout(callback, 200); // Wait for fade out
+  }, 1500);
 }
 
 /* =============================
@@ -1030,6 +1357,15 @@ el.testCasesBtn.addEventListener('click', ()=> {
   }
   ensureAudio();
   openMiniBonusCases();
+});
+
+el.testCardsBtn.addEventListener('click', ()=> {
+  if (!state.started) {
+    alert('Please start a round first to test Acey Deucey!');
+    return;
+  }
+  ensureAudio();
+  openMiniAceyDeucey();
 });
 
 /* =============================
