@@ -4,9 +4,9 @@
 
 const CONFIG = {
   couples: ["Team 1","Team 2","Team 3","Team 4"], // Will be updated from intro
-  playerCount: 3, // Will be updated from intro
-  roundsPlanned: 16,
-  originalRoundsPlanned: 16, // Keep track of original setting from startup
+  playerCount: 4, // Updated default to 4 teams
+  roundsPlanned: 8, // Updated default to 8 rounds
+  originalRoundsPlanned: 8, // Keep track of original setting from startup
   roundPrize: 5,
   cols: 5,
   timerSeconds: 15,
@@ -175,6 +175,10 @@ const el = {
   miniButtons: document.getElementById('miniButtons'),
 
   newMatchBtn: document.getElementById('newMatchBtn'),
+  
+  // Minis dropdown
+  minisBtn: document.getElementById('minisBtn'),
+  minisMenu: document.getElementById('minisMenu'),
   testWheelBtn: document.getElementById('testWheelBtn'),
   testCasesBtn: document.getElementById('testCasesBtn'),
   testCardsBtn: document.getElementById('testCardsBtn')
@@ -1251,10 +1255,10 @@ function setupIntro(){
   
 
   
-  // Initialize with default player count (3)
-  CONFIG.playerCount = 3;
+  // Initialize with default player count (4)
+  CONFIG.playerCount = 4;
   nameInputs.forEach((input, index) => {
-    if (index < 3) {
+    if (index < 4) {
       input.style.display = 'block';
       input.required = true;
     } else {
@@ -1307,9 +1311,9 @@ el.newMatchBtn.addEventListener('click', ()=> {
     
     // Reset CONFIG to defaults
     CONFIG.couples = ["Team 1","Team 2","Team 3","Team 4"];
-    CONFIG.playerCount = 3;
-    CONFIG.roundsPlanned = 16;
-    CONFIG.originalRoundsPlanned = 16;
+    CONFIG.playerCount = 4;
+    CONFIG.roundsPlanned = 8;
+    CONFIG.originalRoundsPlanned = 8;
     CONFIG.roundPrize = 5;
     
     // Show intro screen and hide game
@@ -1319,12 +1323,12 @@ el.newMatchBtn.addEventListener('click', ()=> {
     // Reset intro form to defaults
     const countBtns = document.querySelectorAll('.count-btn');
     countBtns.forEach(b => b.classList.remove('active'));
-    document.querySelector('[data-count="3"]').classList.add('active');
+    document.querySelector('[data-count="4"]').classList.add('active');
     
     const nameInputs = document.querySelectorAll('.name-input');
     nameInputs.forEach((input, index) => {
       input.value = `Team ${index + 1}`;
-      if (index < 3) {
+      if (index < 4) {
         input.style.display = 'block';
         input.required = true;
       } else {
@@ -1333,15 +1337,29 @@ el.newMatchBtn.addEventListener('click', ()=> {
       }
     });
     
-    document.getElementById('roundsInput').value = 16;
+    document.getElementById('roundsInput').value = 8;
     document.getElementById('wagerInput').value = 5;
   }
 });
 el.askBtn.addEventListener('click', openAI);
 el.aiCloseBtn.addEventListener('click', ()=> { closeAI(); });
 
-// Temporary test buttons for mini-games
+// Minis dropdown functionality
+el.minisBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  el.minisMenu.classList.toggle('show');
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', (e) => {
+  if (!el.minisBtn.contains(e.target) && !el.minisMenu.contains(e.target)) {
+    el.minisMenu.classList.remove('show');
+  }
+});
+
+// Mini-game test buttons (now in dropdown)
 el.testWheelBtn.addEventListener('click', ()=> {
+  el.minisMenu.classList.remove('show'); // Close dropdown
   if (!state.started) {
     alert('Please start a round first to test the wheel!');
     return;
@@ -1351,6 +1369,7 @@ el.testWheelBtn.addEventListener('click', ()=> {
 });
 
 el.testCasesBtn.addEventListener('click', ()=> {
+  el.minisMenu.classList.remove('show'); // Close dropdown
   if (!state.started) {
     alert('Please start a round first to test bonus chests!');
     return;
@@ -1360,6 +1379,7 @@ el.testCasesBtn.addEventListener('click', ()=> {
 });
 
 el.testCardsBtn.addEventListener('click', ()=> {
+  el.minisMenu.classList.remove('show'); // Close dropdown
   if (!state.started) {
     alert('Please start a round first to test Acey Deucey!');
     return;

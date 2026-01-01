@@ -17,8 +17,8 @@
       <label class="intro-label">Number of Teams:</label>
       <div class="player-count-selector">
         <button class="count-btn" data-count="2">2 Teams</button>
-        <button class="count-btn active" data-count="3">3 Teams</button>
-        <button class="count-btn" data-count="4">4 Teams</button>
+        <button class="count-btn" data-count="3">3 Teams</button>
+        <button class="count-btn active" data-count="4">4 Teams</button>
       </div>
     </div>
 
@@ -28,14 +28,14 @@
         <input type="text" class="name-input" placeholder="Team 1 Name" value="Team 1" maxlength="12">
         <input type="text" class="name-input" placeholder="Team 2 Name" value="Team 2" maxlength="12">
         <input type="text" class="name-input" placeholder="Team 3 Name" value="Team 3" maxlength="12">
-        <input type="text" class="name-input" placeholder="Team 4 Name" value="Team 4" maxlength="12" style="display: none;">
+        <input type="text" class="name-input" placeholder="Team 4 Name" value="Team 4" maxlength="12">
       </div>
     </div>
 
     <div class="intro-section">
       <label class="intro-label">Number of Rounds:</label>
       <div class="setting-input-wrapper">
-        <input type="number" class="setting-input" id="roundsInput" min="1" max="50" value="16">
+        <input type="number" class="setting-input" id="roundsInput" min="1" max="50" value="8">
       </div>
     </div>
 
@@ -60,7 +60,14 @@
       <span class="pill">Round <span id="roundNum">1</span>/<span id="roundsPlanned">16</span></span>
       <span class="pill">Prize: $<span id="roundPrize">5</span></span>
       <button class="btn" id="rulesBtn">Rules</button>
-
+      <div class="dropdown-container">
+        <button class="btn" id="minisBtn">Minis ▼</button>
+        <div class="dropdown-menu" id="minisMenu">
+          <button class="dropdown-item" id="testWheelBtn">🎡 Risk Wheel</button>
+          <button class="dropdown-item" id="testCasesBtn">📦 Bonus Chests</button>
+          <button class="dropdown-item" id="testCardsBtn">🃏 Acey Deucey</button>
+        </div>
+      </div>
       <button class="btn danger" id="newMatchBtn">Reset Game</button>
     </div>
   </header>
@@ -123,9 +130,6 @@
         <div class="chips" id="counts"></div>
       <div class="footer-right">
         <button class="btn" id="askBtn">Ask BradGPT</button>
-        <button class="btn" id="testWheelBtn" style="background: #ff6b6b; color: #000;">🎡 Test Wheel</button>
-        <button class="btn" id="testCasesBtn" style="background: #c0c0c0; color: #000;">📦 Test Chests</button>
-        <button class="btn" id="testCardsBtn" style="background: #000; color: #fff;">🃏 Test Cards</button>
         <span class="pill" id="miniHint">Mini-game in: 5</span>
       </div>
       </div>
@@ -177,14 +181,15 @@
     <h2>Treasure Chest Game</h2>
     <p><b>Open treasure chests, avoid the Bust, bank when you dare.</b></p>
     <ul style="text-align:left; margin:0 auto; width:min(900px, 96%); background: rgba(255,255,255,.65); color:#7a0037; border:2px solid rgba(255,255,255,.9); border-radius:14px; padding:16px; font-weight:800; font-size: clamp(14px,1.6vw,22px);">
-      <li><b>Teams:</b> 2-4 teams compete (customize team names on the intro screen).</li>
+      <li><b>Teams:</b> 2-4 teams compete (customize team names on the intro screen). Default: 4 teams, 8 rounds.</li>
       <li><b>20 treasure chests</b> per turn: 19 have points, <b>1 Bust (0)</b>. Values reshuffled each turn; the set is the same every time.</li>
       <li>Tap a chest → suspenseful flip + big reveal. Safe values add to your Round Total.</li>
       <li><b>Bank Points</b> (button next to Round Total) anytime to lock in the total for your team's turn.</li>
       <li><b>Timer:</b> 15s per decision. It <i>starts only after your first pick</i>, pauses during reveal, and resets after safe picks. Timer at 0 or revealing the Bust ends your turn with 0 for that turn.</li>
       <li><b>Rounds:</b> customizable (set on startup). Prize per round is customizable. Ties or no-score → an extra round is added automatically.</li>
-      <li><b>Time Out:</b> 3 uses per turn; freezes time for 30 seconds to strategize.</li>
-      <li><b>Mini-games:</b> every 5 safe picks (max 3 per turn). <i>Bonus Chests</i> (-20,+20,+30,+40) or <i>Risk Wheel</i> (+0,+BUST, and additional points). Only the wheel may be passed.</li>
+      <li><b>Time Out:</b> 3 uses per turn; pauses the game to strategize.</li>
+      <li><b>Mini-games:</b> every 5 safe picks (max 3 per turn). Three types: <i>Bonus Chests</i> (pick from 4 mystery chests with values -20 to +60), <i>Risk Wheel</i> (spin for 0-80 points or BUST), and <i>Acey Deucey</i> (card game - wager on whether the middle card falls between two end cards). Games rotate randomly without repeats.</li>
+      <li><b>Acey Deucey Details:</b> Two cards dealt, wager 10%-100% of your points (or NONE to watch). Win your wager if the middle card is between the end cards. Lose your wager if outside the range, or lose 50 points if it matches an end card.</li>
       <li>Starting team rotates each round for fairness.</li>
     </ul>
     <div class="row" style="margin-top:10px">
