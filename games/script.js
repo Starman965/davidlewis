@@ -48,7 +48,23 @@ const state = {
 ============================= */
 
 let AC=null;
-function ensureAudio(){ if(!AC){ try{ AC=new (window.AudioContext||window.webkitAudioContext)(); }catch{} } }
+let audioInitialized = false;
+
+function ensureAudio(){ 
+  if(!AC && !audioInitialized){ 
+    try{ 
+      AC=new (window.AudioContext||window.webkitAudioContext)(); 
+      audioInitialized = true;
+      
+      // Resume AudioContext if it's suspended (Chrome requirement)
+      if(AC.state === 'suspended') {
+        AC.resume().catch(() => {});
+      }
+    }catch{
+      audioInitialized = true; // Prevent repeated attempts
+    } 
+  } 
+}
 
 // Professional audio system for game sounds
 const gameAudio = {
@@ -64,6 +80,9 @@ const gameAudio = {
   play(name, volume = 0.7) {
     if (this.sounds[name]) {
       try {
+        // Ensure audio is initialized before playing
+        ensureAudio();
+        
         this.sounds[name].currentTime = 0;
         this.sounds[name].volume = volume;
         this.sounds[name].play().catch(() => {}); // Ignore autoplay restrictions
@@ -83,6 +102,25 @@ gameAudio.load('cardbust', 'cardbust.mp3');
 gameAudio.load('points', 'points.mp3');
 gameAudio.load('chest', 'chest.mp3');
 gameAudio.load('crowd_ah', 'crowd_ah.mp3');
+
+// One-time audio unlock for mobile browsers (especially Chrome)
+let audioUnlocked = false;
+function unlockAudio() {
+  if (!audioUnlocked) {
+    ensureAudio();
+    
+    // Try to play a silent sound to unlock audio
+    if (AC) {
+      const buffer = AC.createBuffer(1, 1, 22050);
+      const source = AC.createBufferSource();
+      source.buffer = buffer;
+      source.connect(AC.destination);
+      source.start(0);
+    }
+    
+    audioUnlocked = true;
+  }
+}
 
 // Legacy tone functions for fallback
 function tone(freq=880, dur=0.2, type='sine', gain=0.25){
@@ -1210,6 +1248,8 @@ function setupIntro(){
   
   // Start game button
   el.startGameBtn.addEventListener('click', () => {
+    // Unlock audio on first user interaction (Chrome requirement)
+    unlockAudio();
     // Get team names from inputs
     const names = [];
     for (let i = 0; i < CONFIG.playerCount; i++) {
@@ -1241,9 +1281,11 @@ function setupIntro(){
     el.introScreen.style.display = 'none';
     el.gameWrap.style.display = 'flex';
     
+    // Initialize audio with user gesture (Chrome requirement)
+    ensureAudio();
+    
     // Initialize the game
     newMatch();
-    ensureAudio();
   });
   
 
