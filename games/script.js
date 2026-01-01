@@ -174,14 +174,7 @@ const el = {
   miniArea: document.getElementById('miniArea'),
   miniButtons: document.getElementById('miniButtons'),
 
-  newMatchBtn: document.getElementById('newMatchBtn'),
-  
-  // Minis dropdown
-  minisBtn: document.getElementById('minisBtn'),
-  minisMenu: document.getElementById('minisMenu'),
-  testWheelBtn: document.getElementById('testWheelBtn'),
-  testCasesBtn: document.getElementById('testCasesBtn'),
-  testCardsBtn: document.getElementById('testCardsBtn')
+  newMatchBtn: document.getElementById('newMatchBtn')
 };
 
 /* =============================
@@ -298,7 +291,7 @@ function renderBoard(){
     d.dataset.idx = i;
     d.innerHTML = `
       <div class="inner">
-        <div class="face front"><div class="label">CHEST ${i+1}</div></div>
+        <div class="face front"></div>
         <div class="face back"><div class="value">${c.value}</div></div>
       </div>`;
     d.addEventListener('click', ()=> onCase(i), {passive:true});
@@ -1344,49 +1337,6 @@ el.newMatchBtn.addEventListener('click', ()=> {
 el.askBtn.addEventListener('click', openAI);
 el.aiCloseBtn.addEventListener('click', ()=> { closeAI(); });
 
-// Minis dropdown functionality
-el.minisBtn.addEventListener('click', (e) => {
-  e.stopPropagation();
-  el.minisMenu.classList.toggle('show');
-});
-
-// Close dropdown when clicking outside
-document.addEventListener('click', (e) => {
-  if (!el.minisBtn.contains(e.target) && !el.minisMenu.contains(e.target)) {
-    el.minisMenu.classList.remove('show');
-  }
-});
-
-// Mini-game test buttons (now in dropdown)
-el.testWheelBtn.addEventListener('click', ()=> {
-  el.minisMenu.classList.remove('show'); // Close dropdown
-  if (!state.started) {
-    alert('Please start a round first to test the wheel!');
-    return;
-  }
-  ensureAudio();
-  openMiniWheel();
-});
-
-el.testCasesBtn.addEventListener('click', ()=> {
-  el.minisMenu.classList.remove('show'); // Close dropdown
-  if (!state.started) {
-    alert('Please start a round first to test bonus chests!');
-    return;
-  }
-  ensureAudio();
-  openMiniBonusCases();
-});
-
-el.testCardsBtn.addEventListener('click', ()=> {
-  el.minisMenu.classList.remove('show'); // Close dropdown
-  if (!state.started) {
-    alert('Please start a round first to test Acey Deucey!');
-    return;
-  }
-  ensureAudio();
-  openMiniAceyDeucey();
-});
 
 /* =============================
    Init
