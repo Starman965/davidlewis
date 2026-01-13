@@ -253,12 +253,9 @@ function roleDisplay(role) {
 }
 
 function canEditAppointment(appointment) {
-  if (!currentUser || !userProfile) return false;
-  if (userProfile.role === "admin") return true;
-  if (userProfile.role === "carol") {
-    return appointment.createdBy === currentUser.uid;
-  }
-  return false;
+  // Web app now matches Firestore rules: any signed-in user can edit/delete.
+  // (Firestore enforces auth; this is just UI gating.)
+  return !!currentUser;
 }
 
 // --- Firebase: auth flow ---
@@ -401,6 +398,7 @@ function startAppointmentsListener() {
     (snapshot) => {
       appointments = snapshot.docs.map((docSnap) => {
         const data = docSnap.data();
+        const docId = docSnap.id;
         const date = normalizeDateField(data.date);
         const appointmentTime = normalizeDateField(
           data.appointmentTime || data.date
@@ -410,8 +408,10 @@ function startAppointmentsListener() {
         );
 
         return {
-          id: data.id || docSnap.id,
-          documentId: docSnap.id,
+          // Normalize to the document ID so writes satisfy:
+          // `request.resource.data.id == appointmentId`
+          id: docId,
+          documentId: docId,
           name: data.name || "Appointment",
           date,
           appointmentTime,
@@ -421,7 +421,11 @@ function startAppointmentsListener() {
           notes: data.notes || "",
           createdBy: data.createdBy || null,
           createdByName: data.createdByName || null,
+          createdByEmail: data.createdByEmail || null,
           createdAt: normalizeDateField(data.createdAt),
+          updatedBy: data.updatedBy || null,
+          updatedByName: data.updatedByName || null,
+          updatedByEmail: data.updatedByEmail || null,
           updatedAt: normalizeDateField(data.updatedAt),
         };
       });
@@ -486,38 +490,53 @@ async function saveAppointmentFromForm(event) {
         showFormError("Could not find this appointment to update.");
         return;
       }
-      if (!canEditAppointment(existing)) {
-        showFormError("You do not have permission to edit this appointment.");
-        return;
-      }
+      if (!canEditAppointment(existing)) return;
 
-      const updated = {
-        ...existing,
-        ...baseAppointment,
-        updatedAt: now,
-      };
+      const editorName =
+        (userProfile && userProfile.displayName) ||
+        currentUser.displayName ||
+        "Someone";
+      const editorEmail = currentUser.email || (userProfile && userProfile.email) || null;
 
-      await setDoc(doc(db, "appointments", existing.id), {
-        id: existing.id,
-        name: updated.name,
-        date: updated.date,
-        appointmentTime: updated.appointmentTime,
-        pickupTime: updated.pickupTime,
-        location: updated.location,
-        driverName: updated.driverName,
-        notes: updated.notes,
-        createdBy: updated.createdBy,
-        createdByName: updated.createdByName,
-        createdAt: updated.createdAt || now,
-        updatedAt: updated.updatedAt,
-      });
+      const updated = { ...existing, ...baseAppointment, updatedAt: now };
+
+      const docId = existing.documentId || existing.id;
+      await setDoc(
+        doc(db, "appointments", docId),
+        {
+          id: docId,
+          name: updated.name,
+          date: updated.date,
+          appointmentTime: updated.appointmentTime,
+          pickupTime: updated.pickupTime,
+          location: updated.location,
+          driverName: updated.driverName,
+          notes: updated.notes,
+
+          // keep creator immutable
+          createdBy: updated.createdBy || null,
+          createdByName: updated.createdByName || null,
+          createdByEmail: updated.createdByEmail || null,
+          createdAt: updated.createdAt || null,
+
+          // stamp editor
+          updatedBy: currentUser.uid,
+          updatedByName: editorName,
+          updatedByEmail: editorEmail,
+          updatedAt: updated.updatedAt,
+        },
+        { merge: true }
+      );
     } else {
       const id =
         (self.crypto && self.crypto.randomUUID && self.crypto.randomUUID()) ||
         Math.random().toString(36).slice(2);
 
       const createdByName =
-        (userProfile && userProfile.displayName) || "Someone";
+        (userProfile && userProfile.displayName) ||
+        currentUser.displayName ||
+        "Someone";
+      const createdByEmail = currentUser.email || (userProfile && userProfile.email) || null;
 
       const newAppointment = {
         id,
@@ -530,11 +549,15 @@ async function saveAppointmentFromForm(event) {
         notes: baseAppointment.notes,
         createdBy: currentUser.uid,
         createdByName,
+        createdByEmail,
         createdAt: now,
+        updatedBy: currentUser.uid,
+        updatedByName: createdByName,
+        updatedByEmail: createdByEmail,
         updatedAt: now,
       };
 
-      await setDoc(doc(db, "appointments", id), newAppointment);
+      await setDoc(doc(db, "appointments", id), newAppointment, { merge: true });
     }
 
     closeAppointmentModal();
@@ -547,10 +570,7 @@ async function saveAppointmentFromForm(event) {
 async function deleteAppointment(id) {
   const appointment = appointments.find((a) => a.id === id);
   if (!appointment) return;
-  if (!canEditAppointment(appointment)) {
-    alert("You do not have permission to delete this appointment.");
-    return;
-  }
+  if (!canEditAppointment(appointment)) return;
   const confirmed = confirm(
     `Delete "${appointment.name}" on ${formatDateDisplay(
       appointment.date
@@ -559,7 +579,8 @@ async function deleteAppointment(id) {
   if (!confirmed) return;
 
   try {
-    await deleteDoc(doc(db, "appointments", appointment.id));
+    const docId = appointment.documentId || appointment.id;
+    await deleteDoc(doc(db, "appointments", docId));
   } catch (err) {
     console.error("Error deleting appointment", err);
     showGlobalError("Error deleting appointment. Please try again.");
