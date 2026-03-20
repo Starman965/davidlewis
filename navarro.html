@@ -170,6 +170,15 @@
       max-width: 36ch;
     }
 
+    .slogan {
+      margin: 12px 0 0;
+      color: var(--brand);
+      font-size: 0.98rem;
+      font-style: italic;
+      letter-spacing: 0.01em;
+      max-width: 52ch;
+    }
+
     .hero-cta {
       display: flex;
       gap: 12px;
@@ -373,6 +382,126 @@
       background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.75));
     }
 
+    .video-feature {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .video-thumb {
+      position: relative;
+      display: block;
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      background: #1a1712;
+      padding: 0;
+    }
+
+    .video-thumb img {
+      width: 100%;
+      height: 100%;
+      min-height: 280px;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.78);
+    }
+
+    .video-thumb .play {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: var(--paper);
+      text-align: center;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-shadow: 0 2px 18px rgba(0, 0, 0, 0.7);
+    }
+
+    .video-thumb .play::before {
+      content: "";
+      width: 78px;
+      height: 78px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.48);
+      border: 1px solid rgba(213, 181, 138, 0.8);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45);
+      display: block;
+      margin: 0 auto 10px;
+      -webkit-mask: radial-gradient(circle at 40% 50%, transparent 28px, #000 29px);
+      mask: radial-gradient(circle at 40% 50%, transparent 28px, #000 29px);
+    }
+
+    .video-thumb .play::after {
+      content: "▶";
+      position: absolute;
+      font-size: 28px;
+      margin-left: 4px;
+      margin-top: -22px;
+      color: var(--paper);
+    }
+
+    .video-note h3 {
+      margin: 0 0 10px;
+      font-size: 1.1rem;
+      color: var(--paper);
+    }
+
+    .video-note p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .video-modal[hidden] { display: none; }
+
+    .video-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: rgba(0, 0, 0, 0.78);
+    }
+
+    .video-dialog {
+      position: relative;
+      width: min(980px, 100%);
+      background: #0d0a08;
+      border: 1px solid rgba(213, 181, 138, 0.5);
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+    }
+
+    .video-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(213, 181, 138, 0.6);
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.6);
+      color: var(--paper);
+      font-size: 1.1rem;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .video-player {
+      width: 100%;
+      max-height: 78vh;
+      display: block;
+      background: #000;
+    }
+
     .num {
       width: 30px;
       height: 30px;
@@ -417,7 +546,7 @@
     }
 
     @media (max-width: 980px) {
-      .hero-grid, .program, .steps-grid, .image-band {
+      .hero-grid, .program, .steps-grid, .image-band, .video-feature {
         grid-template-columns: 1fr;
       }
       .grid-3 {
@@ -465,6 +594,7 @@
         <div>
           <div class="eyebrow">Proposal for Consideration</div>
           <h1>Start Every Day with Ahhhh!</h1>
+          <p class="slogan">Where cherished memories are brewed one cup at a time.</p>
           <p class="subhead">Proposal to consider Navarro Coffee as the in-home guest coffee supplier for select Exclusive Resorts destinations.</p>
           <p class="lead">
             This proposal outlines a pilot-ready opportunity for <strong>Exclusive Resorts</strong> to evaluate Navarro
@@ -588,6 +718,26 @@
       </div>
     </section>
 
+    <section id="media-feature" class="section">
+      <div class="container">
+        <h2 class="section-title">National TV Feature: Third-Party Taste Validation</h2>
+        <div class="video-feature">
+          <button class="video-thumb" id="open-feature-video" type="button" aria-label="Play Access Hollywood feature video">
+            <img src="image4.JPEG" alt="Navarro espresso product image used as video thumbnail">
+            <span class="play">Play Access Hollywood Segment</span>
+          </button>
+          <article class="card video-note">
+            <h3>Recognized media endorsement strengthens supplier confidence</h3>
+            <p>
+              This segment features on-air tasting and commentary about Navarro Coffee's outstanding flavor.
+              For a select-destination supplier proposal, this kind of third-party media validation reinforces
+              product credibility and guest-experience alignment.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section id="rollout" class="section">
       <div class="container">
         <h2 class="section-title">Simple 4-Step Consideration Path</h2>
@@ -633,6 +783,16 @@
     </section>
   </main>
 
+  <div class="video-modal" id="feature-video-modal" hidden>
+    <div class="video-dialog" role="dialog" aria-modal="true" aria-label="Access Hollywood Navarro Coffee segment">
+      <button class="video-close" id="close-feature-video" type="button" aria-label="Close video">✕</button>
+      <video class="video-player" id="feature-video-player" controls playsinline preload="metadata">
+        <source src="NavarroCoffeeCoSegment.MOV" type="video/quicktime">
+        Your browser does not support this video format.
+      </video>
+    </div>
+  </div>
+
   <footer class="footer">
     <div class="container">
       © <span id="year"></span> Navarro Coffee Company. Proposal page prepared for Exclusive Resorts.
@@ -641,6 +801,33 @@
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    const modal = document.getElementById("feature-video-modal");
+    const openBtn = document.getElementById("open-feature-video");
+    const closeBtn = document.getElementById("close-feature-video");
+    const player = document.getElementById("feature-video-player");
+
+    function openVideoModal() {
+      modal.hidden = false;
+      player.play().catch(function () { return null; });
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeVideoModal() {
+      modal.hidden = true;
+      player.pause();
+      player.currentTime = 0;
+      document.body.style.overflow = "";
+    }
+
+    openBtn.addEventListener("click", openVideoModal);
+    closeBtn.addEventListener("click", closeVideoModal);
+    modal.addEventListener("click", function (event) {
+      if (event.target === modal) closeVideoModal();
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && !modal.hidden) closeVideoModal();
+    });
   </script>
 </body>
 </html>
