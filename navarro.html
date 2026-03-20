@@ -3,19 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Navarro Coffee x Exclusive Resorts | In-Home Guest Coffee Program</title>
-  <meta name="description" content="A proposal for Navarro Coffee to become the in-home coffee experience for guests across Exclusive Resorts destinations worldwide.">
+  <title>Navarro Coffee x Exclusive Resorts | Supplier Proposal for Select Destinations</title>
+  <meta name="description" content="A proposal for consideration for Navarro Coffee to serve as an in-home guest coffee supplier for select Exclusive Resorts destinations.">
   <style>
     :root {
-      --bg: #0f0e0b;
-      --panel: #1a1712;
+      --bg: #411e0d;
+      --panel: #2b1409;
       --paper: #f6f1e8;
       --text: #e9dfd1;
-      --muted: #bfae98;
-      --brand: #d3a35d;
-      --brand-dark: #8f6230;
-      --ok: #89c4a9;
-      --border: #3a3228;
+      --muted: #d5b58a;
+      --brand: #d5b58a;
+      --brand-dark: #7d4416;
+      --deep-brown: #411e0d;
+      --green: #617305;
+      --red: #7f0b1f;
+      --light-red: #9b000c;
+      --ok: #617305;
+      --border: #7d4416;
       --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
       --radius: 14px;
       --maxw: 1120px;
@@ -27,8 +31,8 @@
       font-family: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       background:
         linear-gradient(rgba(15, 14, 11, 0.93), rgba(15, 14, 11, 0.93)),
-        radial-gradient(1200px 700px at 85% -20%, #3a2816 0%, transparent 45%),
-        url("https://images.squarespace-cdn.com/content/v1/6351c3c5233afa69cee27efa/55a7864c-aa2e-4df9-a0e0-5362d954fa59/DSC09043.jpg?format=2500w") center/cover fixed no-repeat,
+        radial-gradient(1200px 700px at 85% -20%, rgba(213, 181, 138, 0.3) 0%, transparent 45%),
+        url("image2.JPEG") center/cover fixed no-repeat,
         var(--bg);
       color: var(--text);
       line-height: 1.55;
@@ -67,13 +71,10 @@
     }
 
     .brand-logo {
-      width: 42px;
-      height: 42px;
+      width: 56px;
+      height: 56px;
       object-fit: contain;
-      border-radius: 50%;
-      background: #fff;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      box-shadow: var(--shadow);
+      filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.4));
     }
 
     .nav {
@@ -106,9 +107,9 @@
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--brand), #f1c27f);
-      color: #1b130a;
-      box-shadow: 0 6px 20px rgba(211, 163, 93, 0.3);
+      background: linear-gradient(135deg, var(--brand), var(--brand-dark));
+      color: var(--paper);
+      box-shadow: 0 6px 20px rgba(125, 68, 22, 0.35);
     }
 
     .btn-primary:hover { transform: translateY(-1px); }
@@ -120,7 +121,7 @@
     }
 
     .btn-outline:hover {
-      border-color: #6f5b44;
+      border-color: var(--brand-dark);
       background: rgba(255, 255, 255, 0.06);
     }
 
@@ -158,6 +159,15 @@
       color: var(--muted);
       max-width: 60ch;
       font-size: 1.06rem;
+    }
+
+    .subhead {
+      margin: 14px 0 0;
+      color: var(--paper);
+      font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+      font-weight: 600;
+      line-height: 1.3;
+      max-width: 36ch;
     }
 
     .hero-cta {
@@ -256,7 +266,7 @@
 
     .kicker {
       display: inline-block;
-      color: #25180b;
+      color: var(--deep-brown);
       background: var(--brand);
       border-radius: 999px;
       font-size: 0.72rem;
@@ -286,6 +296,20 @@
     }
 
     .program .card li + li { margin-top: 7px; }
+
+    .program-media {
+      margin-top: 14px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(213, 181, 138, 0.3);
+    }
+
+    .program-media img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
 
     .quote {
       border-left: 3px solid var(--brand);
@@ -355,9 +379,9 @@
       border-radius: 50%;
       display: grid;
       place-items: center;
-      background: rgba(211, 163, 93, 0.2);
-      border: 1px solid rgba(211, 163, 93, 0.5);
-      color: #f5d9ae;
+      background: rgba(125, 68, 22, 0.3);
+      border: 1px solid rgba(213, 181, 138, 0.65);
+      color: var(--brand);
       font-weight: 700;
       margin-bottom: 8px;
     }
@@ -366,8 +390,8 @@
       margin-top: 14px;
       text-align: center;
       background:
-        radial-gradient(700px 250px at 10% -20%, rgba(211, 163, 93, 0.15), transparent 50%),
-        linear-gradient(150deg, #201a12 0%, #14120e 100%);
+        radial-gradient(700px 250px at 10% -20%, rgba(127, 11, 31, 0.2), transparent 50%),
+        linear-gradient(150deg, rgba(155, 0, 12, 0.22) 0%, #140e0c 100%);
       padding: 30px;
       border-radius: var(--radius);
       border: 1px solid var(--border);
@@ -383,7 +407,7 @@
     .footer {
       padding: 26px 0 38px;
       text-align: center;
-      color: #9f8f7a;
+      color: #d5b58a;
       font-size: 0.86rem;
     }
 
@@ -409,8 +433,8 @@
       .topbar .inner { min-height: 66px; }
       .hero { padding-top: 50px; }
       .brand-logo {
-        width: 38px;
-        height: 38px;
+        width: 46px;
+        height: 46px;
       }
     }
   </style>
@@ -421,7 +445,7 @@
       <div class="brand">
         <img
           class="brand-logo"
-          src="https://static1.squarespace.com/static/6351c3c5233afa69cee27efa/t/6926af9186de8f1a130db3af/1764142993666/navarro+logo.png?format=300w"
+          src="image8.PNG"
           alt="Navarro Coffee logo"
         >
         <span>Navarro Coffee</span>
@@ -430,7 +454,7 @@
         <a class="hide-mobile" href="#value">Why Navarro</a>
         <a class="hide-mobile" href="#program">Program Design</a>
         <a class="hide-mobile" href="#rollout">Rollout</a>
-        <a class="btn btn-primary" href="#contact">Schedule Tasting</a>
+        <a class="btn btn-primary" href="#contact">Request Samples</a>
       </nav>
     </div>
   </header>
@@ -439,15 +463,16 @@
     <section class="hero">
       <div class="container hero-grid">
         <div>
-          <div class="eyebrow">Partnership Proposal</div>
-          <h1>Start Every Day with Ahhhh! Make Navarro Coffee the in-home guest coffee at Exclusive Resorts.</h1>
+          <div class="eyebrow">Proposal for Consideration</div>
+          <h1>Start Every Day with Ahhhh!</h1>
+          <p class="subhead">Proposal to consider Navarro Coffee as the in-home guest coffee supplier for select Exclusive Resorts destinations.</p>
           <p class="lead">
-            We propose Navarro Coffee as the in-home coffee provided to guests across <strong>Exclusive Resorts</strong>
-            residences around the world, delivering a superb product that aligns with your commitment to exceptional
-            guest experience in every destination.
+            This proposal outlines a pilot-ready opportunity for <strong>Exclusive Resorts</strong> to evaluate Navarro
+            Coffee as a supplier for select residences, with a focus on product quality, consistency, and exceptional
+            guest experience.
           </p>
           <div class="hero-cta">
-            <a class="btn btn-primary" href="#contact">Request Sample Shipment</a>
+            <a class="btn btn-primary" href="#contact">Review Proposal & Request Samples</a>
             <a class="btn btn-outline" href="https://www.navarrocoffee.com" target="_blank" rel="noopener noreferrer">Visit NavarroCoffee.com</a>
           </div>
           <div class="mini-proof">
@@ -460,21 +485,21 @@
         <aside class="card proposal" aria-label="Offer highlights">
           <div class="proposal-media">
             <img
-              src="https://images.squarespace-cdn.com/content/v1/6351c3c5233afa69cee27efa/e14dc428-86b1-4da2-bda7-ab9b6f31b94f/DSC09160.jpg?format=1500w"
-              alt="Navarro coffee bag among coffee plants"
+              src="image5.JPEG"
+              alt="Navarro espresso bag for supplier proposal"
             >
           </div>
-          <h2>Designed for in-home guest enjoyment</h2>
+          <h2>Structured as a select-destination supplier proposal</h2>
           <p>
-            A flexible premium supply model built for consistency, convenience, and the elevated service standards expected by
+            A flexible premium supply model presented for consideration, built for consistency, convenience, and the elevated service standards expected by
             <a href="https://www.exclusiveresorts.com" target="_blank" rel="noopener noreferrer">ExclusiveResorts.com</a>.
           </p>
           <ul>
             <li>Signature in-home blend concept tailored for Exclusive Resorts guests.</li>
             <li>Formats for each residence: whole bean, ground, and single-serve convenience options.</li>
-            <li>Consistent replenishment planning for homes across hundreds of destinations.</li>
+            <li>Supplier support model designed for select destination rollout.</li>
             <li>Simple prep standards so every guest can enjoy a flawless cup.</li>
-            <li class="ok">Experience goal: every guest starts each day with “Ahhhh!”.</li>
+            <li class="ok">Evaluation goal: confirm fit for broader adoption after pilot success.</li>
           </ul>
         </aside>
       </div>
@@ -482,7 +507,7 @@
 
     <section id="value" class="section">
       <div class="container">
-        <h2 class="section-title">Why Navarro for Exclusive Resorts Homes</h2>
+        <h2 class="section-title">Why Consider Navarro for Select Destinations</h2>
         <div class="grid-3">
           <article class="card value">
             <span class="kicker">Taste</span>
@@ -505,25 +530,31 @@
 
     <section id="program" class="section">
       <div class="container">
-        <h2 class="section-title">In-Home Program Framework</h2>
+        <h2 class="section-title">Select-Destination Supplier Framework</h2>
         <div class="program">
           <article class="card">
-            <h3>Home Supply Architecture</h3>
+            <h3>Supplier + Home Supply Architecture</h3>
             <ul>
-              <li>Core in-home coffee lineup with optional seasonal reserve offerings.</li>
+              <li>Core in-home coffee lineup for select destinations, with optional seasonal reserve offerings.</li>
               <li>Residence-ready packaging for kitchens, welcome kits, and pantry placement.</li>
               <li>Compatibility planning for in-home brewers and simple brewing guidance.</li>
               <li>Optional sustainability-forward packaging and refill options.</li>
             </ul>
+            <div class="program-media">
+              <img src="image6.JPEG" alt="Navarro light roast product shot for in-home supply options">
+            </div>
           </article>
           <article class="card">
-            <h3>Experience + Guest Delight</h3>
+            <h3>Experience + Evaluation Support</h3>
             <ul>
               <li>Simple in-home preparation cards so guests can brew confidently.</li>
               <li>Quality checklist for residence teams to maintain stock and freshness.</li>
               <li>Brand story cards connecting guests to Salvadoran origin and craftsmanship.</li>
-              <li>Quarterly review cadence to optimize blends, inventory, and guest feedback.</li>
+              <li>Pilot review cadence to assess quality, logistics, and guest satisfaction outcomes.</li>
             </ul>
+            <div class="program-media">
+              <img src="image4.JPEG" alt="Navarro espresso product with cup for guest in-home coffee experience">
+            </div>
           </article>
         </div>
       </div>
@@ -542,16 +573,16 @@
         </blockquote>
         <div class="image-band" aria-label="Navarro brand photography">
           <figure>
-            <img src="https://images.squarespace-cdn.com/content/v1/6351c3c5233afa69cee27efa/90990d48-179c-4de7-8bf0-a3b5bf81840b/DSC09105.jpg?format=1200w" alt="Person holding Navarro mug and tote">
-            <figcaption>Craft-focused details that feel elevated and personal.</figcaption>
+            <img src="image2.JPEG" alt="Lifestyle scene in coffee farm with Navarro products">
+            <figcaption>Lifestyle storytelling tied to memorable guest experience.</figcaption>
           </figure>
           <figure>
-            <img src="https://images.squarespace-cdn.com/content/v1/6351c3c5233afa69cee27efa/e377e699-d6e5-4546-8fcf-ef8ab567b081/IMG_4743.jpg?format=1200w" alt="Coffee cherries being harvested">
-            <figcaption>Origin authenticity that supports your luxury story.</figcaption>
+            <img src="image1.JPEG" alt="Navarro coffee products staged in the farm">
+            <figcaption>Farm-to-cup authenticity that supports a premium hospitality story.</figcaption>
           </figure>
           <figure>
-            <img src="https://images.squarespace-cdn.com/content/v1/6351c3c5233afa69cee27efa/80865d74-878f-46f0-9491-b1a1a0e77e74/DSC09133.jpg?format=1200w" alt="Navarro coffee lifestyle photo">
-            <figcaption>Visual language aligned with premium member experience.</figcaption>
+            <img src="image9.JPEG" alt="Navarro packaging in tropical lifestyle setting">
+            <figcaption>Warm visual moments that connect with destination-driven travel.</figcaption>
           </figure>
         </div>
       </div>
@@ -559,7 +590,7 @@
 
     <section id="rollout" class="section">
       <div class="container">
-        <h2 class="section-title">Simple 4-Step Rollout</h2>
+        <h2 class="section-title">Simple 4-Step Consideration Path</h2>
         <div class="steps-grid">
           <article class="card steps">
             <div class="num">1</div>
@@ -578,8 +609,8 @@
           </article>
           <article class="card steps">
             <div class="num">4</div>
-            <h3>Scale</h3>
-            <p>Expand across destinations with a repeatable service and supply playbook.</p>
+            <h3>Decision + Expansion</h3>
+            <p>Use pilot outcomes to decide whether to expand Navarro supply to additional destinations.</p>
           </article>
         </div>
       </div>
@@ -588,13 +619,13 @@
     <section id="contact" class="section">
       <div class="container">
         <div class="final-cta">
-          <h2 class="section-title">Let’s Make Navarro the In-Home Coffee for Exclusive Resorts Guests</h2>
+          <h2 class="section-title">Proposal: Consider Navarro for Select Destination Supply</h2>
           <p>
-            Navarro Coffee is ready to send curated samples and build a global in-home supply plan for your residences.
-            If the goal is exceptional guest experience at scale, we are ready to help deliver it cup by cup.
+            Navarro Coffee is ready to send curated samples and support a select-destination evaluation.
+            If approved, we can align on pilot scope, service standards, and expansion criteria.
           </p>
           <div class="hero-cta" style="justify-content:center;">
-            <a class="btn btn-primary" href="mailto:partnerships@navarrocoffee.com?subject=Sample%20Request%20for%20Exclusive%20Resorts%20In-Home%20Coffee%20Program">Send Samples & Start Conversation</a>
+            <a class="btn btn-primary" href="mailto:partnerships@navarrocoffee.com?subject=Proposal%20Consideration%20for%20Select%20Exclusive%20Resorts%20Destinations">Request Samples for Consideration</a>
             <a class="btn btn-outline" href="https://www.exclusiveresorts.com" target="_blank" rel="noopener noreferrer">View ExclusiveResorts.com</a>
           </div>
         </div>
