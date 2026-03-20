@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Navarro Coffee x Exclusive Resorts | Private Label Coffee Program</title>
+  <meta name="description" content="A custom coffee partnership proposal from Navarro Coffee for Exclusive Resorts members, residences, and destination teams.">
+  <style>
+    :root {
+      --bg: #0f0e0b;
+      --panel: #1a1712;
+      --paper: #f6f1e8;
+      --text: #e9dfd1;
+      --muted: #bfae98;
+      --brand: #d3a35d;
+      --brand-dark: #8f6230;
+      --ok: #89c4a9;
+      --border: #3a3228;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      --radius: 14px;
+      --maxw: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background:
+        linear-gradient(rgba(15, 14, 11, 0.93), rgba(15, 14, 11, 0.93)),
+        radial-gradient(1200px 700px at 85% -20%, #3a2816 0%, transparent 45%),
+        url("https://images.squarespace-cdn.com/content/v1/6351c3c5233afa69cee27efa/55a7864c-aa2e-4df9-a0e0-5362d954fa59/DSC09043.jpg?format=2500w") center/cover fixed no-repeat,
+        var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    a { color: inherit; }
+
+    .container {
+      width: min(var(--maxw), 92%);
+      margin-inline: auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(8px);
+      background: rgba(15, 14, 11, 0.7);
+      border-bottom: 1px solid rgba(191, 174, 152, 0.15);
+    }
+
+    .topbar .inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+      border-radius: 50%;
+      background: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: var(--shadow);
+    }
+
+    .nav {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .nav a {
+      text-decoration: none;
+      opacity: 0.92;
+    }
+
+    .nav a:hover {
+      color: var(--text);
+    }
+
+    .btn {
+      display: inline-block;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 11px 18px;
+      text-decoration: none;
+      font-weight: 650;
+      font-size: 0.94rem;
+      transition: 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--brand), #f1c27f);
+      color: #1b130a;
+      box-shadow: 0 6px 20px rgba(211, 163, 93, 0.3);
+    }
+
+    .btn-primary:hover { transform: translateY(-1px); }
+
+    .btn-outline {
+      border-color: var(--border);
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .btn-outline:hover {
+      border-color: #6f5b44;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .hero {
+      padding: 74px 0 56px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.9fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .eyebrow {
+      color: var(--brand);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: "Georgia", "Times New Roman", serif;
+      font-size: clamp(2rem, 4vw, 3.35rem);
+      line-height: 1.1;
+      letter-spacing: 0.3px;
+      max-width: 18ch;
+    }
+
+    .lead {
+      margin: 20px 0 26px;
+      color: var(--muted);
+      max-width: 60ch;
+      font-size: 1.06rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .mini-proof {
+      margin-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .mini-proof span {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 7px 12px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .card {
+      background: linear-gradient(160deg, #1d1913 0%, #14120e 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+    }
+
+    .proposal h2 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1.25rem;
+      color: var(--paper);
+    }
+
+    .proposal-media {
+      margin: -8px -8px 14px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .proposal-media img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .proposal p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .proposal ul {
+      margin: 0;
+      padding-left: 1.1rem;
+      color: var(--text);
+    }
+
+    .proposal li + li { margin-top: 8px; }
+
+    .section {
+      padding: 34px 0;
+    }
+
+    .section-title {
+      margin: 0 0 18px;
+      font-size: clamp(1.35rem, 2vw, 1.9rem);
+      font-family: "Georgia", "Times New Roman", serif;
+      color: var(--paper);
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .value h3, .steps h3 {
+      margin: 4px 0 8px;
+      font-size: 1.06rem;
+      color: var(--paper);
+    }
+
+    .value p, .steps p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .kicker {
+      display: inline-block;
+      color: #25180b;
+      background: var(--brand);
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 5px 9px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .program {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .program .card h3 {
+      margin: 6px 0 10px;
+      font-size: 1.08rem;
+      color: var(--paper);
+    }
+
+    .program .card ul {
+      margin: 0;
+      padding-left: 1.1rem;
+      color: var(--muted);
+    }
+
+    .program .card li + li { margin-top: 7px; }
+
+    .quote {
+      border-left: 3px solid var(--brand);
+      padding: 16px 18px;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 8px;
+      color: var(--paper);
+      font-size: 1.04rem;
+      margin: 0;
+    }
+
+    .quote + .quote { margin-top: 12px; }
+
+    .quote em {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-style: normal;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .image-band {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .image-band figure {
+      margin: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      min-height: 240px;
+      position: relative;
+      background: #1a1712;
+    }
+
+    .image-band img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .image-band figcaption {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 10px 12px;
+      font-size: 0.82rem;
+      color: #f7efe3;
+      background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.75));
+    }
+
+    .num {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(211, 163, 93, 0.2);
+      border: 1px solid rgba(211, 163, 93, 0.5);
+      color: #f5d9ae;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .final-cta {
+      margin-top: 14px;
+      text-align: center;
+      background:
+        radial-gradient(700px 250px at 10% -20%, rgba(211, 163, 93, 0.15), transparent 50%),
+        linear-gradient(150deg, #201a12 0%, #14120e 100%);
+      padding: 30px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .final-cta p {
+      color: var(--muted);
+      margin: 10px auto 20px;
+      max-width: 64ch;
+    }
+
+    .footer {
+      padding: 26px 0 38px;
+      text-align: center;
+      color: #9f8f7a;
+      font-size: 0.86rem;
+    }
+
+    .ok {
+      color: var(--ok);
+      font-weight: 600;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid, .program, .steps-grid, .image-band {
+        grid-template-columns: 1fr;
+      }
+      .grid-3 {
+        grid-template-columns: 1fr 1fr;
+      }
+      .nav .hide-mobile { display: none; }
+    }
+
+    @media (max-width: 620px) {
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+      .topbar .inner { min-height: 66px; }
+      .hero { padding-top: 50px; }
+      .brand-logo {
+        width: 38px;
+        height: 38px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container inner">
+      <div class="brand">
+        <img
+          class="brand-logo"
+          src="https://static1.squarespace.com/static/6351c3c5233afa69cee27efa/t/6926af9186de8f1a130db3af/1764142993666/navarro+logo.png?format=300w"
+          alt="Navarro Coffee logo"
+        >
+        <span>Navarro Coffee</span>
+      </div>
+      <nav class="nav" aria-label="Primary">
+        <a class="hide-mobile" href="#value">Why Navarro</a>
+        <a class="hide-mobile" href="#program">Program Design</a>
+        <a class="hide-mobile" href="#rollout">Rollout</a>
+        <a class="btn btn-primary" href="#contact">Schedule Tasting</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Partnership Proposal</div>
+          <h1>Elevate Every Morning at Exclusive Resorts with Navarro Coffee</h1>
+          <p class="lead">
+            We propose a custom coffee program for <strong>Exclusive Resorts</strong> that delivers exceptional taste,
+            reliable service, and a refined brand experience for members across residences and destinations.
+          </p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#contact">Request a Curated Tasting</a>
+            <a class="btn btn-outline" href="https://www.navarrocoffee.com" target="_blank" rel="noopener noreferrer">Visit NavarroCoffee.com</a>
+          </div>
+          <div class="mini-proof">
+            <span>Fresh-roasted in small batches</span>
+            <span>Hospitality-focused logistics</span>
+            <span>White-glove onboarding</span>
+          </div>
+        </div>
+
+        <aside class="card proposal" aria-label="Offer highlights">
+          <div class="proposal-media">
+            <img
+              src="https://images.squarespace-cdn.com/content/v1/6351c3c5233afa69cee27efa/e14dc428-86b1-4da2-bda7-ab9b6f31b94f/DSC09160.jpg?format=1500w"
+              alt="Navarro coffee bag among coffee plants"
+            >
+          </div>
+          <h2>Designed for premium membership hospitality</h2>
+          <p>
+            A flexible, premium supply model tuned for consistency, seasonality, and service standards expected by
+            <a href="https://www.exclusiveresorts.com" target="_blank" rel="noopener noreferrer">ExclusiveResorts.com</a>.
+          </p>
+          <ul>
+            <li>Signature house blend created specifically for Exclusive Resorts.</li>
+            <li>Property-tier menu options: espresso, drip, cold brew, and in-suite packs.</li>
+            <li>Training and brewing standards for consistently excellent cups.</li>
+            <li>Inventory forecasting with dependable replenishment cadence.</li>
+            <li class="ok">Guest delight target: elevate coffee from routine to memorable moment.</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section id="value" class="section">
+      <div class="container">
+        <h2 class="section-title">Why Navarro for Exclusive Resorts</h2>
+        <div class="grid-3">
+          <article class="card value">
+            <span class="kicker">Taste</span>
+            <h3>Curated flavor profile for discerning members</h3>
+            <p>Develop a signature roast strategy that reflects your brand: smooth, layered, and unmistakably premium.</p>
+          </article>
+          <article class="card value">
+            <span class="kicker">Service</span>
+            <h3>Operational precision your teams can trust</h3>
+            <p>Clear ordering cycles, forecasting support, and straightforward replenishment across high-touch destinations.</p>
+          </article>
+          <article class="card value">
+            <span class="kicker">Brand</span>
+            <h3>A hospitality experience that starts with coffee</h3>
+            <p>Custom packaging and presentation options aligned with the Exclusive Resorts luxury standard.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="program" class="section">
+      <div class="container">
+        <h2 class="section-title">Program Framework</h2>
+        <div class="program">
+          <article class="card">
+            <h3>Supply + Menu Architecture</h3>
+            <ul>
+              <li>Core all-property coffee lineup plus seasonal reserve offerings.</li>
+              <li>Dedicated options for member welcome kits and in-residence amenities.</li>
+              <li>Brewing equipment compatibility planning and grind profile standards.</li>
+              <li>Optional sustainability-forward packaging alternatives.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Experience + Enablement</h3>
+            <ul>
+              <li>On-site or virtual staff training for bar, lounge, and concierge teams.</li>
+              <li>Simple quality-control checklist to maintain consistent cup standards.</li>
+              <li>Co-branded story cards that connect members to origin and craftsmanship.</li>
+              <li>Quarterly review cadence to optimize selection and service performance.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Guest Experience Vision</h2>
+        <blockquote class="quote">
+          "From sunrise in the mountains to evenings by the coast, every cup should feel intentional, comforting, and exceptional."
+          <em>Shared hospitality goal: elevate daily rituals into signature member moments.</em>
+        </blockquote>
+        <blockquote class="quote">
+          "Coffee quality becomes a quiet differentiator members remember long after checkout."
+          <em>Positioning goal: align beverage quality with your luxury promise.</em>
+        </blockquote>
+        <div class="image-band" aria-label="Navarro brand photography">
+          <figure>
+            <img src="https://images.squarespace-cdn.com/content/v1/6351c3c5233afa69cee27efa/90990d48-179c-4de7-8bf0-a3b5bf81840b/DSC09105.jpg?format=1200w" alt="Person holding Navarro mug and tote">
+            <figcaption>Craft-focused details that feel elevated and personal.</figcaption>
+          </figure>
+          <figure>
+            <img src="https://images.squarespace-cdn.com/content/v1/6351c3c5233afa69cee27efa/e377e699-d6e5-4546-8fcf-ef8ab567b081/IMG_4743.jpg?format=1200w" alt="Coffee cherries being harvested">
+            <figcaption>Origin authenticity that supports your luxury story.</figcaption>
+          </figure>
+          <figure>
+            <img src="https://images.squarespace-cdn.com/content/v1/6351c3c5233afa69cee27efa/80865d74-878f-46f0-9491-b1a1a0e77e74/DSC09133.jpg?format=1200w" alt="Navarro coffee lifestyle photo">
+            <figcaption>Visual language aligned with premium member experience.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="rollout" class="section">
+      <div class="container">
+        <h2 class="section-title">Simple 4-Step Rollout</h2>
+        <div class="steps-grid">
+          <article class="card steps">
+            <div class="num">1</div>
+            <h3>Discovery</h3>
+            <p>Align on member profile, destination formats, and service expectations.</p>
+          </article>
+          <article class="card steps">
+            <div class="num">2</div>
+            <h3>Tasting + Selection</h3>
+            <p>Host guided tastings to finalize your signature lineup and reserve options.</p>
+          </article>
+          <article class="card steps">
+            <div class="num">3</div>
+            <h3>Pilot</h3>
+            <p>Launch in selected properties, gather team feedback, and refine workflows.</p>
+          </article>
+          <article class="card steps">
+            <div class="num">4</div>
+            <h3>Scale</h3>
+            <p>Expand across destinations with a repeatable service and supply playbook.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container">
+        <div class="final-cta">
+          <h2 class="section-title">Let’s Build Exclusive Resorts’ Signature Coffee Program</h2>
+          <p>
+            Navarro Coffee is ready to prepare a custom proposal, tasting roadmap, and rollout plan for your team.
+            We can begin with a short discovery call and a curated sample kit.
+          </p>
+          <div class="hero-cta" style="justify-content:center;">
+            <a class="btn btn-primary" href="mailto:partnerships@navarrocoffee.com?subject=Exclusive%20Resorts%20Coffee%20Program%20Proposal">Start the Conversation</a>
+            <a class="btn btn-outline" href="https://www.exclusiveresorts.com" target="_blank" rel="noopener noreferrer">View ExclusiveResorts.com</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © <span id="year"></span> Navarro Coffee Company. Proposal page prepared for Exclusive Resorts.
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
