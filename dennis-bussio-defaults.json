@@ -3,46 +3,42 @@
   "lifeExpectancy": 100,
   "yearsToProject": 19,
   "inflationRate": 0.03,
-  "moneyMarketGrowthRate": 0.0125,
+  "moneyMarketGrowthRate": 0,
   "houseGrowthRate": 0.03,
   "currentAge": 82,
   "annualSpendDennis": 65000,
   "annualSupportMarc": 15000,
-  "socialSecurityAnnual": 0,
-  "annualPension": 87000,
+  "socialSecurityAnnual": 42000,
+  "annualPension": 45000,
   "checkingBalance": 0,
   "savingsBalance": 0,
   "retirement1Balance": 150000,
-  "retirement2Balance": 50000,
-  "moneyMarketBalance": 150000,
+  "retirement2Balance": 150000,
+  "moneyMarketBalance": 0,
   "houseAssetValue": 1200000,
-  "retirement1Profile": "balanced",
-  "retirement2Profile": "balanced",
+  "retirement1Profile": "conservative",
+  "retirement2Profile": "conservative",
   "budgetPlanner": {
     "categories": [
       {
         "name": "Gas",
-        "amount": 500
+        "amount": 0
       },
       {
         "name": "Water",
-        "amount": 500
+        "amount": 0
       },
       {
         "name": "HOA",
-        "amount": 50
+        "amount": 0
       },
       {
         "name": "Medical",
-        "amount": 500
+        "amount": 0
       },
       {
         "name": "Car Payment",
-        "amount": 500
-      },
-      {
-        "name": "Tester",
-        "amount": 150
+        "amount": 0
       }
     ]
   }

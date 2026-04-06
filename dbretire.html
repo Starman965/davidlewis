@@ -64,6 +64,10 @@
       grid-template-columns: 1fr 1fr;
       gap: 10px;
     }
+    .retirement-pair {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+      align-items: end;
+    }
     label {
       display: block;
       font-size: 12px;
@@ -562,12 +566,12 @@
       return rows;
     }
 
-    function NumberField({ label, keyName, draftInputs, setField, isPercent = false, isCurrency = false }) {
+    function NumberField({ label, keyName, draftInputs, setField, isPercent = false, isCurrency = false, inputStyle = null }) {
       return (
         <div className="row">
           <label>{label}</label>
           <div className={`input-wrap ${isPercent ? "with-suffix" : ""} ${isCurrency ? "with-prefix" : ""}`}>
-            <input type="text" inputMode="decimal" value={draftInputs[keyName]} onChange={(e) => setField(keyName, e.target.value)} />
+            <input type="text" inputMode="decimal" style={inputStyle || undefined} value={draftInputs[keyName]} onChange={(e) => setField(keyName, e.target.value)} />
             {isCurrency && <span className="input-prefix">$</span>}
             {isPercent && <span className="input-suffix">%</span>}
           </div>
@@ -763,32 +767,54 @@
                 <NumberField label="Current Age" keyName="currentAge" draftInputs={draftInputs} setField={setField} />
                 <NumberField label="Inflation Rate" keyName="inflationRate" draftInputs={draftInputs} setField={setField} isPercent={true} />
               </div>
-              <NumberField label="House Growth Rate" keyName="houseGrowthRate" draftInputs={draftInputs} setField={setField} isPercent={true} />
               <div className="section-title" style={{ marginTop: 14 }}>Annual Spend</div>
               <NumberField label="Annual Spend: Dennis" keyName="annualSpendDennis" draftInputs={draftInputs} setField={setField} isCurrency={true} />
               <NumberField label="Annual Support: Marc" keyName="annualSupportMarc" draftInputs={draftInputs} setField={setField} isCurrency={true} />
               <div className="row">
-                <label>Dennis and Marc Total</label>
+                <label>Total Annual Spend</label>
                 <div className="input-wrap with-prefix">
                   <input type="text" value={formatWithCommas(computedAnnualSpend)} readOnly />
                   <span className="input-prefix">$</span>
                 </div>
               </div>
-              <NumberField label="Social Security Income" keyName="socialSecurityAnnual" draftInputs={draftInputs} setField={setField} isCurrency={true} />
-              <NumberField label="Annual Pension Income" keyName="annualPension" draftInputs={draftInputs} setField={setField} isCurrency={true} />
+              <NumberField label="Social Security Net Income" keyName="socialSecurityAnnual" draftInputs={draftInputs} setField={setField} isCurrency={true} />
+              <NumberField label="Annual Pension Net Income" keyName="annualPension" draftInputs={draftInputs} setField={setField} isCurrency={true} />
 
-              <div className="section-title" style={{ marginTop: 14 }}>Balances</div>
-              <NumberField label="Checking" keyName="checkingBalance" draftInputs={draftInputs} setField={setField} isCurrency={true} />
-              <NumberField label="Savings" keyName="savingsBalance" draftInputs={draftInputs} setField={setField} isCurrency={true} />
+              <div className="section-title" style={{ marginTop: 14 }}>Asset Balances</div>
+              <div className="split">
+                <NumberField label="Checking" keyName="checkingBalance" draftInputs={draftInputs} setField={setField} isCurrency={true} />
+                <NumberField label="Savings" keyName="savingsBalance" draftInputs={draftInputs} setField={setField} isCurrency={true} />
+              </div>
               <div className="split">
                 <NumberField label="Money Market" keyName="moneyMarketBalance" draftInputs={draftInputs} setField={setField} isCurrency={true} />
                 <NumberField label="Money Market Growth" keyName="moneyMarketGrowthRate" draftInputs={draftInputs} setField={setField} isPercent={true} />
               </div>
-              <NumberField label="House Asset Value" keyName="houseAssetValue" draftInputs={draftInputs} setField={setField} isCurrency={true} />
-              <NumberField label="Retirement 1 Balance" keyName="retirement1Balance" draftInputs={draftInputs} setField={setField} isCurrency={true} />
-              <SelectField label="Retirement 1 Strategy" keyName="retirement1Profile" draftInputs={draftInputs} setField={setField} />
-              <NumberField label="Retirement 2 Balance" keyName="retirement2Balance" draftInputs={draftInputs} setField={setField} isCurrency={true} />
-              <SelectField label="Retirement 2 Strategy" keyName="retirement2Profile" draftInputs={draftInputs} setField={setField} />
+              <div className="split">
+                <NumberField label="House Asset Value" keyName="houseAssetValue" draftInputs={draftInputs} setField={setField} isCurrency={true} />
+                <NumberField label="House Growth Rate" keyName="houseGrowthRate" draftInputs={draftInputs} setField={setField} isPercent={true} />
+              </div>
+              <div className="split retirement-pair">
+                <NumberField
+                  label="Retirement 1 Balance"
+                  keyName="retirement1Balance"
+                  draftInputs={draftInputs}
+                  setField={setField}
+                  isCurrency={true}
+                  inputStyle={{ minWidth: "9ch" }}
+                />
+                <SelectField label="Retirement 1 Strategy" keyName="retirement1Profile" draftInputs={draftInputs} setField={setField} />
+              </div>
+              <div className="split retirement-pair">
+                <NumberField
+                  label="Retirement 2 Balance"
+                  keyName="retirement2Balance"
+                  draftInputs={draftInputs}
+                  setField={setField}
+                  isCurrency={true}
+                  inputStyle={{ minWidth: "9ch" }}
+                />
+                <SelectField label="Retirement 2 Strategy" keyName="retirement2Profile" draftInputs={draftInputs} setField={setField} />
+              </div>
 
               <div className="split" style={{ marginTop: 8 }}>
                 <button className="btn" type="button" onClick={applyProjection} style={{ marginTop: 0 }}>Refresh</button>
@@ -850,12 +876,12 @@
                   {declineRow && (() => {
                     const x = chartPadL + (declineIndex / Math.max(1, rows.length - 1)) * plotW;
                     const y = chartH - (declineRow.total / yAxisMax) * chartH;
-                    const labelY = Math.min(chartH - 6, y + 14);
+                    const labelY = Math.min(chartH - 4, y + 16);
                     return (
                       <g>
                         <line x1={x} y1={0} x2={x} y2={chartH} stroke="#f87171" strokeDasharray="5 4" strokeWidth="1.1" />
                         <circle cx={x} cy={y} r="4" fill="#f87171" stroke="#7f1d1d" strokeWidth="1" />
-                        <text x={x + 6} y={labelY} fill="#f87171" fontSize="8" fontWeight="700">
+                        <text x={x} y={labelY} fill="#f87171" fontSize="8" fontWeight="700" textAnchor="middle">
                           {`Decline starts: ${declineRow.year} (Age ${declineRow.age})`}
                         </text>
                       </g>
