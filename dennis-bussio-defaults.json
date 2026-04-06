@@ -3,7 +3,7 @@
   "lifeExpectancy": 100,
   "yearsToProject": 19,
   "inflationRate": 0.03,
-  "moneyMarketGrowthRate": 0,
+  "moneyMarketGrowthRate": 0.02,
   "houseGrowthRate": 0.03,
   "currentAge": 82,
   "annualSpendDennis": 65000,
