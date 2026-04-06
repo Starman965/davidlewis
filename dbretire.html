@@ -607,7 +607,7 @@
           const storedDefaults = loadDefaultsFromStorage();
           const fileBudgetPlanner = getBudgetPlannerFromDefaultsPayload(fileDefaults);
           const storedBudgetPlanner = getBudgetPlannerFromDefaultsPayload(storedDefaults);
-          const mergedDefaults = { ...DEFAULT_INPUTS, ...(fileDefaults || {}), ...(storedDefaults || {}) };
+          const mergedDefaults = { ...DEFAULT_INPUTS, ...(storedDefaults || {}), ...(fileDefaults || {}) };
           const normalized = toAppliedValues(toDraftValues(mergedDefaults), DEFAULT_INPUTS);
           if (!isMounted) return;
           setApplied({ ...normalized, asOfDateISO: new Date().toISOString() });
