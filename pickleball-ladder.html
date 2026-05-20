@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pickleball Ladder Scorecard</title>
+  <style>
+    :root {
+      --ink: #17211c;
+      --muted: #5e6a63;
+      --line: #cfd8d1;
+      --paper: #fffdf8;
+      --panel: #f4f8f1;
+      --accent: #20725b;
+      --accent-dark: #124736;
+      --warn: #b35f19;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #e9efe8;
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.35;
+    }
+
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: end;
+      padding-bottom: 18px;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    h1 {
+      margin: 0 0 4px;
+      font-size: clamp(28px, 4vw, 46px);
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    button {
+      min-height: 42px;
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      background: var(--accent);
+      color: var(--white);
+      cursor: pointer;
+      font: 700 14px Arial, Helvetica, sans-serif;
+      padding: 0 14px;
+    }
+
+    button.secondary {
+      background: var(--white);
+      color: var(--accent-dark);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(300px, 0.9fr);
+      gap: 18px;
+      align-items: start;
+      margin-top: 18px;
+    }
+
+    .rounds,
+    .standings,
+    .notes {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(23, 33, 28, 0.08);
+    }
+
+    .rounds {
+      overflow: hidden;
+    }
+
+    .round {
+      padding: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .round:last-child {
+      border-bottom: 0;
+    }
+
+    .round h2 {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+
+    .round-status {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 400;
+    }
+
+    .game {
+      display: grid;
+      grid-template-columns: 74px minmax(0, 1fr) 90px 34px minmax(0, 1fr) 90px;
+      gap: 10px;
+      align-items: center;
+      min-height: 52px;
+      padding: 8px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--white);
+    }
+
+    .game + .game {
+      margin-top: 8px;
+    }
+
+    .court {
+      color: var(--accent-dark);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .team {
+      min-width: 0;
+      font-weight: 700;
+    }
+
+    .versus {
+      color: var(--muted);
+      font-weight: 700;
+      text-align: center;
+    }
+
+    label.score {
+      display: grid;
+      gap: 3px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      min-height: 42px;
+      border: 1px solid #acbbb0;
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+      font: 700 22px Arial, Helvetica, sans-serif;
+      text-align: center;
+    }
+
+    .standings {
+      position: sticky;
+      top: 12px;
+      padding: 14px;
+    }
+
+    .standings h2,
+    .notes h2 {
+      margin: 0 0 10px;
+      font-size: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th,
+    td {
+      padding: 8px 6px;
+      border-bottom: 1px solid var(--line);
+      text-align: right;
+      vertical-align: middle;
+    }
+
+    th:first-child,
+    td:first-child,
+    th:nth-child(2),
+    td:nth-child(2) {
+      text-align: left;
+    }
+
+    th {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    tbody tr:first-child td {
+      background: var(--panel);
+      font-weight: 700;
+    }
+
+    .rank {
+      width: 34px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .notes {
+      margin-top: 18px;
+      padding: 14px;
+    }
+
+    .notes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .note {
+      min-height: 90px;
+      border: 1px dashed #9eb0a4;
+      border-radius: 6px;
+      padding: 10px;
+      background: #fff;
+    }
+
+    .note strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .hint {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .complete {
+      color: var(--accent);
+    }
+
+    .invalid {
+      color: #9b1c1c;
+    }
+
+    .partial {
+      color: var(--warn);
+    }
+
+    @media (max-width: 860px) {
+      main {
+        padding: 14px;
+      }
+
+      header,
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .actions {
+        justify-content: flex-start;
+      }
+
+      .standings {
+        position: static;
+      }
+
+      .game {
+        grid-template-columns: 58px minmax(0, 1fr) 72px;
+      }
+
+      .team.two,
+      label.score.two {
+        grid-column: 2 / -1;
+      }
+
+      .versus {
+        display: none;
+      }
+
+      .notes-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      @page {
+        size: letter landscape;
+        margin: 0.35in;
+      }
+
+      body {
+        background: #fff;
+        color: #000;
+      }
+
+      main {
+        max-width: none;
+        padding: 0;
+      }
+
+      header {
+        grid-template-columns: 1fr;
+        gap: 4px;
+        padding-bottom: 8px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      .subtitle,
+      .hint,
+      .actions,
+      .round-status {
+        display: none;
+      }
+
+      .layout {
+        grid-template-columns: 1.65fr 0.9fr;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .rounds,
+      .standings,
+      .notes {
+        border: 1px solid #777;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      .round {
+        padding: 6px;
+      }
+
+      .round h2 {
+        margin-bottom: 4px;
+        font-size: 13px;
+      }
+
+      .game {
+        min-height: 30px;
+        grid-template-columns: 48px minmax(0, 1fr) 50px 24px minmax(0, 1fr) 50px;
+        gap: 5px;
+        padding: 4px;
+        border-radius: 0;
+      }
+
+      .game + .game {
+        margin-top: 4px;
+      }
+
+      .court,
+      label.score {
+        font-size: 9px;
+      }
+
+      .team {
+        font-size: 11px;
+      }
+
+      input[type="number"] {
+        min-height: 24px;
+        border: 1px solid #555;
+        border-radius: 0;
+        font-size: 13px;
+      }
+
+      .standings {
+        position: static;
+        padding: 6px;
+      }
+
+      .standings h2,
+      .notes h2 {
+        margin-bottom: 4px;
+        font-size: 14px;
+      }
+
+      table {
+        font-size: 11px;
+      }
+
+      th,
+      td {
+        padding: 4px;
+      }
+
+      .notes {
+        margin-top: 10px;
+        padding: 6px;
+        break-inside: avoid;
+      }
+
+      .notes-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
+      }
+
+      .note {
+        min-height: 52px;
+        border-radius: 0;
+        font-size: 10px;
+        padding: 5px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <h1>Pickleball Doubles Ladder</h1>
+        <p class="subtitle">8 players, 7 rounds, 2 courts. Enter each team's score; totals roll up automatically.</p>
+      </div>
+      <div class="actions" aria-label="Scorecard actions">
+        <button type="button" id="printButton">Print Card</button>
+        <button type="button" class="secondary" id="clearButton">Clear Scores</button>
+      </div>
+    </header>
+
+    <section class="layout" aria-label="Ladder tracker">
+      <section class="rounds" id="rounds" aria-label="Rounds and scores"></section>
+
+      <aside class="standings" aria-label="Current standings">
+        <h2>Standings</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Player</th>
+              <th>Pts</th>
+              <th>W</th>
+              <th>Diff</th>
+            </tr>
+          </thead>
+          <tbody id="standingsBody"></tbody>
+        </table>
+        <p class="hint">Ranking: total points, then wins, then point differential.</p>
+      </aside>
+    </section>
+
+    <section class="notes" aria-label="Night notes">
+      <h2>Courtside Notes</h2>
+      <div class="notes-grid">
+        <div class="note"><strong>Format</strong>Games to 11, win by 2, hard cap at 15.</div>
+        <div class="note"><strong>Score Rule</strong>Each player gets the points their team scored.</div>
+        <div class="note"><strong>Tiebreaker</strong>Total points, wins, point differential, then one-point playoff.</div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const players = [
+      "Kent Donahue",
+      "David Lewis",
+      "Nasser Gaemi",
+      "John Ahern",
+      "Rob Thomas",
+      "Jason Smyth",
+      "Gene Bobroff",
+      "Bill Fisher"
+    ];
+
+    const schedule = [
+      [
+        [["Kent Donahue", "David Lewis"], ["Nasser Gaemi", "John Ahern"]],
+        [["Rob Thomas", "Jason Smyth"], ["Gene Bobroff", "Bill Fisher"]]
+      ],
+      [
+        [["Kent Donahue", "Nasser Gaemi"], ["Rob Thomas", "Gene Bobroff"]],
+        [["David Lewis", "John Ahern"], ["Jason Smyth", "Bill Fisher"]]
+      ],
+      [
+        [["Kent Donahue", "John Ahern"], ["Jason Smyth", "Gene Bobroff"]],
+        [["David Lewis", "Nasser Gaemi"], ["Rob Thomas", "Bill Fisher"]]
+      ],
+      [
+        [["Kent Donahue", "Rob Thomas"], ["David Lewis", "Gene Bobroff"]],
+        [["Nasser Gaemi", "Jason Smyth"], ["John Ahern", "Bill Fisher"]]
+      ],
+      [
+        [["Kent Donahue", "Jason Smyth"], ["John Ahern", "Rob Thomas"]],
+        [["David Lewis", "Bill Fisher"], ["Nasser Gaemi", "Gene Bobroff"]]
+      ],
+      [
+        [["Kent Donahue", "Gene Bobroff"], ["Nasser Gaemi", "Bill Fisher"]],
+        [["David Lewis", "Rob Thomas"], ["John Ahern", "Jason Smyth"]]
+      ],
+      [
+        [["Kent Donahue", "Bill Fisher"], ["John Ahern", "Gene Bobroff"]],
+        [["David Lewis", "Jason Smyth"], ["Nasser Gaemi", "Rob Thomas"]]
+      ]
+    ];
+
+    const storageKey = "pickleball-ladder-scores-v1";
+    const roundsElement = document.querySelector("#rounds");
+    const standingsBody = document.querySelector("#standingsBody");
+
+    function scoreId(roundIndex, gameIndex, teamIndex) {
+      return `r${roundIndex}-g${gameIndex}-t${teamIndex}`;
+    }
+
+    function getSavedScores() {
+      try {
+        return JSON.parse(localStorage.getItem(storageKey)) || {};
+      } catch (error) {
+        return {};
+      }
+    }
+
+    function saveScores() {
+      const scores = {};
+      document.querySelectorAll("input[data-score-id]").forEach((input) => {
+        if (input.value !== "") {
+          scores[input.dataset.scoreId] = input.value;
+        }
+      });
+      localStorage.setItem(storageKey, JSON.stringify(scores));
+    }
+
+    function getNumber(scoreIdValue) {
+      const input = document.querySelector(`[data-score-id="${scoreIdValue}"]`);
+      if (!input || input.value === "") return null;
+      const parsed = Number(input.value);
+      return Number.isFinite(parsed) ? parsed : null;
+    }
+
+    function renderRounds() {
+      const savedScores = getSavedScores();
+      roundsElement.innerHTML = "";
+
+      schedule.forEach((games, roundIndex) => {
+        const round = document.createElement("article");
+        round.className = "round";
+
+        const heading = document.createElement("h2");
+        heading.innerHTML = `Round ${roundIndex + 1} <span class="round-status" id="status-${roundIndex}"></span>`;
+        round.appendChild(heading);
+
+        games.forEach((game, gameIndex) => {
+          const gameElement = document.createElement("div");
+          gameElement.className = "game";
+
+          const court = document.createElement("div");
+          court.className = "court";
+          court.textContent = `Court ${gameIndex + 1}`;
+
+          const teamOne = document.createElement("div");
+          teamOne.className = "team";
+          teamOne.textContent = game[0].join(" / ");
+
+          const scoreOne = buildScoreInput(roundIndex, gameIndex, 0, savedScores);
+
+          const versus = document.createElement("div");
+          versus.className = "versus";
+          versus.textContent = "vs";
+
+          const teamTwo = document.createElement("div");
+          teamTwo.className = "team two";
+          teamTwo.textContent = game[1].join(" / ");
+
+          const scoreTwo = buildScoreInput(roundIndex, gameIndex, 1, savedScores);
+          scoreTwo.classList.add("two");
+
+          gameElement.append(court, teamOne, scoreOne, versus, teamTwo, scoreTwo);
+          round.appendChild(gameElement);
+        });
+
+        roundsElement.appendChild(round);
+      });
+    }
+
+    function buildScoreInput(roundIndex, gameIndex, teamIndex, savedScores) {
+      const id = scoreId(roundIndex, gameIndex, teamIndex);
+      const label = document.createElement("label");
+      label.className = "score";
+      label.textContent = "Score";
+
+      const input = document.createElement("input");
+      input.type = "number";
+      input.min = "0";
+      input.max = "15";
+      input.inputMode = "numeric";
+      input.pattern = "[0-9]*";
+      input.dataset.scoreId = id;
+      input.setAttribute("aria-label", `Round ${roundIndex + 1}, court ${gameIndex + 1}, team ${teamIndex + 1} score`);
+      input.value = savedScores[id] || "";
+      input.addEventListener("input", () => {
+        saveScores();
+        updateStandings();
+      });
+
+      label.appendChild(input);
+      return label;
+    }
+
+    function buildEmptyStats() {
+      return players.reduce((stats, player) => {
+        stats[player] = {
+          player,
+          points: 0,
+          wins: 0,
+          losses: 0,
+          diff: 0,
+          games: 0
+        };
+        return stats;
+      }, {});
+    }
+
+    function isValidGameScore(scoreOne, scoreTwo) {
+      const high = Math.max(scoreOne, scoreTwo);
+      const low = Math.min(scoreOne, scoreTwo);
+      const margin = high - low;
+      if (scoreOne === scoreTwo) return false;
+      if (high < 11 || high > 15 || low < 0 || low > 15) return false;
+      if (high === 15) return margin >= 1;
+      return margin >= 2;
+    }
+
+    function updateStandings() {
+      const stats = buildEmptyStats();
+
+      schedule.forEach((games, roundIndex) => {
+        let completedInRound = 0;
+        let hasInvalidScore = false;
+
+        games.forEach((game, gameIndex) => {
+          const scoreOne = getNumber(scoreId(roundIndex, gameIndex, 0));
+          const scoreTwo = getNumber(scoreId(roundIndex, gameIndex, 1));
+          if (scoreOne === null || scoreTwo === null) return;
+
+          completedInRound += 1;
+          if (!isValidGameScore(scoreOne, scoreTwo)) {
+            hasInvalidScore = true;
+          }
+          const teams = [
+            { players: game[0], score: scoreOne, opponentScore: scoreTwo },
+            { players: game[1], score: scoreTwo, opponentScore: scoreOne }
+          ];
+
+          teams.forEach((team) => {
+            team.players.forEach((player) => {
+              stats[player].points += team.score;
+              stats[player].diff += team.score - team.opponentScore;
+              stats[player].games += 1;
+              if (team.score > team.opponentScore) stats[player].wins += 1;
+              if (team.score < team.opponentScore) stats[player].losses += 1;
+            });
+          });
+        });
+
+        const status = document.querySelector(`#status-${roundIndex}`);
+        if (hasInvalidScore) {
+          status.textContent = "Check score";
+          status.className = "round-status invalid";
+        } else if (completedInRound === 2) {
+          status.textContent = "Complete";
+          status.className = "round-status complete";
+        } else if (completedInRound === 1) {
+          status.textContent = "One game entered";
+          status.className = "round-status partial";
+        } else {
+          status.textContent = "";
+          status.className = "round-status";
+        }
+      });
+
+      const rows = Object.values(stats).sort((a, b) => {
+        return b.points - a.points || b.wins - a.wins || b.diff - a.diff || a.player.localeCompare(b.player);
+      });
+
+      standingsBody.innerHTML = "";
+      rows.forEach((row, index) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td class="rank">${index + 1}</td>
+          <td>${row.player}</td>
+          <td>${row.points}</td>
+          <td>${row.wins}</td>
+          <td>${row.diff}</td>
+        `;
+        standingsBody.appendChild(tr);
+      });
+    }
+
+    document.querySelector("#printButton").addEventListener("click", () => window.print());
+
+    document.querySelector("#clearButton").addEventListener("click", () => {
+      const ok = window.confirm("Clear all scores from this ladder?");
+      if (!ok) return;
+      localStorage.removeItem(storageKey);
+      document.querySelectorAll("input[data-score-id]").forEach((input) => {
+        input.value = "";
+      });
+      updateStandings();
+    });
+
+    renderRounds();
+    updateStandings();
+  </script>
+</body>
+</html>
