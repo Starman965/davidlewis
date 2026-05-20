@@ -270,7 +270,7 @@
       color: var(--warn);
     }
 
-    @media (max-width: 860px) {
+    @media (max-width: 960px) {
       main {
         padding: 14px;
       }
@@ -288,21 +288,30 @@
         position: static;
       }
 
+      .notes-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
       .game {
         grid-template-columns: 58px minmax(0, 1fr) 72px;
       }
 
-      .team.two,
+      .court {
+        grid-row: 1 / 3;
+      }
+
+      .team.two {
+        grid-column: 2;
+      }
+
       label.score.two {
-        grid-column: 2 / -1;
+        grid-column: 3;
       }
 
       .versus {
         display: none;
-      }
-
-      .notes-grid {
-        grid-template-columns: 1fr;
       }
     }
 
