@@ -496,7 +496,6 @@
         <p class="subtitle">8 players, 7 rounds, 2 courts. Enter each team's score; totals roll up automatically.</p>
       </div>
       <div class="actions" aria-label="Scorecard actions">
-        <button type="button" id="printButton">Print Card</button>
         <button type="button" class="secondary" id="resetNamesButton">Reset Names</button>
         <button type="button" class="secondary" id="clearButton">Clear Scores</button>
       </div>
@@ -833,8 +832,6 @@
         standingsBody.appendChild(tr);
       });
     }
-
-    document.querySelector("#printButton").addEventListener("click", () => window.print());
 
     document.querySelector("#resetNamesButton").addEventListener("click", () => {
       const ok = window.confirm("Clear all player names?");
