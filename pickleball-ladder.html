@@ -87,6 +87,46 @@
       margin-top: 18px;
     }
 
+    .player-setup {
+      margin-top: 18px;
+      padding: 14px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(23, 33, 28, 0.08);
+    }
+
+    .player-setup h2 {
+      margin: 0 0 10px;
+      font-size: 20px;
+    }
+
+    .player-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .player-field {
+      display: grid;
+      gap: 4px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      min-height: 40px;
+      border: 1px solid #acbbb0;
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+      font: 700 15px Arial, Helvetica, sans-serif;
+      padding: 0 10px;
+    }
+
     .rounds,
     .standings,
     .notes {
@@ -284,6 +324,10 @@
         justify-content: flex-start;
       }
 
+      .player-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
       .standings {
         position: static;
       }
@@ -294,6 +338,10 @@
     }
 
     @media (max-width: 560px) {
+      .player-grid {
+        grid-template-columns: 1fr;
+      }
+
       .game {
         grid-template-columns: 58px minmax(0, 1fr) 72px;
       }
@@ -344,6 +392,7 @@
       .subtitle,
       .hint,
       .actions,
+      .player-setup,
       .round-status {
         display: none;
       }
@@ -448,9 +497,16 @@
       </div>
       <div class="actions" aria-label="Scorecard actions">
         <button type="button" id="printButton">Print Card</button>
+        <button type="button" class="secondary" id="resetNamesButton">Reset Names</button>
         <button type="button" class="secondary" id="clearButton">Clear Scores</button>
       </div>
     </header>
+
+    <section class="player-setup" aria-label="Player names">
+      <h2>Players</h2>
+      <div class="player-grid" id="playerFields"></div>
+      <p class="hint">Enter names before play. Blank names appear as Player 1, Player 2, and so on in the ladder.</p>
+    </section>
 
     <section class="layout" aria-label="Ladder tracker">
       <section class="rounds" id="rounds" aria-label="Rounds and scores"></section>
@@ -484,51 +540,44 @@
   </main>
 
   <script>
-    const players = [
-      "Kent Donahue",
-      "David Lewis",
-      "Nasser Gaemi",
-      "John Ahern",
-      "Rob Thomas",
-      "Jason Smyth",
-      "Gene Bobroff",
-      "Bill Fisher"
-    ];
+    const defaultPlayers = Array.from({ length: 8 }, (_, index) => `Player ${index + 1}`);
 
     const schedule = [
       [
-        [["Kent Donahue", "David Lewis"], ["Nasser Gaemi", "John Ahern"]],
-        [["Rob Thomas", "Jason Smyth"], ["Gene Bobroff", "Bill Fisher"]]
+        [[0, 1], [2, 3]],
+        [[4, 5], [6, 7]]
       ],
       [
-        [["Kent Donahue", "Nasser Gaemi"], ["Rob Thomas", "Gene Bobroff"]],
-        [["David Lewis", "John Ahern"], ["Jason Smyth", "Bill Fisher"]]
+        [[0, 2], [4, 6]],
+        [[1, 3], [5, 7]]
       ],
       [
-        [["Kent Donahue", "John Ahern"], ["Jason Smyth", "Gene Bobroff"]],
-        [["David Lewis", "Nasser Gaemi"], ["Rob Thomas", "Bill Fisher"]]
+        [[0, 3], [5, 6]],
+        [[1, 2], [4, 7]]
       ],
       [
-        [["Kent Donahue", "Rob Thomas"], ["David Lewis", "Gene Bobroff"]],
-        [["Nasser Gaemi", "Jason Smyth"], ["John Ahern", "Bill Fisher"]]
+        [[0, 4], [1, 6]],
+        [[2, 5], [3, 7]]
       ],
       [
-        [["Kent Donahue", "Jason Smyth"], ["John Ahern", "Rob Thomas"]],
-        [["David Lewis", "Bill Fisher"], ["Nasser Gaemi", "Gene Bobroff"]]
+        [[0, 5], [3, 4]],
+        [[1, 7], [2, 6]]
       ],
       [
-        [["Kent Donahue", "Gene Bobroff"], ["Nasser Gaemi", "Bill Fisher"]],
-        [["David Lewis", "Rob Thomas"], ["John Ahern", "Jason Smyth"]]
+        [[0, 6], [2, 7]],
+        [[1, 4], [3, 5]]
       ],
       [
-        [["Kent Donahue", "Bill Fisher"], ["John Ahern", "Gene Bobroff"]],
-        [["David Lewis", "Jason Smyth"], ["Nasser Gaemi", "Rob Thomas"]]
+        [[0, 7], [3, 6]],
+        [[1, 5], [2, 4]]
       ]
     ];
 
     const storageKey = "pickleball-ladder-scores-v1";
+    const namesStorageKey = "pickleball-ladder-player-names-v1";
     const roundsElement = document.querySelector("#rounds");
     const standingsBody = document.querySelector("#standingsBody");
+    const playerFieldsElement = document.querySelector("#playerFields");
 
     function scoreId(roundIndex, gameIndex, teamIndex) {
       return `r${roundIndex}-g${gameIndex}-t${teamIndex}`;
@@ -540,6 +589,33 @@
       } catch (error) {
         return {};
       }
+    }
+
+    function getPlayerName(index) {
+      const input = document.querySelector(`[data-player-index="${index}"]`);
+      const fallback = defaultPlayers[index];
+      if (!input) return fallback;
+      return input.value.trim() || fallback;
+    }
+
+    function getPlayers() {
+      return defaultPlayers.map((player, index) => getPlayerName(index));
+    }
+
+    function getSavedPlayerNames() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(namesStorageKey));
+        return Array.isArray(saved) ? saved : [];
+      } catch (error) {
+        return [];
+      }
+    }
+
+    function savePlayerNames() {
+      const names = Array.from(document.querySelectorAll("input[data-player-index]"), (input, index) => {
+        return input.value.trim();
+      });
+      localStorage.setItem(namesStorageKey, JSON.stringify(names));
     }
 
     function saveScores() {
@@ -559,8 +635,36 @@
       return Number.isFinite(parsed) ? parsed : null;
     }
 
+    function renderPlayerFields() {
+      const savedNames = getSavedPlayerNames();
+      playerFieldsElement.innerHTML = "";
+
+      defaultPlayers.forEach((player, index) => {
+        const label = document.createElement("label");
+        label.className = "player-field";
+        label.textContent = `Player ${index + 1}`;
+
+        const input = document.createElement("input");
+        input.type = "text";
+        input.dataset.playerIndex = index;
+        input.value = savedNames[index] || "";
+        input.placeholder = player;
+        input.autocomplete = "off";
+        input.setAttribute("aria-label", `Player ${index + 1} name`);
+        input.addEventListener("input", () => {
+          savePlayerNames();
+          renderRounds();
+          updateStandings();
+        });
+
+        label.appendChild(input);
+        playerFieldsElement.appendChild(label);
+      });
+    }
+
     function renderRounds() {
       const savedScores = getSavedScores();
+      const players = getPlayers();
       roundsElement.innerHTML = "";
 
       schedule.forEach((games, roundIndex) => {
@@ -581,7 +685,7 @@
 
           const teamOne = document.createElement("div");
           teamOne.className = "team";
-          teamOne.textContent = game[0].join(" / ");
+          teamOne.textContent = game[0].map((playerIndex) => players[playerIndex]).join(" / ");
 
           const scoreOne = buildScoreInput(roundIndex, gameIndex, 0, savedScores);
 
@@ -591,7 +695,7 @@
 
           const teamTwo = document.createElement("div");
           teamTwo.className = "team two";
-          teamTwo.textContent = game[1].join(" / ");
+          teamTwo.textContent = game[1].map((playerIndex) => players[playerIndex]).join(" / ");
 
           const scoreTwo = buildScoreInput(roundIndex, gameIndex, 1, savedScores);
           scoreTwo.classList.add("two");
@@ -629,6 +733,7 @@
     }
 
     function buildEmptyStats() {
+      const players = getPlayers();
       return players.reduce((stats, player) => {
         stats[player] = {
           player,
@@ -674,7 +779,8 @@
           ];
 
           teams.forEach((team) => {
-            team.players.forEach((player) => {
+            team.players.forEach((playerIndex) => {
+              const player = getPlayerName(playerIndex);
               stats[player].points += team.score;
               stats[player].diff += team.score - team.opponentScore;
               stats[player].games += 1;
@@ -707,18 +813,37 @@
       standingsBody.innerHTML = "";
       rows.forEach((row, index) => {
         const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td class="rank">${index + 1}</td>
-          <td>${row.player}</td>
-          <td>${row.points}</td>
-          <td>${row.wins}</td>
-          <td>${row.diff}</td>
-        `;
+        const rank = document.createElement("td");
+        rank.className = "rank";
+        rank.textContent = index + 1;
+
+        const player = document.createElement("td");
+        player.textContent = row.player;
+
+        const points = document.createElement("td");
+        points.textContent = row.points;
+
+        const wins = document.createElement("td");
+        wins.textContent = row.wins;
+
+        const diff = document.createElement("td");
+        diff.textContent = row.diff;
+
+        tr.append(rank, player, points, wins, diff);
         standingsBody.appendChild(tr);
       });
     }
 
     document.querySelector("#printButton").addEventListener("click", () => window.print());
+
+    document.querySelector("#resetNamesButton").addEventListener("click", () => {
+      const ok = window.confirm("Clear all player names?");
+      if (!ok) return;
+      localStorage.removeItem(namesStorageKey);
+      renderPlayerFields();
+      renderRounds();
+      updateStandings();
+    });
 
     document.querySelector("#clearButton").addEventListener("click", () => {
       const ok = window.confirm("Clear all scores from this ladder?");
@@ -730,6 +855,7 @@
       updateStandings();
     });
 
+    renderPlayerFields();
     renderRounds();
     updateStandings();
   </script>
