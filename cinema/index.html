@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ShotCraft AI | Cinematic Prompt Builder</title>
+    <meta
+      name="description"
+      content="An interactive cinematic camera-shot reference and AI video prompt builder for creators using Seedance, Higgsfield, Runway, Kling, and more."
+    />
+    <meta property="og:title" content="ShotCraft AI" />
+    <meta
+      property="og:description"
+      content="Build cinematic AI video prompts using real camera language."
+    />
+    <link rel="canonical" href="https://www.davidlewis.ai/cinema/" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <div class="eyebrow">Film school for AI video creators</div>
+            <h1>ShotCraft AI</h1>
+            <p class="hero-subtitle">Build cinematic AI video prompts using real camera language.</p>
+            <p class="hero-text">
+              Choose a shot size, camera angle, movement, mood, and scene type.
+              ShotCraft turns your selections into a ready-to-use prompt for AI
+              video tools like Seedance, Higgsfield, Runway, Kling, and more.
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="#builder">Start Building</a>
+              <a class="button secondary" href="#shot-library">Browse Shot Library</a>
+            </div>
+          </div>
+          <div class="hero-panel" aria-hidden="true">
+            <div class="hero-grid">
+              <div class="hero-wide"><span></span></div>
+              <div class="hero-face"></div>
+              <div class="hero-lines"></div>
+              <div class="hero-scene"></div>
+              <div class="hero-slice"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="builder" class="builder-shell">
+        <section class="builder-card">
+          <div class="builder-head">
+            <div>
+              <p class="section-kicker">AI video shot builder</p>
+              <h2>Compose the shot before you prompt.</h2>
+              <p>
+                Select the cinematic ingredients, then use the generated prompt
+                as a clean starting point for Seedance, Higgsfield, Runway,
+                Kling, or any other AI video model.
+              </p>
+            </div>
+            <button id="resetBuilder" class="button secondary" type="button">Reset</button>
+          </div>
+
+          <form id="promptForm" class="form-grid">
+            <label>
+              <span>Character name</span>
+              <input id="characterName" name="characterName" value="Naomi" />
+            </label>
+            <label>
+              <span>Duration</span>
+              <select id="duration" name="duration"></select>
+            </label>
+            <label>
+              <span>Aspect ratio</span>
+              <select id="aspectRatio" name="aspectRatio"></select>
+            </label>
+            <label>
+              <span>Visual style</span>
+              <select id="visualStyle" name="visualStyle"></select>
+            </label>
+            <label>
+              <span>Shot size</span>
+              <select id="shotSize" name="shotSize"></select>
+            </label>
+            <label>
+              <span>Camera angle</span>
+              <select id="cameraAngle" name="cameraAngle"></select>
+            </label>
+            <label>
+              <span>Camera position</span>
+              <select id="cameraPosition" name="cameraPosition"></select>
+            </label>
+            <label>
+              <span>Camera movement</span>
+              <select id="cameraMovement" name="cameraMovement"></select>
+            </label>
+            <label>
+              <span>Mood</span>
+              <select id="mood" name="mood"></select>
+            </label>
+            <label>
+              <span>Scene type</span>
+              <select id="sceneType" name="sceneType"></select>
+            </label>
+            <label>
+              <span>Audio style</span>
+              <select id="audioStyle" name="audioStyle"></select>
+            </label>
+            <label class="wide-field">
+              <span>Scene description</span>
+              <textarea id="sceneDescription" name="sceneDescription" rows="5">Naomi discovers a glowing friendship shell near a tide pool on a sunny beach.</textarea>
+            </label>
+          </form>
+        </section>
+
+        <aside class="side-panel">
+          <section id="shotPreview" class="preview-card"></section>
+          <section class="output-card">
+            <div class="output-head">
+              <div>
+                <p class="section-kicker">Generated prompt</p>
+                <h2>Ready to paste</h2>
+              </div>
+              <button id="copyPrompt" class="button primary" type="button">Copy Prompt</button>
+            </div>
+            <p id="copyStatus" class="copy-status" aria-live="polite"></p>
+            <pre id="promptOutput"></pre>
+          </section>
+        </aside>
+      </section>
+
+      <section class="recipes-section">
+        <div class="section-intro">
+          <p class="section-kicker">Shot recipes</p>
+          <h2>Presets for the moments creators use most.</h2>
+          <p>Apply a recipe, then adjust the character, scene, and timing for your own video.</p>
+        </div>
+        <div id="recipeGrid" class="recipe-grid"></div>
+      </section>
+
+      <section id="shot-library" class="library-section">
+        <div class="section-intro">
+          <p class="section-kicker">Shot library</p>
+          <h2>Learn the language, then build with it.</h2>
+          <p>
+            Each card explains what the shot does, when to use it, and the
+            feeling it adds to an AI video prompt.
+          </p>
+        </div>
+        <div class="stats-grid">
+          <div><strong>24</strong><span>camera references</span></div>
+          <div><strong>4</strong><span>shot categories</span></div>
+          <div><strong>16:9</strong><span>AI-ready thumbnails</span></div>
+        </div>
+        <div id="shotLibrary"></div>
+      </section>
+    </main>
+    <script src="./app.js"></script>
+  </body>
+</html>
