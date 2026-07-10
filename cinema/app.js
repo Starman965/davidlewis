@@ -35,49 +35,23 @@ const shots = [
 }));
 
 const categories = ["Shot Size", "Camera Angle", "Camera Position", "Camera Movement"];
-const defaults = {
-  characterName: "Naomi",
-  sceneDescription: "Naomi discovers a glowing friendship shell near a tide pool on a sunny beach.",
-  duration: "15 seconds",
-  aspectRatio: "16:9",
-  visualStyle: "Bright animated cinematic",
-  shotSize: "Medium Close-Up",
-  cameraAngle: "Eye-Level Shot",
-  cameraPosition: "POV Shot",
-  cameraMovement: "Slow Push-In",
-  mood: "Wonder",
-  sceneType: "Discovery",
-  audioStyle: "Natural ambience only",
-};
-
-const selectOptions = {
-  duration: ["5 seconds", "10 seconds", "15 seconds", "30 seconds"],
-  aspectRatio: ["16:9", "9:16", "1:1"],
-  visualStyle: ["Bright animated cinematic", "Pixar-inspired CGI", "Stylized 3D animation", "Realistic cinematic", "Cozy children's storybook"],
-  shotSize: namesFor("Shot Size"),
-  cameraAngle: namesFor("Camera Angle"),
-  cameraPosition: namesFor("Camera Position"),
-  cameraMovement: namesFor("Camera Movement"),
-  mood: ["Wonder", "Excitement", "Comedy", "Mystery", "Adventure", "Warm friendship", "Emotional discovery"],
-  sceneType: ["Dialogue", "Discovery", "Action", "Reveal", "Character introduction", "Ending shot", "Comedy beat"],
-  audioStyle: ["Natural ambience only", "Environmental Foley", "Dialogue plus ambience", "Music plus ambience", "Subject-driven sound effects"],
-};
-
-const recipes = [
-  ["Emotional Discovery", "A personal reveal where the camera moves closer as the character understands what they have found.", { shotSize: "Medium Close-Up", cameraAngle: "Eye-Level Shot", cameraPosition: "POV Shot", cameraMovement: "Slow Push-In", mood: "Wonder", sceneType: "Discovery" }],
-  ["Epic Establishing Moment", "A scale-building opener for a journey, new location, or first look at a world.", { shotSize: "Extreme Wide Shot", cameraAngle: "High Angle Shot", cameraPosition: "Rear Tracking Shot", cameraMovement: "Crane Up", mood: "Adventure", sceneType: "Character introduction" }],
-  ["Funny Dialogue Beat", "A clean comedy setup where framing stays readable and the reaction does the work.", { shotSize: "Medium Shot", cameraAngle: "Eye-Level Shot", cameraPosition: "Over-the-Shoulder", cameraMovement: "Static Shot", mood: "Comedy", sceneType: "Dialogue" }],
-  ["Magical Reveal", "A detail-first setup for glowing objects, clues, transformations, and surprise reveals.", { shotSize: "Extreme Close-Up", cameraAngle: "Low Angle Shot", cameraPosition: "POV Shot", cameraMovement: "Orbit Shot", mood: "Mystery", sceneType: "Reveal" }],
-  ["Adventure Walk", "A forward-moving travel beat for characters entering a fresh space.", { shotSize: "Wide Shot", cameraAngle: "Eye-Level Shot", cameraPosition: "Rear Tracking Shot", cameraMovement: "Tracking Shot", mood: "Adventure", sceneType: "Action" }],
-  ["Warm Friendship Moment", "A gentle two-character setup for connection, trust, and quiet dialogue.", { shotSize: "Medium Shot", cameraAngle: "Eye-Level Shot", cameraPosition: "Three-Quarter View", cameraMovement: "Slow Push-In", mood: "Warm friendship", sceneType: "Dialogue" }],
+const learningPath = [
+  ["Shot Size", "Controls emotional distance. Are we watching the whole adventure, a body in action, or one tiny feeling on a face?", "Director note: go wide for the world, go close for the heart."],
+  ["Camera Angle", "Changes the audience's relationship to the subject. A small tilt in viewpoint can make someone feel brave, vulnerable, strange, or funny.", "Director note: low can empower, high can soften, Dutch can unsettle."],
+  ["Camera Position", "Decides whose side the audience is on. We can stand across from someone, behind them, beside them, or inside their point of view.", "Director note: position is empathy."],
+  ["Camera Movement", "Gives the shot a pulse. Movement should reveal, follow, intensify, or let the audience lean into a moment.", "Director note: if the emotion is still, the camera can be still too."],
 ];
 
-let state = { ...defaults };
-let selectedShot = getShotByName(state.shotSize);
+const recipes = [
+  ["The Little Discovery", "A character notices something small that suddenly feels important.", ["Medium Close-Up", "Eye-Level Shot", "POV Shot", "Slow Push-In"], "The camera leans in with the character. The audience feels the discovery instead of just seeing it."],
+  ["The Big World Reveal", "The story opens up and we understand the size of the place or adventure.", ["Extreme Wide Shot", "High Angle Shot", "Rear Tracking Shot", "Crane Up"], "Distance, height, and rising motion tell the audience: this world is bigger than the character."],
+  ["The Joke Lands Here", "A simple comedy beat where timing and reaction matter more than camera flash.", ["Medium Shot", "Eye-Level Shot", "Over-the-Shoulder", "Static Shot"], "The frame stays readable so the performance can do the funny work."],
+  ["The Magic Object", "A detail, clue, or glowing object becomes the center of attention.", ["Extreme Close-Up", "Low Angle Shot", "POV Shot", "Orbit Shot"], "The camera treats the object like a character. Detail plus motion makes it feel alive."],
+  ["The Brave Step Forward", "A character moves into a new space, choice, or adventure.", ["Wide Shot", "Eye-Level Shot", "Rear Tracking Shot", "Tracking Shot"], "We follow from behind so the audience joins the journey instead of watching from far away."],
+  ["The Quiet Connection", "Two characters share trust, friendship, or a soft emotional beat.", ["Medium Shot", "Eye-Level Shot", "Three-Quarter View", "Slow Push-In"], "Gentle framing and a slow move keep attention on faces, body language, and connection."],
+];
 
-function namesFor(category) {
-  return shots.filter((shot) => shot.category === category).map((shot) => shot.name);
-}
+let selectedShot = getShotByName("Medium Close-Up");
 
 function getShotByName(name) {
   return shots.find((shot) => shot.name === name) || shots[0];
@@ -93,115 +67,78 @@ function escapeHtml(value) {
   })[char]);
 }
 
-function setFieldValue(id, value) {
-  const field = document.getElementById(id);
-  if (field) field.value = value;
-}
-
-function readFormState() {
-  Object.keys(defaults).forEach((key) => {
-    const field = document.getElementById(key);
-    if (field) state[key] = field.value;
-  });
-}
-
-function writeFormState() {
-  Object.entries(state).forEach(([key, value]) => setFieldValue(key, value));
-}
-
-function syncSelectedShotFromState() {
-  const possibleNames = [state.cameraMovement, state.cameraPosition, state.cameraAngle, state.shotSize];
-  selectedShot = shots.find((shot) => possibleNames.includes(shot.name)) || selectedShot;
-}
-
-function renderSelects() {
-  Object.entries(selectOptions).forEach(([id, options]) => {
-    const select = document.getElementById(id);
-    select.innerHTML = options.map((option) => `<option value="${escapeHtml(option)}">${escapeHtml(option)}</option>`).join("");
-  });
-  writeFormState();
-}
-
-function renderPreview() {
-  const preview = document.getElementById("shotPreview");
-  preview.innerHTML = `
-    <p class="section-kicker">Selected shot preview</p>
-    <div class="thumbnail active"><img src="${selectedShot.thumbnail}" alt="${escapeHtml(selectedShot.name)} cinematic thumbnail" /></div>
-    <div class="preview-meta">
-      <p class="category-label">${escapeHtml(selectedShot.category)}</p>
-      <h3>${escapeHtml(selectedShot.name)}</h3>
-      <p>${escapeHtml(selectedShot.definition)}</p>
-    </div>
-    <div class="meaning-box">
-      <strong>What this shot communicates</strong>
-      <p>${escapeHtml(selectedShot.feeling)}</p>
-    </div>
-    <div class="prompt-phrase">
-      <strong>Prompt phrase to use</strong>
-      <p>${escapeHtml(selectedShot.promptPhrase)}</p>
-    </div>
-  `;
-}
-
-function buildPrompt() {
-  const name = state.characterName.trim() || "the character";
-  const dialogueTypes = new Set(["Dialogue", "Discovery", "Reveal", "Comedy beat", "Character introduction"]);
-  const dialogue = dialogueTypes.has(state.sceneType)
-    ? `\n\nDialogue:\nInclude one short sample line from ${name}, such as "I think this is meant for us."`
-    : "";
-
-  return `${state.duration} animated cinematic scene, ${state.aspectRatio}.
-
-Visual style:
-${state.visualStyle}.
-
-Scene:
-${state.sceneDescription}
-
-Camera:
-Use a ${state.shotSize}, ${state.cameraAngle}, ${state.cameraPosition}, with ${state.cameraMovement}.
-
-Mood:
-The scene should feel ${state.mood.toLowerCase()}.
-
-Action:
-${name} moves with simple, readable timing that matches a ${state.sceneType.toLowerCase()} scene. Keep the body language emotionally clear: one main action, a clean reaction, and a final held moment so the shot has time to breathe.${dialogue}
-
-Audio:
-Use ${state.audioStyle}. Include appropriate ambience, environmental Foley, and subject-driven sound.
-
-Prompt guidance:
-Keep character movement simple, readable, and emotionally expressive. Use natural timing. Avoid overloading the scene with too many actions.`;
-}
-
-function renderPrompt() {
-  document.getElementById("promptOutput").textContent = buildPrompt();
-}
-
-function labelForKey(key) {
-  return {
-    shotSize: "Shot",
-    cameraAngle: "Angle",
-    cameraPosition: "Position",
-    cameraMovement: "Move",
-    mood: "Mood",
-    sceneType: "Type",
-  }[key] || key;
+function renderLearningPath() {
+  document.getElementById("pathGrid").innerHTML = learningPath.map(([title, description, example], index) => `
+    <article class="path-card" data-step="${index + 1}">
+      <h3>${escapeHtml(title)}</h3>
+      <p>${escapeHtml(description)}</p>
+      <p class="path-example">${escapeHtml(example)}</p>
+    </article>
+  `).join("");
 }
 
 function renderRecipes() {
-  document.getElementById("recipeGrid").innerHTML = recipes.map(([name, description, settings], index) => `
+  document.getElementById("recipeGrid").innerHTML = recipes.map(([name, description, shotNames, lesson], index) => `
     <article class="recipe-card">
       <h3>${escapeHtml(name)}</h3>
       <p>${escapeHtml(description)}</p>
-      <dl class="settings-grid">
-        ${Object.entries(settings).map(([key, value]) => `
-          <div><dt>${escapeHtml(labelForKey(key))}</dt><dd>${escapeHtml(value)}</dd></div>
-        `).join("")}
-      </dl>
-      <button class="button primary apply-recipe" data-index="${index}" type="button">Apply Recipe</button>
+      <div class="lesson-tags">
+        ${shotNames.map((shotName) => `<span>${escapeHtml(shotName)}</span>`).join("")}
+      </div>
+      <div class="meaning-box">
+        <strong>What to notice</strong>
+        <p>${escapeHtml(lesson)}</p>
+      </div>
+      <button class="button primary study-recipe" data-index="${index}" type="button">Watch the Camera Choice</button>
     </article>
   `).join("");
+}
+
+function openRecipeModal(index) {
+  const [name, description, shotNames, lesson] = recipes[index];
+  const modal = document.getElementById("recipeModal");
+  const modalContent = document.getElementById("modalContent");
+  const firstShot = getShotByName(shotNames[0]);
+
+  selectedShot = firstShot;
+  updateAll();
+
+  modalContent.innerHTML = `
+    <div class="modal-lesson">
+      <p class="section-kicker">Story recipe</p>
+      <h2 id="modalTitle">${escapeHtml(name)}</h2>
+      <p>${escapeHtml(description)}</p>
+      <div class="modal-shot-grid">
+        ${shotNames.map((shotName) => {
+          const shot = getShotByName(shotName);
+          return `
+            <article class="modal-shot-card">
+              <div class="thumbnail">
+                <img src="${shot.thumbnail}" alt="${escapeHtml(shot.name)} cinematic thumbnail" loading="lazy" />
+              </div>
+              <span>${escapeHtml(shot.category)}</span>
+              <h3>${escapeHtml(shot.name)}</h3>
+              <p>${escapeHtml(shot.definition)}</p>
+            </article>
+          `;
+        }).join("")}
+      </div>
+      <div class="modal-director-note">
+        <strong>What changes in the scene</strong>
+        <p>${escapeHtml(lesson)}</p>
+      </div>
+    </div>
+  `;
+
+  modal.hidden = false;
+  document.body.style.overflow = "hidden";
+  modal.querySelector(".modal-close").focus();
+}
+
+function closeRecipeModal() {
+  const modal = document.getElementById("recipeModal");
+  modal.hidden = true;
+  document.body.style.overflow = "";
 }
 
 function renderLibrary() {
@@ -219,7 +156,7 @@ function renderLibrary() {
                 <p class="section-kicker">${escapeHtml(shot.category)}</p>
                 <h3>${escapeHtml(shot.name)}</h3>
               </div>
-              <button class="select-shot" data-shot-id="${shot.id}" type="button">Select</button>
+              <button class="select-shot" data-shot-id="${shot.id}" type="button">Learn</button>
             </div>
             <p class="shot-card-body">${escapeHtml(shot.definition)}</p>
             <div class="shot-facts">
@@ -234,56 +171,28 @@ function renderLibrary() {
 }
 
 function updateAll() {
-  syncSelectedShotFromState();
-  renderPreview();
-  renderPrompt();
   renderLibrary();
 }
 
 function selectShot(shot) {
   selectedShot = shot;
-  if (shot.category === "Shot Size") state.shotSize = shot.name;
-  if (shot.category === "Camera Angle") state.cameraAngle = shot.name;
-  if (shot.category === "Camera Position") state.cameraPosition = shot.name;
-  if (shot.category === "Camera Movement") state.cameraMovement = shot.name;
-  writeFormState();
   updateAll();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  renderSelects();
+  renderLearningPath();
   renderRecipes();
   updateAll();
 
-  document.getElementById("promptForm").addEventListener("input", () => {
-    readFormState();
-    updateAll();
-  });
-
-  document.getElementById("resetBuilder").addEventListener("click", () => {
-    state = { ...defaults };
-    selectedShot = getShotByName(defaults.shotSize);
-    writeFormState();
-    updateAll();
-  });
-
-  document.getElementById("copyPrompt").addEventListener("click", async () => {
-    await navigator.clipboard.writeText(buildPrompt());
-    const status = document.getElementById("copyStatus");
-    status.textContent = "Copied to clipboard.";
-    window.setTimeout(() => {
-      status.textContent = "";
-    }, 1800);
-  });
-
   document.addEventListener("click", (event) => {
-    const recipeButton = event.target.closest(".apply-recipe");
+    const recipeButton = event.target.closest(".study-recipe");
     if (recipeButton) {
-      const [, , settings] = recipes[Number(recipeButton.dataset.index)];
-      state = { ...state, ...settings };
-      writeFormState();
-      updateAll();
-      document.getElementById("builder").scrollIntoView({ behavior: "smooth" });
+      openRecipeModal(Number(recipeButton.dataset.index));
+      return;
+    }
+
+    if (event.target.closest("[data-close-modal]")) {
+      closeRecipeModal();
       return;
     }
 
@@ -291,6 +200,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (shotButton) {
       const shot = shots.find((item) => item.id === shotButton.dataset.shotId);
       if (shot) selectShot(shot);
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !document.getElementById("recipeModal").hidden) {
+      closeRecipeModal();
     }
   });
 });

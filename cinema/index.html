@@ -3,15 +3,15 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>ShotCraft AI | Cinematic Prompt Builder</title>
+    <title>ShotCraft | Storytelling Camera School</title>
     <meta
       name="description"
-      content="An interactive cinematic camera-shot reference and AI video prompt builder for creators using Seedance, Higgsfield, Runway, Kling, and more."
+      content="A playful camera and directing school for creators who want to learn visual storytelling, shot choices, movement, and AI video planning."
     />
     <meta property="og:title" content="ShotCraft AI" />
     <meta
       property="og:description"
-      content="Build cinematic AI video prompts using real camera language."
+      content="Learn visual storytelling, camera shots, and directing choices without needing a film background."
     />
     <link rel="canonical" href="https://www.davidlewis.ai/cinema/" />
     <link rel="stylesheet" href="./styles.css" />
@@ -21,110 +21,73 @@
       <section class="hero">
         <div class="hero-inner">
           <div class="hero-copy">
-            <div class="eyebrow">Film school for AI video creators</div>
-            <h1>ShotCraft AI</h1>
-            <p class="hero-subtitle">Build cinematic AI video prompts using real camera language.</p>
+            <div class="eyebrow">A director's playground for non-film people</div>
+            <h1>ShotCraft</h1>
+            <p class="hero-subtitle">Learn to direct the audience's eyes, heart, and imagination.</p>
             <p class="hero-text">
-              Choose a shot size, camera angle, movement, mood, and scene type.
-              ShotCraft turns your selections into a ready-to-use prompt for AI
-              video tools like Seedance, Higgsfield, Runway, Kling, and more.
+              Great shots are not camera trivia. They are story decisions. This
+              site teaches camera language like a friendly film set: pick a
+              feeling, guide attention, move with purpose, and end on an image
+              the audience remembers.
             </p>
             <div class="hero-actions">
-              <a class="button primary" href="#builder">Start Building</a>
-              <a class="button secondary" href="#shot-library">Browse Shot Library</a>
+              <a class="button primary" href="#director-school">Enter Director School</a>
+              <a class="button secondary" href="#story-recipes">Try Story Recipes</a>
+              <a class="button ghost" href="#shot-library">Browse Shot Library</a>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="builder" class="builder-shell">
-        <section class="builder-card">
-          <div class="builder-head">
-            <div>
-              <p class="section-kicker">AI video shot builder</p>
-              <h2>Compose the shot before you prompt.</h2>
-              <p>
-                Select the cinematic ingredients, then use the generated prompt
-                as a clean starting point for Seedance, Higgsfield, Runway,
-                Kling, or any other AI video model.
-              </p>
-            </div>
-            <button id="resetBuilder" class="button secondary" type="button">Reset</button>
-          </div>
-
-          <form id="promptForm" class="form-grid">
-            <label>
-              <span>Character name</span>
-              <input id="characterName" name="characterName" value="Naomi" />
-            </label>
-            <label>
-              <span>Duration</span>
-              <select id="duration" name="duration"></select>
-            </label>
-            <label>
-              <span>Aspect ratio</span>
-              <select id="aspectRatio" name="aspectRatio"></select>
-            </label>
-            <label>
-              <span>Visual style</span>
-              <select id="visualStyle" name="visualStyle"></select>
-            </label>
-            <label>
-              <span>Shot size</span>
-              <select id="shotSize" name="shotSize"></select>
-            </label>
-            <label>
-              <span>Camera angle</span>
-              <select id="cameraAngle" name="cameraAngle"></select>
-            </label>
-            <label>
-              <span>Camera position</span>
-              <select id="cameraPosition" name="cameraPosition"></select>
-            </label>
-            <label>
-              <span>Camera movement</span>
-              <select id="cameraMovement" name="cameraMovement"></select>
-            </label>
-            <label>
-              <span>Mood</span>
-              <select id="mood" name="mood"></select>
-            </label>
-            <label>
-              <span>Scene type</span>
-              <select id="sceneType" name="sceneType"></select>
-            </label>
-            <label>
-              <span>Audio style</span>
-              <select id="audioStyle" name="audioStyle"></select>
-            </label>
-            <label class="wide-field">
-              <span>Scene description</span>
-              <textarea id="sceneDescription" name="sceneDescription" rows="5">Naomi discovers a glowing friendship shell near a tide pool on a sunny beach.</textarea>
-            </label>
-          </form>
-        </section>
-
-        <aside class="side-panel">
-          <section id="shotPreview" class="preview-card"></section>
-          <section class="output-card">
-            <div class="output-head">
-              <div>
-                <p class="section-kicker">Generated prompt</p>
-                <h2>Ready to paste</h2>
-              </div>
-              <button id="copyPrompt" class="button primary" type="button">Copy Prompt</button>
-            </div>
-            <p id="copyStatus" class="copy-status" aria-live="polite"></p>
-            <pre id="promptOutput"></pre>
-          </section>
-        </aside>
+      <section id="director-school" class="director-school">
+        <div class="section-intro">
+          <p class="section-kicker">Director school</p>
+          <h2>Every camera choice starts with a story job.</h2>
+          <p>
+            Before you choose a wide shot, close-up, low angle, or tracking
+            move, ask what the shot is doing for the audience. These three
+            questions make camera language feel less technical and more human.
+          </p>
+        </div>
+        <div class="director-question-grid">
+          <article class="director-question-card">
+            <span>01</span>
+            <h3>What should we feel?</h3>
+            <p>Wonder, danger, comedy, loneliness, triumph, curiosity. The emotion chooses the lens before the lens chooses the shot.</p>
+          </article>
+          <article class="director-question-card">
+            <span>02</span>
+            <h3>Where should we look?</h3>
+            <p>The frame is a magic trick. Size, angle, position, and light tell the audience what matters right now.</p>
+          </article>
+          <article class="director-question-card">
+            <span>03</span>
+            <h3>What changes by the end?</h3>
+            <p>A shot should arrive somewhere: a discovery, a laugh, a decision, a reveal, or a final image that holds.</p>
+          </article>
+        </div>
       </section>
 
-      <section class="recipes-section">
+      <section class="camera-toolkit">
         <div class="section-intro">
-          <p class="section-kicker">Shot recipes</p>
-          <h2>Presets for the moments creators use most.</h2>
-          <p>Apply a recipe, then adjust the character, scene, and timing for your own video.</p>
+          <p class="section-kicker">Camera toolkit</p>
+          <h2>Four simple knobs directors turn.</h2>
+          <p>
+            You do not need film school vocabulary to start. These are the four
+            practical controls that make shots feel clear, emotional, and alive.
+          </p>
+        </div>
+        <div id="pathGrid" class="path-grid"></div>
+      </section>
+
+      <section id="story-recipes" class="recipes-section">
+        <div class="section-intro">
+          <p class="section-kicker">Story recipes</p>
+          <h2>Learn camera language through little movie moments.</h2>
+          <p>
+            Recipes are mini directing lessons. Each one starts with a story
+            feeling, then shows which camera choices help the moment land.
+          </p>
         </div>
         <div id="recipeGrid" class="recipe-grid"></div>
       </section>
@@ -132,20 +95,132 @@
       <section id="shot-library" class="library-section">
         <div class="section-intro">
           <p class="section-kicker">Shot library</p>
-          <h2>Learn the language, then build with it.</h2>
+          <h2>The director's bookshelf.</h2>
           <p>
             Each card explains what the shot does, when to use it, and the
-            feeling it adds to an AI video prompt.
+            feeling it adds to a scene. Start here when you know what you want
+            the audience to feel, but not the camera words yet.
           </p>
-        </div>
-        <div class="stats-grid">
-          <div><strong>24</strong><span>camera references</span></div>
-          <div><strong>4</strong><span>shot categories</span></div>
-          <div><strong>16:9</strong><span>AI-ready thumbnails</span></div>
         </div>
         <div id="shotLibrary"></div>
       </section>
+
+      <section id="ai-video-language" class="ai-language-section">
+        <div class="section-intro">
+          <p class="section-kicker">Director notes for AI video</p>
+          <h2>Clear shots make stronger AI video scenes.</h2>
+          <p>
+            AI video tools respond best to visual decisions that are specific
+            and easy to follow. These habits turn directing choices into plain
+            scene language: where things are, what stays consistent, what moves,
+            and how the shot ends.
+          </p>
+        </div>
+        <div class="ai-principles-grid">
+          <article class="ai-principle-card">
+            <span class="principle-number">01</span>
+            <h3>Map the frame</h3>
+            <p>
+              Say where the subject sits: left, center, right, foreground,
+              midground, or background. This helps stop the scene from feeling
+              random.
+            </p>
+            <p class="principle-example">Example: subject in the left third, empty beach in the right two-thirds.</p>
+          </article>
+          <article class="ai-principle-card">
+            <span class="principle-number">02</span>
+            <h3>Lock the subject</h3>
+            <p>
+              Keep identity, wardrobe, pose, gaze, and contact points stable.
+              AI video needs clear anchors so characters do not drift or change.
+            </p>
+            <p class="principle-example">Example: same face, same hoodie, hand stays on the table.</p>
+          </article>
+          <article class="ai-principle-card">
+            <span class="principle-number">03</span>
+            <h3>Plan the movement</h3>
+            <p>
+              Give the camera and subject one main motion. A push-in, track,
+              orbit, pan, or static hold should support the emotion of the shot.
+            </p>
+            <p class="principle-example">Example: slow push-in as the character realizes what they found.</p>
+          </article>
+          <article class="ai-principle-card">
+            <span class="principle-number">04</span>
+            <h3>Know the last frame</h3>
+            <p>
+              A good shot has an ending picture. Describe what the final frame
+              should hold so the moment lands instead of wandering away.
+            </p>
+            <p class="principle-example">Example: final close-up holds on the glowing shell in her palm.</p>
+          </article>
+          <article class="ai-principle-card">
+            <span class="principle-number">05</span>
+            <h3>Use real scene sound</h3>
+            <p>
+              Start with diegetic audio: sounds that belong inside the scene,
+              like footsteps, room tone, waves, cloth movement, or dialogue.
+            </p>
+            <p class="principle-example">Example: ocean ambience, soft sand steps, shell hum, no music.</p>
+          </article>
+          <article class="ai-principle-card">
+            <span class="principle-number">06</span>
+            <h3>Build short sequences</h3>
+            <p>
+              For multi-shot animation, think in timed beats. Three to seven
+              shots across 15 seconds is usually easier to understand and refine.
+            </p>
+            <p class="principle-example">Example: wide opener, medium action, close-up reaction, final detail.</p>
+          </article>
+        </div>
+        <div class="sequence-example-card">
+          <div>
+            <p class="section-kicker">Beginner sequence pattern</p>
+            <h3>A simple 15-second learning structure</h3>
+            <p>
+              Use this as a starter rhythm for visual storytelling. Each shot
+              changes size, angle, or movement because the story beat changes.
+            </p>
+          </div>
+          <ol>
+            <li><strong>0-4s:</strong> wide shot establishes the location and subject.</li>
+            <li><strong>4-8s:</strong> medium shot shows the main action clearly.</li>
+            <li><strong>8-12s:</strong> close-up shows the emotional reaction.</li>
+            <li><strong>12-15s:</strong> detail shot or held final frame lands the idea.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="practice-lab" class="practice-section">
+        <div>
+          <p class="section-kicker">Practice on set</p>
+          <h2>Build a shot like a director.</h2>
+          <p>
+            A strong scene starts with a simple set of choices. Use this
+            checklist to turn an idea into a clear camera plan before writing a
+            script, storyboard, or AI video prompt.
+          </p>
+        </div>
+        <div class="practice-card">
+          <h3>Set-ready checklist</h3>
+          <ol>
+            <li>Name the feeling before naming the shot.</li>
+            <li>Decide where the audience should look first.</li>
+            <li>Give the camera one clean job.</li>
+            <li>Hold a memorable final image.</li>
+            <li>Keep action simple enough for the moment to read.</li>
+          </ol>
+        </div>
+      </section>
     </main>
+
+    <div id="recipeModal" class="modal" hidden>
+      <div class="modal-backdrop" data-close-modal></div>
+      <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button class="modal-close" type="button" aria-label="Close recipe lesson" data-close-modal>Close</button>
+        <div id="modalContent"></div>
+      </section>
+    </div>
     <script src="./app.js"></script>
   </body>
 </html>
