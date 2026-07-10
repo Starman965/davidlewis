@@ -31,7 +31,7 @@ const shots = [
   bestFor,
   feeling,
   promptPhrase,
-  thumbnail: `./thumbnails/${id}.jpg`,
+  thumbnail: `/cinema/thumbnails/${id}.jpg`,
 }));
 
 const categories = ["Shot Size", "Camera Angle", "Camera Position", "Camera Movement"];
@@ -114,7 +114,7 @@ function openRecipeModal(index) {
           return `
             <article class="modal-shot-card">
               <div class="thumbnail">
-                <img src="${shot.thumbnail}" alt="${escapeHtml(shot.name)} cinematic thumbnail" loading="lazy" />
+                <img src="${shot.thumbnail}" alt="${escapeHtml(shot.name)} cinematic thumbnail" decoding="async" />
               </div>
               <span>${escapeHtml(shot.category)}</span>
               <h3>${escapeHtml(shot.name)}</h3>
@@ -149,7 +149,7 @@ function renderLibrary() {
         ${shots.filter((shot) => shot.category === category).map((shot) => `
           <article class="shot-card ${selectedShot.id === shot.id ? "selected" : ""}" data-shot-id="${shot.id}">
             <div class="thumbnail ${selectedShot.id === shot.id ? "active" : ""}">
-              <img src="${shot.thumbnail}" alt="${escapeHtml(shot.name)} cinematic thumbnail" loading="lazy" />
+              <img src="${shot.thumbnail}" alt="${escapeHtml(shot.name)} cinematic thumbnail" decoding="async" />
             </div>
             <div class="shot-card-head">
               <div>

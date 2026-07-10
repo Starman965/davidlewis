@@ -65,7 +65,7 @@ p {
   background:
     linear-gradient(90deg, rgba(9, 10, 15, 0.96) 0%, rgba(9, 10, 15, 0.82) 33%, rgba(9, 10, 15, 0.35) 64%, rgba(9, 10, 15, 0.18) 100%),
     linear-gradient(180deg, rgba(15, 17, 23, 0.04) 0%, #0f1117 100%),
-    url("./hero-shotcraft.jpg") center right / cover no-repeat;
+    url("/cinema/hero-shotcraft.jpg") center right / cover no-repeat;
 }
 
 .hero::before {
@@ -740,12 +740,52 @@ h3 {
   }
 
   .hero {
-    min-height: 640px;
+    min-height: auto;
+    background:
+      linear-gradient(180deg, rgba(15, 17, 23, 0) 0%, rgba(15, 17, 23, 0.08) 28%, var(--bg) 48%),
+      url("/cinema/hero-shotcraft.jpg") top center / auto 360px no-repeat,
+      var(--bg);
+  }
+
+  .hero::before {
+    display: none;
   }
 
   .hero-inner {
-    min-height: 640px;
-    padding: 62px 0 92px;
+    min-height: auto;
+    padding: 318px 0 56px;
+    align-items: flex-start;
+  }
+
+  h1 {
+    font-size: clamp(3.3rem, 22vw, 5.25rem);
+  }
+
+  h2 {
+    font-size: clamp(2rem, 11vw, 2.65rem);
+  }
+
+  .hero-subtitle {
+    font-size: 1.28rem;
+  }
+
+  .director-school,
+  .camera-toolkit,
+  .library-section,
+  .ai-language-section {
+    padding: 44px 0;
+  }
+
+  .recipes-section {
+    padding: 44px 0;
+  }
+
+  .director-question-card,
+  .path-card,
+  .recipe-card,
+  .ai-principle-card,
+  .practice-card {
+    padding: 20px;
   }
 
   .director-question-grid,
@@ -760,6 +800,14 @@ h3 {
     width: 100%;
   }
 
+  .thumbnail {
+    min-height: 190px;
+  }
+
+  .shot-card {
+    padding: 14px;
+  }
+
   .director-question-card {
     min-height: 240px;
   }
@@ -770,6 +818,7 @@ h3 {
 
   .modal-card {
     padding: 22px;
+    max-height: calc(100vh - 28px);
   }
 
   .modal-lesson {
