@@ -142,3 +142,26 @@ footer{font-size:.875rem}
 .intro,.topics,.experience,.about,.book{padding-block:60px}
 .section-heading{margin-bottom:30px}
 }
+
+/* Four-session program: balanced pairs, then a natural reading flow on phones. */
+.program-format{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;margin:0 0 28px;padding:18px 0;border-block:1px solid #29344a;color:#b9c7dd;font-size:.875rem}
+.program-format strong{color:#fff}
+.program-format span{display:block}
+.session-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;align-items:stretch}
+.session-card{display:flex;flex-direction:column}
+.session-body{padding:32px;flex:1;display:flex;flex-direction:column}
+.session-card h3{font-size:clamp(1.8rem,2.6vw,2.6rem);margin-bottom:8px}
+.session-duration{font-size:.875rem;color:#aebbd3;margin-bottom:22px}
+.session-hook{min-height:0}
+.session-card:nth-child(4) .session-stage{color:#ffcb8b}
+.session-payoff{margin-top:auto;padding-top:2px}
+@media(min-width:701px) and (max-width:1100px){
+.session-grid{grid-template-columns:minmax(0,1fr)}
+.session-card{display:grid;grid-template-columns:42% minmax(0,1fr)}
+.session-body{padding:28px}
+}
+@media(max-width:700px){
+.session-grid{grid-template-columns:minmax(0,1fr)}
+.session-body{padding:24px}
+.program-format{align-items:flex-start;flex-direction:column;gap:6px}
+}
