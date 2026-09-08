@@ -165,3 +165,19 @@ footer{font-size:.875rem}
 .session-body{padding:24px}
 .program-format{align-items:flex-start;flex-direction:column;gap:6px}
 }
+
+/* Explicit disclosure buttons with native keyboard and expanded-state semantics. */
+.session-details{border:0;margin:2px 0 24px}
+.session-details summary{display:flex;align-items:center;justify-content:space-between;gap:18px;width:100%;padding:15px 18px;min-height:56px;border:1px solid #6598b3;border-radius:10px;background:#153047;color:#e0f8ff;list-style:none;font-size:1rem;line-height:1.5;font-weight:700;transition:background .18s,border-color .18s}
+.session-details summary::-webkit-details-marker{display:none}
+.session-details summary::marker{content:""}
+.session-details summary:hover{background:#21435b;border-color:#8ce9ff}
+.session-details summary:focus-visible{outline:3px solid var(--cyan);outline-offset:4px}
+.details-symbol{flex:0 0 24px;text-align:center;font-size:1.5rem;font-weight:400;line-height:1;color:var(--cyan)}
+.details-symbol:before{content:"+"}
+.details-open{display:none}
+.session-details[open] .details-closed{display:none}
+.session-details[open] .details-open{display:inline}
+.session-details[open] .details-symbol:before{content:"−"}
+.session-details[open] summary{margin-bottom:24px;background:#21435b}
+@media(prefers-reduced-motion:reduce){.session-details summary{transition:none}}
