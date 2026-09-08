@@ -29,3 +29,27 @@
 .about h2{font-size:clamp(2.4rem,10vw,3.2rem)}
 .about-lede{margin:28px 0}
 }
+
+/* Three practical AI sessions */
+.session-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start}
+.session-card{min-width:0;background:#101a2d;border:1px solid rgba(255,255,255,.14);border-radius:6px;overflow:hidden}
+.session-image{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover}
+.session-body{padding:28px}
+.session-stage{font-size:.875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:20px;font-weight:700}
+.session-card h3{font-size:clamp(1.75rem,2.5vw,2.8rem);line-height:1.08;letter-spacing:-.04em;margin-bottom:16px}
+.session-body>p{color:#c0cadd}
+.session-body .session-stage{color:var(--cyan)}
+.session-body .session-hook{font-size:1.25rem;line-height:1.4;font-weight:600;color:#fff}
+.session-details{border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:24px 0}
+.session-details summary{cursor:pointer;padding:18px 0;color:#b7efff;font-size:1rem;font-weight:650;min-height:48px}
+.session-details summary:focus-visible{outline:2px solid var(--cyan);outline-offset:4px}
+.session-details ul,.session-details ol{padding-left:22px;color:#c0cadd;margin:0 0 20px}
+.session-details li{padding-left:4px;margin-bottom:16px}
+.session-details strong{color:#fff}
+.session-details a{text-decoration:underline;text-underline-offset:3px}
+.session-note{font-size:.875rem;color:#aebbd3;line-height:1.6;margin-bottom:20px}
+.session-body .session-payoff{font-size:1.05rem;color:#fff;font-weight:650}
+.session-body .session-tools{font-size:.875rem;color:#aebbd3;margin-bottom:0}
+.session-closing{text-align:center;color:#c0cadd;margin:40px auto 0;font-size:1.15rem;max-width:650px}
+@media(min-width:701px) and (max-width:1180px){.session-grid{grid-template-columns:1fr}.session-card{display:grid;grid-template-columns:38% minmax(0,1fr);align-items:start}.session-image{margin-top:28px;margin-left:24px;width:calc(100% - 24px)}}
+@media(max-width:700px){.session-grid{grid-template-columns:minmax(0,1fr);gap:28px}.session-body{padding:24px}.session-card h3{font-size:2rem}.session-image{aspect-ratio:3/2}.topics .section-heading h2{font-size:clamp(2.4rem,10vw,3.4rem)}}
