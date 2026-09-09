@@ -44,3 +44,7 @@ Discussion, voice input and implementation can happen in separate project chats,
 At handoff, identify the current repository revision, requested changes, approved assets and unresolved choices. New chats must still have appropriate tools and access; a markdown file cannot grant permissions or guarantee that every chat retrieves every source.
 
 The historical four-session baseline is `132277787fd4778a8b629145f6942c52d55460c8`. The six-session/logo update is `42b10b536546d59de93c16aa96c91c90b76406d8`. These are historical checkpoints; always inspect current main.
+
+## SEO handoff
+
+Homepage metadata emphasizes practical AI talks and immediate use; the existing title and canonical www URL are retained. Open Graph/X previews use the approved stage hero, replacing the homepage reference to the legacy Vibe Coder social card. Preserve the legacy image file for other projects. Person data includes David’s approved public email; session metadata reflects all six current titles and the Apple-device scope. Root robots.txt permits crawling and references sitemap.xml; the sitemap currently lists only the speaker homepage, not unrelated projects. Search Console ownership/access has not been verified in this workflow, and no indexing request has been submitted. Request a homepage recrawl from the verified property when access is available.
