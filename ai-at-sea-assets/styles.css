@@ -212,3 +212,12 @@ footer{font-size:.875rem}
 .email-contact-address{font-size:clamp(1rem,1.5vw,1.25rem);overflow-wrap:anywhere;color:#d8f6ff}
 .email-contact:hover{background:#07153288;border-color:var(--cyan)}
 @media(max-width:620px){.email-contact{padding:28px}.email-contact svg{width:48px;height:48px}}
+
+/* Contact details directly below the bio portrait. */
+.about-portrait .portrait-contact{display:flex;flex-direction:column;gap:5px;margin-top:16px;text-transform:none;letter-spacing:normal}
+.portrait-contact>strong{font-size:1.125rem;color:var(--ink);line-height:1.3}
+.portrait-contact>span{font-size:.875rem;line-height:1.5}
+.portrait-links{display:flex;flex-wrap:wrap;align-items:center;gap:4px 16px;margin-top:8px}
+.portrait-links>a{display:inline-flex;align-items:center;gap:6px;min-height:44px;color:#174f82;font-size:.875rem;font-weight:650;margin:0}
+.portrait-links>a:hover{text-decoration:underline;text-underline-offset:3px}
+.portrait-links .bio-linkedin svg{width:18px;height:18px}
