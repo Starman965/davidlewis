@@ -4,6 +4,15 @@ The authoritative public website is https://www.davidlewis.ai/ (also reached thr
 
 The homepage is index.html and its assets are in ai-at-sea-assets/. Preserve the repository's other pages and projects.
 
+## Read first in any new chat
+
+- [AGENTS.md](AGENTS.md): operational instructions for coding tasks.
+- [Strategy](docs/ai-at-sea/STRATEGY.md): audience hierarchy, positioning, session rules and pending decisions.
+- [Brand](docs/ai-at-sea/BRAND.md): current palette, typography, imagery and interaction rules.
+- [Workflow](docs/ai-at-sea/WORKFLOW.md): current-source retrieval, implementation, checks and publishing.
+
+Primary website audience: **cruise program directors, cruise directors, and speaker/enrichment agencies**. Cruise guests are secondary website readers and the audience for the sessions. Friendly guest-facing copy supports the buyer's evaluation; it does not change the homepage's primary audience.
+
 ## Agreed direction — September 9, 2026
 
 - Keep the cruise niche. Address program directors and speaker agencies while keeping guest-facing copy inviting.
