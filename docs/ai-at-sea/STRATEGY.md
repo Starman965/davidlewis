@@ -71,3 +71,7 @@ The earlier “flexible enrichment series / six-session arc” proposal was supe
 ## Latest hero wording refinement
 
 David requested “engaging AI enrichment talks” rather than “presentations” in the opening paragraph, emphasizing unlocking AI’s power and practical use immediately rather than entertainment. Preserve the closing invitation to select sessions for guests and program goals. This is a targeted hero-paragraph change; further section edits require separate direction.
+
+## Confirmed hands-on AI background
+
+David confirmed three years of practical AI use, including pickleball iPhone apps, a children’s YouTube cartoon series, a storybook for his grandchildren, travel apps for family and friends, a calendar and word processor for his 90-year-old mother, video games, and songs. The bio now includes these concrete examples to demonstrate breadth and depth of adoption and connect it to his practical sessions. Do not invent usage metrics, release dates, or commercial success for these projects.
