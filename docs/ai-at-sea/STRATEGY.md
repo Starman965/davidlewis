@@ -4,7 +4,7 @@ Last editorial confirmation: September 9, 2026. Latest explicit directions from 
 
 ## Audience hierarchy
 
-1. Primary: cruise program directors, cruise directors, and speaker/enrichment agencies evaluating David for a sailing.
+1. Primary: cruise program directors, cruise directors, enrichment/programming decision makers, and speaker/enrichment agencies evaluating David for a sailing.
 2. Secondary: cruise guests exploring what a session offers. Sessions should welcome curious people, including ages 15+, without assuming technical expertise.
 
 The homepage is a buyer-facing speaker website with inviting guest-facing session descriptions. Do not confuse a friendly passenger tone with passengers being the primary commercial audience. A future voyage-specific attendee microsite may hold handouts and takeaways; it is not the current homepage's purpose.
@@ -32,14 +32,25 @@ Present a menu, not episodes, a mandatory sequence, or a packaged six-session ar
 
 ## Messaging and conversion
 
-- Preserve the elegant, inviting preamble while making the cruise-buyer proposition clear.
+- Hero and session-menu introduction speak directly to buyers, connecting booking David with guest outcomes. Approved headings: “AI Enrichment” and “Why AI Enrichment Matters.” Preserve the premium editorial design.
+- All six session cards intentionally remain guest-facing so buyers can imagine passenger appeal; do not globally convert the website to buyer language.
 - Use discover, see, try, create, explore and use. Avoid corporate enablement, transformation, certification and training jargon in new copy.
 - Use AI enrichment and cruise enrichment strategically in metadata and buyer sections, not in every passenger-facing paragraph.
-- Supporting promise: “See it demonstrated live. Leave knowing how to try it yourself on the phone, tablet or computer you already own.”
+- Buyer-facing promise: “Each session blends lively demonstrations with practical takeaways, so guests leave entertained, inspired, and ready to try what they’ve learned on the devices they already own.”
 - Keep a compact programmer/agency section near the bottom: six topics; approximately 45-minute presentation plus 15-minute Q&A; no technical prerequisites; visual/live demonstrations; flexible standalone selection; refreshed examples.
 - Preferred agency CTA: “Bring AI Enrichment Aboard.”
 - Discuss presentation setup and connectivity during planning. Do not promise offline demonstrations or specific AV arrangements without confirmation.
 - Current inquiry form copies text; it does not send email. Never imply a booking request was delivered unless a real delivery system has been implemented and verified.
+
+## Freshness and hands-on differentiation
+
+Core differentiation: current AI content, David’s broad hands-on use, practical applications, and engaging demonstrations. Presentations evolve as capabilities evolve, offering new value even to guests who have previously attended AI talks. Draw on David’s actual use across travel planning and experiences, travel videos and storytelling, social content, creative projects, and building useful apps/tools. Show relatable uses and how to begin; avoid abstract theory, product lists or unsupported comparisons with other speakers.
+
+## Take-home value and section-by-section review
+
+David intends to provide useful tools, guides, prompts and/or curated resources that help guests continue applying what they learn after the session and voyage. Exact materials and delivery remain pending; do not promise specific downloads before they exist. A future attendee microsite may support this without changing the homepage’s buyer focus.
+
+Next review: incorporate this value into the existing Experience / “A program guests take home” section. “Take the learning home” is a possible concept, not an approved final heading. This pass changes only hero messaging and the introduction above the session cards, plus durable documentation. Preserve all six cards, format strip, Experience, About, programmer/agency section, booking and footer; wait for David’s separate feedback before revising those sections.
 
 ## Credibility and editorial safeguards
 
