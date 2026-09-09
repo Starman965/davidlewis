@@ -16,8 +16,8 @@ Primary website audience: **cruise program directors, cruise directors, and spea
 ## Agreed direction — September 9, 2026
 
 - Keep the cruise niche. Address program directors and speaker agencies while keeping guest-facing copy inviting.
-- Preserve the original four session cards, including expanded content: AI for Newbies, AI in Daily Life, AI Agents, and Prompt Like a Pro.
-- Add AI in Your Pocket: Getting More From Your iPhone and Turn Your Travels Into Stories With AI, each with an original thumbnail and expandable details.
+- Preserve the original four session cards, including expanded content: Getting the Most from ChatGPT, AI in Daily Life, Assembling AI Agents, and Prompt Like a Pro.
+- Add Mastering Siri AI: Getting More from Your iPhone, iPad, and Mac and Turn Your Adventures Into Shareable Stories With AI, each with an original thumbnail and expandable details.
 - Present six standalone choices, selected together for the sailing. The later menu direction supersedes the earlier six-session-series proposal.
 - Emphasize entertaining live demonstrations, show-and-tell, and something guests can immediately try on their existing devices.
 - Use AI enrichment language strategically in metadata and programmer-facing copy.
@@ -31,3 +31,7 @@ The inquiry form copies a booking inquiry to the clipboard; it does not send a m
 ## Publishing checks
 
 Compare changes against this repository, preserve Sessions 1–4, check six cards against structured data, and verify local asset references. Publish updates to this repository's existing main branch and verify the result at www.davidlewis.ai. Do not substitute the ChatGPT-hosted site when reporting completion.
+
+## Latest approved copy refinements
+
+Session titles above reflect David’s subsequent renaming request. Mastering Siri AI has the subtitle “Getting More from Your iPhone, iPad, and Mac”; device-specific content remains adaptable. The menu introduction is “Why Consistent AI Enrichment Matters.” Experience point four confirms take-home tools and guides, and the bio includes YouTuber. Preserve existing images, session fragment IDs, and expanded content during these copy edits.

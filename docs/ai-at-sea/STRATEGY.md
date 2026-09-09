@@ -19,12 +19,12 @@ Keep the cruise niche prominent. Do not reposition David as a general public/key
 
 Six standalone sessions:
 
-1. AI for Newbies
+1. Getting the Most from ChatGPT
 2. AI in Daily Life
-3. AI Agents
+3. Assembling AI Agents
 4. Prompt Like a Pro
-5. AI in Your Pocket — Getting More From Your iPhone
-6. Turn Your Travels Into Stories With AI
+5. Mastering Siri AI — Getting More from Your iPhone, iPad, and Mac
+6. Turn Your Adventures Into Shareable Stories With AI
 
 Preserve Sessions 1–4, including their expanded descriptions, unless David specifically requests an edit. The current repository is the authoritative copy for all six; do not maintain a second full copy of session text in this guide.
 
@@ -32,7 +32,7 @@ Present a menu, not episodes, a mandatory sequence, or a packaged six-session ar
 
 ## Messaging and conversion
 
-- Hero and session-menu introduction speak directly to buyers, connecting booking David with guest outcomes. Approved headings: “AI Enrichment” and “Why AI Enrichment Matters.” Preserve the premium editorial design.
+- Hero and session-menu introduction speak directly to buyers, connecting booking David with guest outcomes. Approved headings: “AI Enrichment” and “Why Consistent AI Enrichment Matters.” Preserve the premium editorial design.
 - All six session cards intentionally remain guest-facing so buyers can imagine passenger appeal; do not globally convert the website to buyer language.
 - Use discover, see, try, create, explore and use. Avoid corporate enablement, transformation, certification and training jargon in new copy.
 - Use AI enrichment and cruise enrichment strategically in metadata and buyer sections, not in every passenger-facing paragraph.
@@ -48,13 +48,13 @@ Core differentiation: current AI content, David’s broad hands-on use, practica
 
 ## Take-home value and section-by-section review
 
-David intends to provide useful tools, guides, prompts and/or curated resources that help guests continue applying what they learn after the session and voyage. Exact materials and delivery remain pending; do not promise specific downloads before they exist. A future attendee microsite may support this without changing the homepage’s buyer focus.
+David confirmed that he provides take-home tools and guides so guests can take their discoveries home and continue applying what they learn after the voyage. Exact materials and delivery remain pending; do not promise specific downloads before they exist. A future attendee microsite may support this without changing the homepage’s buyer focus.
 
-Next review: incorporate this value into the existing Experience / “A program guests take home” section. “Take the learning home” is a possible concept, not an approved final heading. This pass changes only hero messaging and the introduction above the session cards, plus durable documentation. Preserve all six cards, format strip, Experience, About, programmer/agency section, booking and footer; wait for David’s separate feedback before revising those sections.
+Approved copy update: Experience point four now highlights take-home tools and guides. The hero invites buyers to select sessions for their guests and program goals; the session-menu introduction emphasizes consistent AI enrichment as innovations emerge every month. David’s bio includes YouTuber after podcaster. Session title changes are listed above; preserve the existing descriptions and expanded content unless separately requested.
 
 ## Credibility and editorial safeguards
 
-Confirmed background: 35+ years in B2B marketing/technology; founder of DemandGen International; company sold to BDO USA in 2021; author of Manufacturing Demand; active creator, podcaster and technology enthusiast. Explain genuine curiosity and practical exploration rather than pitching consulting. Fuller client/company credentials and expanded bio remain deferred pending David's input.
+Confirmed background: 35+ years in B2B marketing/technology; founder of DemandGen International; company sold to BDO USA in 2021; author of Manufacturing Demand; active creator, podcaster, YouTuber and technology enthusiast. Explain genuine curiosity and practical exploration rather than pitching consulting. Fuller client/company credentials and expanded bio remain deferred pending David's input.
 
 Apple/Siri session specifics should reflect verified released features, supported devices, language/region and connectivity. Do not treat announcements or expected releases as shipped functionality.
 
