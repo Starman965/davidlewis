@@ -50,7 +50,7 @@ Apple/Siri session specifics should reflect verified released features, supporte
 ## Open decisions
 
 - Exact later recommendation for changing “Prompt Like a Pro” has not been recovered. Keep its current title and content until David supplies or approves a specific change.
-- Logo contrast/readability is being explored in another chat. The supplied ship/wave logo is the current implemented asset; a proposed redesign is not automatically approved for replacement. Obtain the selected asset before changing it.
+- Logo selection resolved September 9, 2026: David approved the higher-contrast transparent white/cyan/navy ship/wave mark. See BRAND.md for the implemented asset details.
 - Detailed post-release Apple coverage and expanded professional biography are pending.
 
 ## Historical clarification
