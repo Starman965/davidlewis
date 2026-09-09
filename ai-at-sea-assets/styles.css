@@ -202,3 +202,13 @@ footer{font-size:.875rem}
 @media(min-width:901px) and (max-width:1150px){.site-header .brand-name{display:none}.site-header nav{gap:20px}.hero h1{font-size:5rem}}
 @media(max-width:900px){.brand-logo{width:52px;height:52px}.programmers-heading{grid-template-columns:1fr;gap:24px}.programmer-facts{grid-template-columns:1fr 1fr}.hero-promise{max-width:620px}}
 @media(max-width:620px){.programmer-facts{grid-template-columns:1fr;gap:24px}.programmers .button{width:100%;gap:12px;justify-content:space-between}.programmers h2{font-size:2.65rem}}
+/* Direct contact */
+.bio-linkedin{display:inline-flex;align-items:center;gap:12px;min-height:48px;margin-top:24px;color:#174f82;font-size:1rem;font-weight:650}
+.bio-linkedin svg{flex:none}
+.bio-linkedin:hover{text-decoration:underline;text-underline-offset:4px}
+.email-contact{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:16px;align-self:center;min-width:0;width:100%;padding:40px;border:1px solid #ffffff55;border-radius:16px;background:#07153255;color:#fff}
+.email-contact svg{color:var(--cyan)}
+.email-contact-title{font-size:clamp(1.75rem,3vw,2.5rem);font-weight:650;line-height:1.2}
+.email-contact-address{font-size:clamp(1rem,1.5vw,1.25rem);overflow-wrap:anywhere;color:#d8f6ff}
+.email-contact:hover{background:#07153288;border-color:var(--cyan)}
+@media(max-width:620px){.email-contact{padding:28px}.email-contact svg{width:48px;height:48px}}

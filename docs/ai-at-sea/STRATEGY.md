@@ -40,7 +40,7 @@ Present a menu, not episodes, a mandatory sequence, or a packaged six-session ar
 - Keep a compact programmer/agency section near the bottom: six topics; approximately 45-minute presentation plus 15-minute Q&A; no technical prerequisites; visual/live demonstrations; flexible standalone selection; refreshed examples.
 - Preferred agency CTA: “Bring AI Enrichment Aboard.”
 - Discuss presentation setup and connectivity during planning. Do not promise offline demonstrations or specific AV arrangements without confirmation.
-- Current inquiry form copies text; it does not send email. Never imply a booking request was delivered unless a real delivery system has been implemented and verified.
+- Contact uses a prominent envelope icon and “Email David” mailto link to Demandgendave@gmail.com. Keep the sailing-unforgettable heading and the invitation “Let’s discuss the best fit for your enrichment program.” No form. The visitor writes and sends their own email. LinkedIn belongs in the bio; footer tagline: “AI enrichment for transformative voyages.”
 
 ## Freshness and hands-on differentiation
 

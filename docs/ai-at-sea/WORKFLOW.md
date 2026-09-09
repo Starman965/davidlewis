@@ -10,9 +10,9 @@
 
 ## Source map
 
-- `index.html`: homepage, six session cards, metadata, JSON-LD, buyer information and inquiry form.
+- `index.html`: homepage, six session cards, metadata, JSON-LD, buyer information and direct email contact.
 - `ai-at-sea-assets/styles.css`: existing responsive design and brand styling.
-- `ai-at-sea-assets/script.js`: navigation and copy-inquiry behavior.
+- `ai-at-sea-assets/script.js`: navigation behavior.
 - `ai-at-sea-assets/`: stage hero, headshot, session imagery and brand icons.
 - `CNAME`: existing custom domain configuration; preserve.
 - Other directories and root pages: separate user projects; not part of an AI at Sea homepage change unless requested.
@@ -26,7 +26,7 @@ This is a static website; no application build is required. Do not introduce a f
 - Verify local image/style/script paths and unique section IDs; preserve canonical www.davidlewis.ai URLs.
 - Run JavaScript syntax checks and `git diff --check`.
 - For visual changes, inspect actual desktop/mobile rendering where browser tools permit; test menu, detail expansion, focus and overflow. Do not claim visual QA from source checks alone.
-- Check the inquiry form's truthful copy-only behavior; do not send real messages as tests.
+- Verify the contact mailto destination without sending a message. The email CTA opens the visitor’s email client.
 - Check asset dimensions, loading, logo contrast and thumbnail crops. Bump asset query versions when needed to prevent stale CSS/icons.
 
 ## Save and publish

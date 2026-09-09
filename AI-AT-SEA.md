@@ -26,7 +26,7 @@ Primary website audience: **cruise program directors, cruise directors, and spea
 - Make only modest bio refinements; the fuller professional-background expansion is deferred.
 - A later recommendation about Prompt Like a Pro was referenced but its exact wording was not recovered. Do not treat a guessed replacement as approved.
 
-The inquiry form copies a booking inquiry to the clipboard; it does not send a message. Preserve that truthful user-facing explanation.
+Contact is a prominent email link to Demandgendave@gmail.com that opens the visitor’s email client. The former copy-inquiry form has been removed. LinkedIn appears in the bio with its icon, and the footer reads “AI enrichment for transformative voyages.”
 
 ## Publishing checks
 
