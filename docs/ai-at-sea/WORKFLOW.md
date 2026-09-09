@@ -48,3 +48,7 @@ The historical four-session baseline is `132277787fd4778a8b629145f6942c52d55460c
 ## SEO handoff
 
 Homepage metadata emphasizes practical AI talks and immediate use; the existing title and canonical www URL are retained. Open Graph/X previews use the approved stage hero, replacing the homepage reference to the legacy Vibe Coder social card. Preserve the legacy image file for other projects. Person data includes David’s approved public email; session metadata reflects all six current titles and the Apple-device scope. Root robots.txt permits crawling and references sitemap.xml; the sitemap currently lists only the speaker homepage, not unrelated projects. Search Console ownership/access has not been verified in this workflow, and no indexing request has been submitted. Request a homepage recrawl from the verified property when access is available.
+
+## Messages preview compatibility follow-up
+
+After David reported a blank Messages preview, the homepage sharing metadata was changed to the dedicated `ai-at-sea-assets/david-lewis-ai-enrichment-share-v1.jpg` (1200×675, JPEG). It preserves the approved stage composition; the in-page hero remains WebP. Metadata dimensions and MIME type match the JPEG. Original WebP was reachable, so a format or cache cause was suspected, not proven. Public delivery checks do not constitute verification of native Messages rendering; test a newly sent link on David’s device.
