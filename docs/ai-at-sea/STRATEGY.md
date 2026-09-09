@@ -67,3 +67,7 @@ Apple/Siri session specifics should reflect verified released features, supporte
 ## Historical clarification
 
 The earlier “flexible enrichment series / six-session arc” proposal was superseded by the standalone-menu decision. The initial passenger-focused brief was clarified to the buyer-first hierarchy above. A reported regression was resolved when David confirmed he had been viewing the wrong site; no rollback was requested after that clarification.
+
+## Latest hero wording refinement
+
+David requested “engaging AI enrichment talks” rather than “presentations” in the opening paragraph, emphasizing unlocking AI’s power and practical use immediately rather than entertainment. Preserve the closing invitation to select sessions for guests and program goals. This is a targeted hero-paragraph change; further section edits require separate direction.
