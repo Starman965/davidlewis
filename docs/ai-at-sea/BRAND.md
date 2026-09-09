@@ -46,3 +46,7 @@ Existing section surfaces include #080D19 (topics), #10192C (experience), #EEF1F
 Keep the native expandable details, collapsed initially, with full-width “View session details” / “Hide session details” buttons and plus/minus affordances. Do not revert to an ambiguous bare chevron. Preserve native keyboard behavior.
 
 Write concrete guest outcomes and concise buyer information. No fabricated statistics, clients or testimonials. Do not add outbound promotional/tool links; the existing LinkedIn link is approved. New editorial copy must follow STRATEGY.md.
+
+## Latest hero approval — September 9, 2026
+
+David supplied `A62FE404-DDFB-486E-BBAB-ECE704BFAA5A.jpeg` to replace the stage hero. The 1536×864 (16:9) image shows David in a black suit and white shirt, facing the audience with a palm-up gesture. Delivered as `david-ai-keynote-hero.webp`, preserving the supplied composition; the homepage reserves its actual dimensions and versions the image URL for cache refresh. Preserve this approved image until explicitly replaced.
