@@ -50,3 +50,7 @@ Write concrete guest outcomes and concise buyer information. No fabricated stati
 ## Latest hero approval — September 9, 2026
 
 David supplied `A62FE404-DDFB-486E-BBAB-ECE704BFAA5A.jpeg` to replace the stage hero. The 1536×864 (16:9) image shows David in a black suit and white shirt, facing the audience with a palm-up gesture. Delivered as `david-ai-keynote-hero.webp`, preserving the supplied composition; the homepage reserves its actual dimensions and versions the image URL for cache refresh. Preserve this approved image until explicitly replaced.
+
+## Latest bio portrait approval — September 9, 2026
+
+David supplied `69DCCCC8-8181-4350-BDFA-D3922C8F11D6.jpeg`, showing a black jacket and white shirt against a blue-gray background. Delivered as `david-headshot.webp` at 720×864, maintaining the 5:6 composition. Keep the restrained existing displayed widths: 240px desktop, 180px tablet, 156px phone, with automatic proportional height. Asset and stylesheet URLs are versioned to refresh cached portraits.

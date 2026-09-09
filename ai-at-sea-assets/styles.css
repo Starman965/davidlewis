@@ -70,7 +70,7 @@ section[id]{scroll-margin-top:28px}
 .experience-list span{font-size:.875rem}
 .about{grid-template-columns:240px minmax(0,1fr);gap:64px}
 .about-portrait{width:100%;max-width:240px;margin:0;align-self:start}
-.about-portrait img{display:block;width:100%;height:auto;aspect-ratio:851/1030;border-radius:12px;box-shadow:0 16px 40px #05091418}
+.about-portrait img{display:block;width:100%;height:auto;aspect-ratio:5/6;border-radius:12px;box-shadow:0 16px 40px #05091418}
 .about-portrait figcaption{font-size:.875rem;color:#596173;margin-top:12px}
 .about h2{font-size:clamp(2.5rem,4.1vw,4.5rem);max-width:800px}
 .about-lede{margin:28px 0;font-size:1.3rem;max-width:720px}
