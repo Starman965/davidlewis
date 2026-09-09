@@ -10,7 +10,7 @@ form?.addEventListener('submit',async event=>{
   const eventName=data.get('event')?.trim();
   const date=data.get('date')?.trim()||'Flexible';
   const notes=data.get('notes')?.trim()||'No additional notes';
-  const inquiry=`AI KEYNOTE INQUIRY\n\nShip or event: ${eventName}\nPreferred date: ${date}\nDetails: ${notes}\n\nI would like to discuss bringing David Lewis aboard.`;
+  const inquiry=`AI CRUISE ENRICHMENT INQUIRY\n\nCruise line, agency or ship: ${eventName}\nPreferred date: ${date}\nDetails: ${notes}\n\nI would like to discuss bringing David Lewis aboard and selecting AI sessions for our guests.`;
   const status=form.querySelector('.form-status');
   try{
     await navigator.clipboard.writeText(inquiry);

@@ -143,7 +143,7 @@ footer{font-size:.875rem}
 .section-heading{margin-bottom:30px}
 }
 
-/* Four-session program: balanced pairs, then a natural reading flow on phones. */
+/* Standalone session menu: balanced pairs, then a natural reading flow on phones. */
 .program-format{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;margin:0 0 28px;padding:18px 0;border-block:1px solid #29344a;color:#b9c7dd;font-size:.875rem}
 .program-format strong{color:#fff}
 .program-format span{display:block}
@@ -181,3 +181,24 @@ footer{font-size:.875rem}
 .session-details[open] .details-symbol:before{content:"−"}
 .session-details[open] summary{margin-bottom:24px;background:#21435b}
 @media(prefers-reduced-motion:reduce){.session-details summary{transition:none}}
+
+/* Cruise enrichment menu and supplied brand artwork. */
+.brand-logo{display:block;flex:0 0 auto;width:64px;height:64px;object-fit:contain}
+.brand{gap:10px}
+.brand-mark{border:0;padding:0;white-space:nowrap}
+.hero-promise{max-width:510px;color:#d8f3fa;font-size:.95rem;line-height:1.6;margin:18px 0 0;padding-left:16px;border-left:2px solid var(--cyan)}
+.session-subtitle{color:#d5e5f3;font-size:1.05rem;margin:0 0 12px;line-height:1.45}
+.session-card:nth-child(5) .session-stage{color:#aaafff}
+.session-card:nth-child(6) .session-stage{color:#ffcb8b}
+.programmers{padding:clamp(60px,7vw,100px) max(var(--pad),calc((100vw - 1360px)/2));background:#0d1728;border-top:1px solid #29344a}
+.programmers-heading{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:end}
+.programmers h2{font-size:clamp(2.5rem,4.2vw,4.8rem);letter-spacing:-.045em;margin:0;line-height:1.08}
+.programmers h2 em{color:var(--cyan);font-family:Georgia,serif;font-weight:400}
+.programmers .section-kicker{color:#aebbd3}
+.programmers-heading>p{color:#bac6da;font-size:1.1rem;max-width:590px;margin:0}
+.programmer-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;margin:36px 0;padding-block:28px;border-block:1px solid #34415a}
+.programmer-facts dt{font-weight:700;color:#fff;margin-bottom:10px;font-size:1rem}
+.programmer-facts dd{margin:0;color:#bac6da;font-size:.95rem;line-height:1.65}
+@media(min-width:901px) and (max-width:1150px){.site-header .brand-name{display:none}.site-header nav{gap:20px}.hero h1{font-size:5rem}}
+@media(max-width:900px){.brand-logo{width:52px;height:52px}.programmers-heading{grid-template-columns:1fr;gap:24px}.programmer-facts{grid-template-columns:1fr 1fr}.hero-promise{max-width:620px}}
+@media(max-width:620px){.programmer-facts{grid-template-columns:1fr;gap:24px}.programmers .button{width:100%;gap:12px;justify-content:space-between}.programmers h2{font-size:2.65rem}}
