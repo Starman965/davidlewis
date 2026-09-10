@@ -54,3 +54,7 @@ David supplied `A62FE404-DDFB-486E-BBAB-ECE704BFAA5A.jpeg` to replace the stage 
 ## Latest bio portrait approval
 
 David approved `6830848A-54A0-4C7B-8606-3EADAB305A39.jpeg`: smiling in a casual patterned shirt against a warm background. This supersedes the suited bio portrait; the stage hero remains unchanged. Delivered as `david-headshot.webp` at 720×960. Display in the existing 5:6 frame with object-fit cover and top alignment, retaining the hairline and reducing the shirt area. Keep existing widths: 240px desktop, 180px tablet, 156px phone. Version asset and stylesheet URLs when changing this image.
+
+## Workshop thumbnail and layout
+
+AI in Action uses ai-in-action-workshop.webp (1200×800), a generated illustrative scene of guests using a tablet and smartphone with personal guidance in an onboard meeting space. Keep the 3:2 composition. The optional workshop appears after the six-card grid as an image-and-copy feature, stacked on phones, with native collapsed View/Hide workshop details controls.

@@ -75,3 +75,7 @@ David requested “engaging AI enrichment talks” rather than “presentations�
 ## Confirmed hands-on AI background
 
 David confirmed three years of practical AI use, including pickleball iPhone apps, a children’s YouTube cartoon series, a storybook for his grandchildren, travel apps for family and friends, a calendar and word processor for his 90-year-old mother, video games, and songs. The bio now includes these concrete examples to demonstrate breadth and depth of adoption and connect it to his practical sessions. Do not invent usage metrics, release dates, or commercial success for these projects.
+
+## Optional hands-on workshop — September 10, 2026
+
+David approved AI in Action: Bring your device. Leave with know-how. Offer it alongside the six standalone talks, not as a seventh talk or required series component. Small groups in conference rooms or suitable onboard spaces bring their own charged device with the selected AI app installed and signed in. Format: 45 minutes of guided practice plus 15 minutes of Q&A. Activities include useful conversations, follow-up prompts, a personal project, and reviewing results and privacy. Take-home tools and guides are included. Internet access is required; coordinate activities with ship connectivity and program goals. The approved full copy is in index.html.
