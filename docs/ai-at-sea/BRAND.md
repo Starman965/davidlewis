@@ -58,3 +58,7 @@ David approved `6830848A-54A0-4C7B-8606-3EADAB305A39.jpeg`: smiling in a casual 
 ## Workshop thumbnail and layout
 
 AI in Action uses ai-in-action-workshop.webp (1200×800), a generated illustrative scene of guests using a tablet and smartphone with personal guidance in an onboard meeting space. Keep the 3:2 composition. The optional workshop appears after the six-card grid as an image-and-copy feature, stacked on phones, with native collapsed View/Hide workshop details controls.
+
+## Updated hero — September 11, 2026
+
+David supplied IMG_1087.jpeg and authorized publication. This supersedes the September 9 hero. Preserve the full 1536×869 composition, delivered as david-ai-keynote-hero.webp with the URL version 20260911-hero3 and matching HTML dimensions. Existing responsive positioning remains. Sharing metadata now uses david-lewis-ai-enrichment-share-v2.jpg, 1200×679 JPEG, derived from the same approved image with its aspect ratio preserved. No creative modifications were made. Existing cached social previews may retain older imagery.
