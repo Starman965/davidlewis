@@ -32,13 +32,13 @@ Present a menu, not episodes, a mandatory sequence, or a packaged six-session ar
 
 ## Messaging and conversion
 
-- Hero and session-menu introduction speak directly to buyers, connecting booking David with guest outcomes. Approved headings: “AI Enrichment” and “Why Consistent AI Enrichment Matters.” Preserve the premium editorial design.
+- Hero and session-menu introduction speak directly to buyers, connecting booking David with guest outcomes. Approved headings: “AI Enrichment for Cruise Guests” and “Why Consistent AI Enrichment Matters.” Preserve the premium editorial design.
 - All six session cards intentionally remain guest-facing so buyers can imagine passenger appeal; do not globally convert the website to buyer language.
 - Use discover, see, try, create, explore and use. Avoid corporate enablement, transformation, certification and training jargon in new copy.
 - Use AI enrichment and cruise enrichment strategically in metadata and buyer sections, not in every passenger-facing paragraph.
 - Buyer-facing promise: “Each session blends lively demonstrations with practical takeaways, so guests leave entertained, inspired, and ready to try what they’ve learned on the devices they already own.”
 - Keep a compact programmer/agency section near the bottom: six topics; approximately 45-minute presentation plus 15-minute Q&A; no technical prerequisites; visual/live demonstrations; flexible standalone selection; refreshed examples.
-- Preferred agency CTA: “Bring AI Enrichment Aboard.”
+- Preferred booking CTA: “Book David to Speak.”
 - Discuss presentation setup and connectivity during planning. Do not promise offline demonstrations or specific AV arrangements without confirmation.
 - Contact uses a prominent envelope icon and “Email David” mailto link to Demandgendave@gmail.com. Keep the sailing-unforgettable heading and the invitation “Let’s discuss the best fit for your enrichment program.” No form. The visitor writes and sends their own email. LinkedIn belongs in the bio; footer tagline: “AI enrichment for transformative voyages.”
 
@@ -78,4 +78,8 @@ David confirmed three years of practical AI use, including pickleball iPhone app
 
 ## Optional hands-on workshop — September 10, 2026
 
-David approved AI in Action: Bring your device. Leave with know-how. Offer it alongside the six standalone talks, not as a seventh talk or required series component. Small groups in conference rooms or suitable onboard spaces bring their own charged device with the selected AI app installed and signed in. Format: 45 minutes of guided practice plus 15 minutes of Q&A. Activities include useful conversations, follow-up prompts, a personal project, and reviewing results and privacy. Take-home tools and guides are included. Internet access is required; coordinate activities with ship connectivity and program goals. The approved full copy is in index.html.
+David approved Hands-On AI Workshop: Bring your device. Leave with know-how. Offer it alongside the six standalone talks, not as a seventh talk or required series component. Small groups in conference rooms or suitable onboard spaces bring their own charged device with the selected AI app installed and signed in. Format: 45 minutes of guided practice plus 15 minutes of Q&A. Activities include useful conversations, follow-up prompts, a personal project, and reviewing results and privacy. Take-home tools and guides are included. Internet access is required; coordinate activities with ship connectivity and program goals. The approved full copy is in index.html.
+
+## Targeted copy update — September 11, 2026
+
+Hero heading: AI Enrichment for Cruise Guests. The hero planning link reads Cruise Programmers and Agencies and still targets #programmers. ChatGPT hook: Turn your phone into an intelligent hub. Workshop title: Hands-On AI Workshop, with #ai-in-action preserved for existing links and the matching structured-data name updated. Both booking buttons read Book David to Speak and still target #book. Hero audience wording uses a smaller separate line to maintain responsive hierarchy.
