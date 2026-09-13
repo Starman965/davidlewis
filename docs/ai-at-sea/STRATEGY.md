@@ -83,3 +83,8 @@ David approved Hands-On AI Workshop: Bring your device. Leave with know-how. Off
 ## Targeted copy update — September 11, 2026
 
 Hero heading: AI Enrichment for Cruise Guests. The hero planning link reads Cruise Programmers and Agencies and still targets #programmers. ChatGPT hook: Turn your phone into an intelligent hub. Workshop title: Hands-On AI Workshop, with #ai-in-action preserved for existing links and the matching structured-data name updated. Both booking buttons read Book David to Speak and still target #book. Hero audience wording uses a smaller separate line to maintain responsive hierarchy.
+
+## Approved resource library — September 13, 2026
+
+David authorized a public attendee-facing /resources/ page for the presentation QR destination. It previews All Aboard for ChatGPT (exact corrected book title), six session companion booklets, and an AI in Action workbook for the Hands-On AI Workshop. The page is a preview: PDFs have not been supplied, all downloads are disabled and labeled Coming soon, and companion contents are planned. Do not imply published manuscripts, availability dates, or working downloads. The homepage remains buyer-focused; a footer link connects it to resources.
+

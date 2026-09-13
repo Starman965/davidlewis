@@ -35,3 +35,8 @@ Compare changes against this repository, preserve Sessions 1–4, check six card
 ## Latest approved copy refinements
 
 Session titles above reflect David’s subsequent renaming request. Mastering Siri AI has the subtitle “Getting More from Your iPhone, iPad, and Mac”; device-specific content remains adaptable. The menu introduction is “Why Consistent AI Enrichment Matters.” Experience point four confirms take-home tools and guides, and the bio includes YouTuber. Preserve existing images, session fragment IDs, and expanded content during these copy edits.
+
+## Guest resources — September 13, 2026
+
+The approved attendee-facing companion page is `resources/index.html`, public at https://www.davidlewis.ai/resources/ (also reachable without the trailing slash). The homepage remains buyer-facing. Covers are in `ai-at-sea-assets/resources/`; isolated page styles are in `resources/resources.css`.
+

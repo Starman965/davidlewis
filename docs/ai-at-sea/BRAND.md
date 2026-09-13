@@ -62,3 +62,8 @@ AI in Action uses ai-in-action-workshop.webp (1200×800), a generated illustrati
 ## Updated hero — September 11, 2026
 
 David supplied IMG_1087.jpeg and authorized publication. This supersedes the September 9 hero. Preserve the full 1536×869 composition, delivered as david-ai-keynote-hero.webp with the URL version 20260911-hero3 and matching HTML dimensions. Existing responsive positioning remains. Sharing metadata now uses david-lewis-ai-enrichment-share-v2.jpg, 1200×679 JPEG, derived from the same approved image with its aspect ratio preserved. No creative modifications were made. Existing cached social previews may retain older imagery.
+
+## Resources collection — September 13, 2026
+
+Eight coordinated portrait covers use the existing navy/cyan palette with topic-specific supporting accents. Display complete covers (no crop) as upright books with restrained CSS spine shading and page-edge shadows to the right of copy on desktop; stack at phone widths. WebP delivery is 720×1080; desktop widths 230px/featured285px, phones180px/featured205px. Generated using the built-in image tool: premium flat 2:3 front covers, prominent exact title, subtitle, AI AT SEA collection label and DAVID LEWIS author; each topic has distinct maritime/technology artwork. The book cover was edited with the exact prompt: Change only title from All Aboard with ChatGPT to All Aboard for ChatGPT; preserve other artwork, subtitle, author, typography, navy palette, aspect ratio and composition. Deployed filenames: all-aboard, chatgpt, daily-life, agents, prompting, siri, stories, workshop (all .webp in ai-at-sea-assets/resources/).
+

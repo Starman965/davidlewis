@@ -52,3 +52,8 @@ Homepage metadata emphasizes practical AI talks and immediate use; the existing 
 ## Messages preview compatibility follow-up
 
 After David reported a blank Messages preview, the homepage sharing metadata was changed to the dedicated `ai-at-sea-assets/david-lewis-ai-enrichment-share-v1.jpg` (1200×675, JPEG). It preserves the approved stage composition; the in-page hero remains WebP. Metadata dimensions and MIME type match the JPEG. Original WebP was reachable, so a format or cache cause was suspected, not proven. Public delivery checks do not constitute verification of native Messages rendering; test a newly sent link on David’s device.
+
+## Resource library publishing — September 13, 2026
+
+/resources/ is served by resources/index.html with resources/resources.css and eight ai-at-sea-assets/resources/*.webp covers. The sitemap now includes this page. Homepage content is preserved except for a footer resource link. Downloads are native disabled buttons labeled Coming soon because no PDFs exist yet. When David supplies or approves a document, add the actual file, replace that entry's disabled button with a descriptive download anchor to the real file, and update its availability copy. Verify file MIME type, download behavior, metadata and public URL. Never link a cover image as if it were the booklet. Keep the route stable for QR codes. Current resources Open Graph uses the existing approved share-v2 JPEG; no homepage sharing changes were made.
+
