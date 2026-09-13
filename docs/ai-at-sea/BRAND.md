@@ -71,3 +71,7 @@ Eight coordinated portrait covers use the existing navy/cyan palette with topic-
 ## Featured book publisher branding — September 13, 2026
 
 David requested the existing AI at Sea ship/wave logo as a top-left publisher imprint, separate from the DAVID LEWIS author credit at the bottom. All Aboard is bold white sans; for ChatGPT is cyan italic serif, matching the website heading system on navy. The book artwork retains the cruise liner and cyan speech-wave concept. The featured resource now uses all-aboard-v2.webp (720×1080). Other resource covers are unchanged. Built-in image edit used the prior cover as target and supplied AI at Sea logo lockup as brand reference, requesting faithful logo treatment, exact title/subtitle/author, website palette and typography, and no mockup perspective.
+
+## Publisher placement refinement
+
+David requested the publisher logo centered beneath his author name. The featured cover now uses all-aboard-v3.webp (720×1080), with a smaller centered AI at Sea ship/wave lockup below DAVID LEWIS and no top-left imprint. This supersedes the prior placement. Built-in image edit prompt moved only the publisher position and adjusted vertical spacing while retaining title, colors, typography and maritime artwork.
