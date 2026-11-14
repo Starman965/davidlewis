@@ -1,3 +1,9 @@
+## November 14, 2026 — personal creator hub
+
+David explicitly approved broadening the root website into his personal AI creator/builder/speaker hub. This supersedes older root-homepage audience restrictions. The existing cruise speaking page now lives at `/ai-at-sea/`, with its session text and original assets retained. `/friendshipshell/`, `/resources/`, other projects and CNAME remain unchanged. Root homepage assets are isolated under `hub-assets/`.
+
+The new root showcases Friendship Shell, PaddleUp, Pickleball Tracker, WealthDesk (personal project, not public service), David’s background and broader speaking. Blackhawk app links and App Store destinations are sourced from https://www.blackhawkpickle.com/. Studio imagery is AI-created concept art and is labeled as such, not a photograph of David’s actual room. Future real studio photos and a synthetic-data WealthDesk walkthrough can replace the conceptual imagery. Do not fabricate coaching product names, metrics, bookings or endorsements.
+
 # AI at Sea — current site and editorial direction
 
 The authoritative public website is https://www.davidlewis.ai/ (also reached through https://davidlewis.ai/). Its source is this repository, Starman965/davidlewis, on main, published through GitHub Pages. The root CNAME retains the existing domain configuration. The separate ChatGPT Sites project is not the publishing destination for updates to this website.

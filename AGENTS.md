@@ -1,3 +1,9 @@
+## November 14, 2026 — personal creator hub
+
+David explicitly approved broadening the root website into his personal AI creator/builder/speaker hub. This supersedes older root-homepage audience restrictions. The existing cruise speaking page now lives at `/ai-at-sea/`, with its session text and original assets retained. `/friendshipshell/`, `/resources/`, other projects and CNAME remain unchanged. Root homepage assets are isolated under `hub-assets/`. Root favicon is a DL monogram; the original cruise favicon is preserved at `/ai-at-sea/favicon.ico` and explicitly linked by that page.
+
+The new root showcases Friendship Shell, PaddleUp, Pickleball Tracker, WealthDesk (personal project, not public service), David’s background and broader speaking. Blackhawk app links and App Store destinations are sourced from https://www.blackhawkpickle.com/. Studio imagery is AI-created concept art and is labeled as such, not a photograph of David’s actual room. Future real studio photos and a synthetic-data WealthDesk walkthrough can replace the conceptual imagery. Do not fabricate coaching product names, metrics, bookings or endorsements.
+
 # Website work: read first
 
 For AI at Sea / David Lewis website tasks, read `AI-AT-SEA.md` and the relevant guides in `docs/ai-at-sea/` before changing anything. These instructions apply to this repository, which also contains unrelated projects; preserve those projects.
