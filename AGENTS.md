@@ -36,3 +36,7 @@ For AI at Sea / David Lewis website tasks, read `AI-AT-SEA.md` and the relevant 
 ## Friendship Shell App Store — November 14, 2026
 
 David supplied the public listing https://apps.apple.com/us/app/friendship-shell/id6834212828. The root project card and game landing page now link directly to it. Removed the game landing page’s coming-soon wording; the US listing was verified at $3.99. Preserve these purchase links in future redesigns.
+
+## Approved homepage portrait — November 14, 2026
+
+Use `hub-assets/david-headshot.jpg` for the personal homepage. David supplied the standalone charcoal-sweater portrait, sourced from `/Users/davidlewis/Desktop/David_Headshot.png`. Keep its full aspect ratio and facial appearance unchanged. His supplied character sheet is reference for future artwork, not a homepage collage.
