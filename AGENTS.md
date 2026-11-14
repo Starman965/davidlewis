@@ -32,3 +32,7 @@ For AI at Sea / David Lewis website tasks, read `AI-AT-SEA.md` and the relevant 
 - Use non-force updates. If main advances during work, reconcile against the new state rather than overwriting it.
 - Verify the actual domain after publishing. Distinguish source checks, visual checks, and deployment checks; never claim a check that did not run.
 - Keep lasting decisions and unresolved items in the guides, not only in a chat transcript. Do not record secrets or personal data unrelated to the website.
+
+## Friendship Shell App Store — November 14, 2026
+
+David supplied the public listing https://apps.apple.com/us/app/friendship-shell/id6834212828. The root project card and game landing page now link directly to it. Removed the game landing page’s coming-soon wording; the US listing was verified at $3.99. Preserve these purchase links in future redesigns.
